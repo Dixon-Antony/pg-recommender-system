@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LastMinute | Home</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='CSS/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <nav id="main-nav">
+      <ul>
+        <li><a class="current" href="index">Home</a></li>
+        <li><a href="listings">Listings</a></li>
+        <li><a href="favorites">Favorites</a></li>
+        <li><a href="profile">Profile</a></li>
+        <li><a href="contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="container"></div>
+
+    <div class="space"></div>
+
+    <footer id="main-footer">
+      <div class="footer-content">
+        <p>Copyright &copy; 2023. All Rights Reserved</p>
+        <div class="social">
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-linkedin"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-youtube"></i>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

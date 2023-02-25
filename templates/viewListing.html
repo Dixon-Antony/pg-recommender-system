@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LastMinute | Listings</title>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+<link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+
+<!-- LoadMore -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script> -->
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+
+<style>
+
+    body,h1,h2,h4,p{
+        font-family: Maiandra GD;
+        line-height: 1.6rem;
+    }
+    #main-nav li{
+        padding: 16.4px 24px;
+    }
+    #main-nav a{
+        font-size: 16px;
+        padding: 0 0 8px;
+    }
+</style>
+
+<body>
+
+    <nav id="main-nav">
+        <ul>
+            <li><a href="index">Home</a></li>
+            <li><a class="current" href="listings">Listings</a></li>
+            <li><a href="favorites">Favorites</a></li>
+            <li><a href="profile">Profile</a></li>
+            <li><a href="contact">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="space"></div>
+    <div class="container">
+        <div class="main-content">
+            <div class="main-img w3-content w3-display-container">
+                <img class="myslides" src="{{ url_for('static', filename='img/bg.jpg') }}" alt="">
+                <img class="mySlides" src="{{ url_for('static', filename='img/bg2.jpg') }}">
+                <img class="mySlides" src="{{ url_for('static', filename='img/bg3.jpg') }}">
+                <button class="w3-button w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                <button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button>
+            </div>
+            <div class="main-div">
+                <h1>Name : </h1>
+                <p>Description : </p>
+                <h2>Price : </h2>
+                <h4>Rating : </h4>
+                <div class="main-btn">
+                    <a class='btn' href="viewListing">Book</a>
+                </div>
+            </div>
+                
+        </div>
+
+        <div class="space"></div>
+        <!-- CSS Cards -->
+
+
+        <div class="space"></div>
+    </div>
+    <footer id="main-footer">
+        <div class="footer-content">
+          <p>Copyright &copy; 2023. All Rights Reserved</p>
+          <div class="social">
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-linkedin"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-youtube"></i>
+          </div>
+        </div>
+      </footer>
+
+      <!-- slideshow -->
+      <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
+
+        function plusDivs(n) {
+        showDivs(slideIndex += n);
+        }
+
+        function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = x.length}
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";  
+        }
+        x[slideIndex-1].style.display = "block";  
+        }
+      </script>
+
+</body>
+</html>

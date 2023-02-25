@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LastMinute | Listings</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+
+    <!-- LoadMore -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script> -->
+
+  </head>
+
+  <body>
+
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index">Home</a></li>
+        <li><a class="current" href="listings">Listings</a></li>
+        <li><a href="favorites">Favorites</a></li>
+        <li><a href="profile">Profile</a></li>
+        <li><a href="contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="space"></div>
+    <div class="container">
+      <div class="search-box">
+        <input class="search-text" type="text" placeholder="Search Anything" />
+        <a href="#" class="search-btn">
+          <i class="fas fa-search"></i>
+        </a>
+      </div>
+      <div class="space"></div>
+      <!-- CSS Cards -->
+      <div class="card-items">
+        <div class="card">
+          <div class="card-img">
+            <img src="{{ url_for('static', filename='img/bg.jpg') }}" alt="" />
+          </div>
+          <div class="card-content">
+            <h1>Name : </h1>
+            <!-- <p>Desciption : </p> -->
+            <h2>Price : </h2>
+            <h4>Rating :  / 5</h4>
+            <div class="card-btn">
+              <a class='btn' href="viewListing">View</a>
+            </div>
+          </div>
+        </div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+      </div>
+      <div class="space"></div>
+      <a class="btn" href="#" id="loadMore">Load More</a>
+      <div class="space"></div>
+    </div>
+
+
+    <!-- <script>
+      $(document).ready(function () {
+        $(".card").slice(0, 6).show();
+        $("#loadMore").on("click", function (e) {
+          e.preventDefault();
+          $(".card:hidden").slice(0, 6).slideDown();
+          if ($(".card:hidden").length == 0) {
+            $("#loadMore").hide();
+          }
+        });
+      });
+    </script> -->
+    
+    <footer id="main-footer">
+      <div class="footer-content">
+        <p>Copyright &copy; 2023. All Rights Reserved</p>
+        <div class="social">
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-linkedin"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-youtube"></i>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+
+</html>
