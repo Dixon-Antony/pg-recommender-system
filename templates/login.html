@@ -23,14 +23,14 @@
         <div class="form-wrap">
           <h1>Sign Up</h1>
           <p>It's free and only takes a minute</p>
-          <form>
+          <form id="register">
             <div class="form-group">
-              <label for="first-name">First Name</label>
-              <input type="text" name="firstName" id="first-name" />
+              <label for="username">Username</label>
+              <input type="text" name="username" id="username" />
             </div>
             <div class="form-group">
-              <label for="last-name">Last Name</label>
-              <input type="text" name="lastName" id="last-name" />
+              <label for="phone">Phone Number</label>
+              <input type="tel" name="phone" id="phone" />
             </div>
             <div class="form-group">
               <label for="email">Email</label>
@@ -44,6 +44,21 @@
               <label for="password2">Confirm Password</label>
               <input type="password" name="pasword2" id="password2" />
             </div>
+            <div class="form-group">
+              <label for="aadhaar">Aadhaar</label>
+              <input type="number" name="aadhaar" id="aadhaar" />
+            </div>
+            <div class="form-group-option">
+              <label for="gender">Gender</label>
+              <div>
+                <input type="radio" id="Male" name="male" value="Male" />
+                <label for="Male">Male</label><br />
+              </div>
+              <div>
+                <input type="radio" id="Female" name="female" value="Female" />
+                <label for="Female">Female</label><br />
+              </div>
+            </div>
             <button type="submit" class="btn">Sign Up</button>
             <p class="bottom-text">
               By clicking the Sign Up button, you agree to our
@@ -54,10 +69,45 @@
         </div>
         <div id="form-footer">
           <p>Already have an account?</p>
-          &nbsp;
-          <a href="#">Login Here</a>
+          <a id="navigateToLog" href="#">Login Here</a>
+        </div>
+      </div>
+      <div id="login-container">
+        <div class="form-wrap">
+          <h1>Login</h1>
+          <form id="login">
+            <div class="form-group">
+              <label for="lemail">Email</label>
+              <input type="email" name="lemail" id="lemail" />
+            </div>
+            <div class="form-group">
+              <label for="lpassword">Password</label>
+              <input type="password" name="lpassword" id="lpassword" />
+            </div>
+            <button type="submit" class="btn">Sign in</button>
+            <p class="bottom-text">
+              By clicking the Sign Up button, you agree to our
+              <a href="#">Terms & Conditions</a> and
+              <a href="#">Privacy Policy</a>
+            </p>
+          </form>
+        </div>
+        <div id="form-footer">
+          <p>New User ?</p>
+          <a id="navigateToReg" href="#">Register Here</a>
         </div>
       </div>
     </div>
+
+    <script>
+      document.getElementById("navigateToReg").addEventListener("click", () => {
+        document.getElementById("login-container").style.display = "none";
+        document.getElementById("form-container").style.display = "block";
+      });
+      document.getElementById("navigateToLog").addEventListener("click", () => {
+        document.getElementById("form-container").style.display = "none";
+        document.getElementById("login-container").style.display = "block";
+      });
+    </script>
   </body>
 </html>
