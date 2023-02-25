@@ -269,7 +269,8 @@ ul {
     This is the white area around the form and heading, etc
   */
   padding: 15px 25px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
   color: #333;
 }
 
@@ -294,7 +295,7 @@ ul {
     Label should be turned into a block element
   */
   display: block;
-  color: #666;
+  color: #222;
 }
 
 .form-wrap .form-group input {
@@ -302,6 +303,7 @@ ul {
     Inputs should reach accross the .form-wrap 100% and have some padding
   */
   width: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
   padding: 10px;
   border: #ddd 1px solid;
   border-radius: 5px;
@@ -353,6 +355,5 @@ ul {
   /* 
     Footer link color is #49c1a2
   */
-  display: block;
-  color: #49c1a2 !important;
+  color: #49c1a2;
 }
