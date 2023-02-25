@@ -259,9 +259,11 @@ ul {
   -I would also set a "max-width" for responsiveness
   -May want to add some padding
   */
-  max-width: 400px;
+  display: none;
+  max-width: 550px;
   margin: 30px auto;
   padding: 20px;
+  transition: all 0.5s ease-in-out;
 }
 
 .form-wrap {
@@ -356,4 +358,18 @@ ul {
     Footer link color is #49c1a2
   */
   color: #49c1a2;
+}
+
+.form-group-option {
+  display: flex;
+  margin-top: 15px;
+  justify-content: flex-start;
+  gap: 40px;
+}
+
+#login-container {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  transition: all 0.5s ease-in-out;
 }
