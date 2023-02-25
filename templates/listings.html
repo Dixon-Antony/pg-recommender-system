@@ -41,12 +41,13 @@
       <div class="space"></div>
       <!-- CSS Cards -->
       <div class="card-items">
+        {%for i in range(0, len)%}
         <div class="card">
           <div class="card-img">
-            <img src="{{ url_for('static', filename='img/bg.jpg') }}" alt="" />
+            <img src="{{ url_for('static', filename='img/{{pgdata[i][img_src]}}.jpg') }}" alt="" />
           </div>
           <div class="card-content">
-            <h1>Name : </h1>
+            <h1>Name : {{pgdata[i][]}}</h1>
             <!-- <p>Desciption : </p> -->
             <h1>Price : </h1>
             <h1>Rating :  / 5</h1>
@@ -55,162 +56,8 @@
             </div>
           </div>
         </div>
-        <div class="card">
-        <div class="card-img">
-          <img src="{{ url_for('static', filename='img/bg.jpg') }}" alt="" />
+        {%endfor%}
         </div>
-        <div class="card-content">
-          <h1>Name : </h1>
-          <!-- <p>Desciption : </p> -->
-          <h1>Price : </h1>
-          <h1>Rating :  / 5</h1>
-          <div class="card-btn">
-            <a class='btn' href="viewListing">View</a>
-          </div>
-        </div>
-      </div>
-        <div class="card">
-        <div class="card-img">
-          <img src="{{ url_for('static', filename='img/bg.jpg') }}" alt="" />
-        </div>
-        <div class="card-content">
-          <h1>Name : </h1>
-          <!-- <p>Desciption : </p> -->
-          <h1>Price : </h1>
-          <h1>Rating :  / 5</h1>
-          <div class="card-btn">
-            <a class='btn' href="viewListing">View</a>
-          </div>
-        </div>
-      </div>
-        <div class="card">
-        <div class="card-img">
-          <img src="{{ url_for('static', filename='img/bg.jpg') }}" alt="" />
-        </div>
-        <div class="card-content">
-          <h1>Name : </h1>
-          <!-- <p>Desciption : </p> -->
-          <h1>Price : </h1>
-          <h1>Rating :  / 5</h1>
-          <div class="card-btn">
-            <a class='btn' href="viewListing">View</a>
-          </div>
-        </div>
-      </div>
-        <div class="card">
-        <div class="card-img">
-          <img src="{{ url_for('static', filename='img/bg.jpg') }}" alt="" />
-        </div>
-        <div class="card-content">
-          <h1>Name : </h1>
-          <!-- <p>Desciption : </p> -->
-          <h1>Price : </h1>
-          <h1>Rating :  / 5</h1>
-          <div class="card-btn">
-            <a class='btn' href="viewListing">View</a>
-          </div>
-        </div>
-      </div>
-        <div class="card">
-        <div class="card-img">
-          <img src="{{ url_for('static', filename='img/bg.jpg') }}" alt="" />
-        </div>
-        <div class="card-content">
-          <h1>Name : </h1>
-          <!-- <p>Desciption : </p> -->
-          <h1>Price : </h1>
-          <h1>Rating :  / 5</h1>
-          <div class="card-btn">
-            <a class='btn' href="viewListing">View</a>
-          </div>
-        </div>
-      </div>
-        <div class="card">
-        <div class="card-img">
-          <img src="{{ url_for('static', filename='img/bg.jpg') }}" alt="" />
-        </div>
-        <div class="card-content">
-          <h1>Name : </h1>
-          <!-- <p>Desciption : </p> -->
-          <h1>Price : </h1>
-          <h1>Rating :  / 5</h1>
-          <div class="card-btn">
-            <a class='btn' href="viewListing">View</a>
-          </div>
-        </div>
-      </div>
-        <div class="card">
-        <div class="card-img">
-          <img src="{{ url_for('static', filename='img/bg.jpg') }}" alt="" />
-        </div>
-        <div class="card-content">
-          <h1>Name : </h1>
-          <!-- <p>Desciption : </p> -->
-          <h1>Price : </h1>
-          <h1>Rating :  / 5</h1>
-          <div class="card-btn">
-            <a class='btn' href="viewListing">View</a>
-          </div>
-        </div>
-      </div>
-        <div class="card">
-          <div class="card-img">
-            <img src="{{ url_for('static', filename='img/bg.jpg') }}" alt="" />
-          </div>
-          <div class="card-content">
-            <h1>Name : </h1>
-            <!-- <p>Desciption : </p> -->
-            <h1>Price : </h1>
-            <h1>Rating :  / 5</h1>
-            <div class="card-btn">
-              <a class='btn' href="viewListing">View</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-img">
-            <img src="{{ url_for('static', filename='img/bg.jpg') }}" alt="" />
-          </div>
-          <div class="card-content">
-            <h1>Name : </h1>
-            <!-- <p>Desciption : </p> -->
-            <h1>Price : </h1>
-            <h1>Rating :  / 5</h1>
-            <div class="card-btn">
-              <a class='btn' href="viewListing">View</a>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-img">
-            <img src="{{ url_for('static', filename='img/bg.jpg') }}" alt="" />
-          </div>
-          <div class="card-content">
-            <h1>Name : </h1>
-            <!-- <p>Desciption : </p> -->
-            <h1>Price : </h1>
-            <h1>Rating :  / 5</h1>
-            <div class="card-btn">
-              <a class='btn' href="viewListing">View</a>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-img">
-            <img src="{{ url_for('static', filename='img/bg.jpg') }}" alt="" />
-          </div>
-          <div class="card-content">
-            <h1>Name : </h1>
-            <!-- <p>Desciption : </p> -->
-            <h1>Price : </h1>
-            <h1>Rating :  / 5</h1>
-            <div class="card-btn">
-              <a class='btn' href="viewListing">View</a>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="space"></div>
       <a class="btn" href="#" id="loadMore">Load More</a>
       <div class="space"></div>

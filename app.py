@@ -8,7 +8,14 @@ def index():
 
 @app.route("/listings")
 def listings():
-    return render_template('listings.html')
+
+    pgdata = [{'name':'hello','img_src':'bg4','price':'5000','rating':'3'},
+              {'name':'world','img_src':'bg2','price':'4500','rating':'4'},
+              {'name':'Jg','img_src':'bg3','price':'5500','rating':'5'},
+              {'name':'Dinesh','img_src':'bg4','price':'6000','rating':'2'}]
+    
+
+    return render_template('listings.html',pgdata=pgdata, len = len(pgdata))
 
 @app.route("/viewListing")
 def viewListing():
