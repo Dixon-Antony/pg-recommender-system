@@ -44,13 +44,13 @@
         {%for i in range(0, len)%}
         <div class="card">
           <div class="card-img">
-            <img src="{{ url_for('static', filename='img/{{pgdata[i][img_src]}}.jpg') }}" alt="" />
+            <img src="../static/img/{{pgdata[i]['img_src']}}.jpg" alt="" />
           </div>
           <div class="card-content">
-            <h1>Name : {{pgdata[i][]}}</h1>
+            <h1>Name : {{pgdata[i]['name']}}</h1>
             <!-- <p>Desciption : </p> -->
-            <h1>Price : </h1>
-            <h1>Rating :  / 5</h1>
+            <h1>Price : {{pgdata[i]['price']}}</h1>
+            <h1>Rating : {{pgdata[i]['rating']}} / 5</h1>
             <div class="card-btn">
               <a class='btn' href="viewListing">View</a>
             </div>
