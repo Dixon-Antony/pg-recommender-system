@@ -33,30 +33,33 @@
       <div id="contact-form-container">
         <div class="form-wrap">
           <h1>Edit Profile</h1>
-          <form>
+          <form action="/editProfile" method="POST">
             <div class="form-group">
               <label for="username">User Name</label>
-              <input type="text" name="username" id="username" />
-            </div>
-            <div class="form-group">
-              <label for="userid">User ID</label>
-              <input type="text" name="userid" id="userid" />
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" name="email" id="email" />
+              <input
+                type="text"
+                name="username"
+                id="username"
+                value="{{data[0][1]}}"
+              />
             </div>
             <div class="form-group">
               <label for="password">Password</label>
-              <input type="password" name="password" id="password" />
+              <input
+                type="password"
+                name="password"
+                id="password"
+                value="{{data[0][2]}}"
+              />
             </div>
             <div class="form-group">
               <label for="phone">Contact No.</label>
-              <input type="tel" name="phone" id="phone" />
-            </div>
-            <div class="form-group">
-              <label for="aadhaar">Aadhaar No.</label>
-              <input type="number" name="aadhaar" id="aadhaar" />
+              <input
+                type="tel"
+                name="phone"
+                id="phone"
+                value="{{data[0][4]}}"
+              />
             </div>
             <button type="submit" class="btn">Save</button>
           </form>
