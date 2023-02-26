@@ -30,25 +30,25 @@
     <div class="container">
       <div class="space"></div>
       <!-- CSS Cards -->
-      <div class="card-items">
-        <div class="card">
-          <div class="card-img">
-            <img src="{{ url_for('static', filename='img/bg5.png') }}" alt="" />
-          </div>
-          <div class="card-content">
-            <h1>User Name :</h1>
-            <!-- <p>Desciption : </p> -->
-            <h1>User ID :</h1>
-            <h1>Email:</h1>
-            <h1>Password:</h1>
-            <h1>Contact No:</h1>
-            <h1>Aadhaar No:</h1>
-            <div class="card-btn">
-              <a class="btn" href="editProfile">Edit Profile</a>
-            </div>
+      <div class="profile-card">
+        <div class="profile-card-img">
+          <img src="{{ url_for('static', filename='img/bg5.png') }}" alt="" />
+        </div>
+        <br />
+        <div class="profile-card-content">
+          <h2>User Name :</h2>
+          <h2>User ID :</h2>
+          <h2>Email:</h2>
+          <h2>Password:</h2>
+          <h2>Contact No:</h2>
+          <h2>Aadhaar No:</h2>
+          <br />
+          <div class="contact-btn">
+            <a class="btn" href="editProfile">Edit Profile</a>
           </div>
         </div>
       </div>
+      <div class="space"></div>
     </div>
   </body>
 

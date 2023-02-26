@@ -379,3 +379,8 @@ ul {
   padding: 20px;
   transition: all 0.5s ease-in-out;
 }
+
+.profile-card-img img {
+  height: 70%;
+  width: 70%;
+}
