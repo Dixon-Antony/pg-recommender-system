@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request
+from flask import *
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
+app.secret_key = "abc123"  
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
@@ -11,10 +13,22 @@ app.config['MYSQL_DB'] = 'pgpg'
 mysql = MySQL(app)
 
 
+#global_variables
+
 @app.route("/")
 @app.route("/index")
 def index():
-    return render_template('index.html')
+    user_id = session['user_id']
+    cursor = mysql.connection.cursor()
+    #Executing SQL Statements
+    cursor.execute(''' SELECT username FROM users WHERE userid=%s''',(user_id))
+    data = cursor.fetchall()
+    print(data)
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    #Closing the cursor
+    cursor.close()
+    return render_template('index.html',name=data[0][0])
 
 @app.route("/admindashboard")
 def admindashboard():
@@ -45,11 +59,56 @@ def favorites():
 
 @app.route("/profile")
 def profile():
-    return render_template('profile.html')
 
-@app.route("/editProfile")
+    user_id = session['user_id']
+
+    cursor = mysql.connection.cursor()
+    #Executing SQL Statements
+    cursor.execute(''' SELECT * FROM users WHERE userid=%s''',(user_id))
+    data = cursor.fetchall()
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    #Closing the cursor
+    cursor.close()
+
+    return render_template('profile.html',data=data)
+
+@app.route("/editProfile",methods=['GET','POST'])
 def editProfile():
-    return render_template('editProfile.html')
+
+    user_id = session['user_id']
+
+    if request.method=='GET':
+        cursor = mysql.connection.cursor()
+        #Executing SQL Statements
+        cursor.execute(''' SELECT * FROM users WHERE userid=%s''',(user_id))
+        data = cursor.fetchall()
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+        #Closing the cursor
+        cursor.close()
+
+        return render_template('editProfile.html',data=data)
+
+    if request.method=='POST':
+        username = request.form['username']
+        password = request.form['password']
+        phone = request.form['phone']
+
+        cursor = mysql.connection.cursor()
+        #Executing SQL Statements
+        cursor.execute(''' UPDATE users SET username=%s,password=%s,phone=%s WHERE userid=%s''',(username,password,phone,user_id))
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+        #Closing the cursor
+        cursor.close()
+
+        return redirect('/profile')
+
+
+    
+
+
 
 @app.route("/login")
 def login():
@@ -76,8 +135,8 @@ def loginVerify():
     cursor.close()
 
     if len(data)!=0:
-        return render_template('index.html')
-    
+        session['user_id'] = str(data[0][0])
+        return redirect('/index')    
     else:
         return render_template ('login.html',res="invalid")
     
