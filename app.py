@@ -46,6 +46,14 @@ def viewpgowners():
 def viewqueries():
     return render_template('viewqueries.html')
 
+@app.route("/userbooking")
+def userbooking():
+    return render_template('userbooking.html')
+
+@app.route("/pgownerbooking")
+def pgownerbooking():
+    return render_template('pgownerbooking.html')
+
 @app.route("/listings")
 def listings():
 
