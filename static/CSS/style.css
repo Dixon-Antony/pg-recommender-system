@@ -384,3 +384,31 @@ ul {
   height: 70%;
   width: 70%;
 }
+
+th,
+tr,
+td {
+  color: white !important;
+  margin: 10px 30px;
+}
+
+.dataTables_info {
+  color: white !important;
+}
+
+table {
+  width: 90vw;
+}
+
+.table-content {
+  width: 450px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.table-content td {
+  width: 100px;
+}
+
+.table-content button {
+}
