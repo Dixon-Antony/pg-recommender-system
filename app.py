@@ -16,6 +16,10 @@ mysql = MySQL(app)
 def index():
     return render_template('index.html')
 
+@app.route("/admindashboard")
+def admindashboard():
+    return render_template('admindashboard.html')
+
 @app.route("/listings")
 def listings():
 
