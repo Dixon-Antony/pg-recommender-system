@@ -23,7 +23,7 @@
         <div class="form-wrap">
           <h1>Sign Up</h1>
           <p>It's free and only takes a minute</p>
-          <form id="register">
+          <form id="register" action="/register" method="POST">
             <div class="form-group">
               <label for="username">Username</label>
               <input type="text" name="username" id="username" />
@@ -51,11 +51,11 @@
             <div class="form-group-option">
               <label for="gender">Gender</label>
               <div>
-                <input type="radio" id="Male" name="male" value="Male" />
+                <input type="radio" id="Male" name="gender" value="Male" />
                 <label for="Male">Male</label><br />
               </div>
               <div>
-                <input type="radio" id="Female" name="female" value="Female" />
+                <input type="radio" id="Female" name="gender" value="Female" />
                 <label for="Female">Female</label><br />
               </div>
             </div>
@@ -109,5 +109,11 @@
         document.getElementById("login-container").style.display = "block";
       });
     </script>
+    {% if res == "invalid": %}
+    <!--if block html code-->
+    <script defer>
+      alert("Invalid Username or Password");
+    </script>
+    {% endif %}
   </body>
 </html>

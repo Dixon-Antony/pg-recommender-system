@@ -61,7 +61,6 @@ def loginVerify():
     #Executing SQL Statements
     cursor.execute(''' SELECT * FROM users WHERE email=%s AND password=%s''',(lemail,lpassword))
     data = cursor.fetchall()
-    print(data[0][1])
     #Saving the Actions performed on the DB
     mysql.connection.commit()
     
@@ -70,6 +69,43 @@ def loginVerify():
 
     if len(data)!=0:
         return render_template('index.html')
+    
+    else:
+        return render_template ('login.html',res="invalid")
+    
+
+@app.route('/register', methods=['POST'])
+def register():
+    #Creating a connection cursor
+
+    if request.method == 'POST':
+        name = request.form['username']
+        phone = request.form['phone']
+        email = request.form['email']
+        password = request.form['password']
+        cpassword = request.form['password2']
+        aadhaar = request.form['aadhaar']
+        gender = request.form['gender']
+
+        print('Hello')
+        print(gender)
+
+    # cursor = mysql.connection.cursor()
+    
+    # #Executing SQL Statements
+    # cursor.execute(''' SELECT * FROM users WHERE email=%s AND password=%s''',(lemail,lpassword))
+    # data = cursor.fetchall()
+    # #Saving the Actions performed on the DB
+    # mysql.connection.commit()
+    
+    # #Closing the cursor
+    # cursor.close()
+
+    # if len(data)!=0:
+    #     return render_template('index.html')
+    
+    # else:
+    #     return render_template ('login.html',res="invalid")
 
 
 if __name__ == "__main__":
