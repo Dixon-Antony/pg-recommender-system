@@ -15,6 +15,18 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     />
+    <!-- tables -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
   </head>
 
   <body>
@@ -27,8 +39,36 @@
       </ul>
     </nav>
     <div class="container">
-        
-
+      <table id="example" class="table table-striped" style="width: 100%">
+        <thead>
+          <tr>
+            <th>User-id</th>
+            <th>Username</th>
+            <th>E-mail</th>
+            <th>Phone</th>
+            <th>Aadhaar</th>
+            <th>Gender</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2</td>
+            <td>JG</td>
+            <td>jg@gmail.com</td>
+            <td>9998887776</td>
+            <td>123456789012</td>
+            <td>Male</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>GJ</td>
+            <td>gj@gmail.com</td>
+            <td>7998887776</td>
+            <td>223456789012</td>
+            <td>Female</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <div class="space"></div>
@@ -44,5 +84,11 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      $(document).ready(function () {
+        $("#example").DataTable();
+      });
+    </script>
   </body>
 </html>

@@ -158,33 +158,46 @@ def register():
     #Creating a connection cursor
 
     if request.method == 'POST':
-        name = request.form['username']
+        username = request.form['username']
+        # print(username)
         phone = request.form['phone']
+        # print(phone)
         email = request.form['email']
+        # print(email)
         password = request.form['password']
-        cpassword = request.form['password2']
+        # print(password)
+        cpassword = request.form['cpassword']
+        # print(cpassword)
         aadhaar = request.form['aadhaar']
+        # print(aadhaar)
         gender = request.form['gender']
+        # print(gender)
 
-        print('Hello')
-        print(gender)
 
-    # cursor = mysql.connection.cursor()
-    
-    # #Executing SQL Statements
-    # cursor.execute(''' SELECT * FROM users WHERE email=%s AND password=%s''',(lemail,lpassword))
-    # data = cursor.fetchall()
-    # #Saving the Actions performed on the DB
-    # mysql.connection.commit()
-    
-    # #Closing the cursor
-    # cursor.close()
+        if password != cpassword:
+            print('hi')
+            return render_template('login.html',res='check_pass')
 
-    # if len(data)!=0:
-    #     return render_template('index.html')
+    cursor = mysql.connection.cursor()
     
-    # else:
-    #     return render_template ('login.html',res="invalid")
+    #Executing SQL Statements
+    cursor.execute(''' INSERT into users (username,email,password,phone,aadhaar,gender) VALUES(%s,%s,%s,%s,%s,%s)''',(username,email,password,phone,aadhaar,gender))
+
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+
+    #Executing SQL Statements
+    cursor.execute(''' SELECT userid FROM users WHERE username=%s''',(username))
+    data = cursor.fetchall()
+    session['user_id'] = data[0][0]
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    
+    #Closing the cursor
+    cursor.close()
+
+    return redirect('/index')
+
 
 
 if __name__ == "__main__":

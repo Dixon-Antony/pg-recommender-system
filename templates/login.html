@@ -41,15 +41,15 @@
               <input type="password" name="password" id="password" />
             </div>
             <div class="form-group">
-              <label for="password2">Confirm Password</label>
-              <input type="password" name="pasword2" id="password2" />
+              <label for="cpassword">Confirm Password</label>
+              <input type="password" name="cpassword" id="cpassword" />
             </div>
             <div class="form-group">
               <label for="aadhaar">Aadhaar</label>
               <input type="number" name="aadhaar" id="aadhaar" />
             </div>
             <div class="form-group-option">
-              <label for="gender">Gender</label>
+              <label for="bothGender">Gender</label>
               <div>
                 <input type="radio" id="Male" name="gender" value="Male" />
                 <label for="Male">Male</label><br />
@@ -111,9 +111,16 @@
     </script>
     {% if res == "invalid": %}
     <!--if block html code-->
-    <script defer>
+    <script>
       alert("Invalid Username or Password");
     </script>
+
+    {% elif res == "check_pass" %}
+
+    <script>
+      alert("Entered passwords doesn't match");
+    </script>
+
     {% endif %}
   </body>
 </html>
