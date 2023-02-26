@@ -20,6 +20,18 @@ def index():
 def admindashboard():
     return render_template('admindashboard.html')
 
+@app.route("/viewusers")
+def viewusers():
+    return render_template('viewusers.html')
+
+@app.route("/viewpgowners")
+def viewpgowners():
+    return render_template('viewpgowners.html')
+
+@app.route("/viewqueries")
+def viewqueries():
+    return render_template('viewqueries.html')
+
 @app.route("/listings")
 def listings():
 
