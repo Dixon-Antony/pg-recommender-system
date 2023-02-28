@@ -54,6 +54,18 @@ def userbooking():
 def pgownerbooking():
     return render_template('pgownerbooking.html')
 
+@app.route("/pgownerdashboard")
+def pgownerdashboard():
+    return render_template('pgownerdashboard.html')
+
+@app.route("/managepg")
+def managepg():
+    return render_template('managepg.html')
+
+@app.route("/pgownerprofile")
+def pgownerprofile():
+    return render_template('pgownerprofile.html')
+
 @app.route("/listings")
 def listings():
 
