@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='CSS/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div id="form-container">
+        <div class="form-wrap">
+          <h1>Register to get verified as an agent</h1>
+          <p>It's free and only takes a minute</p>
+          <form id="register" action="/register" method="POST">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" name="username" id="username" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" name="phone" id="phone" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" name="password" id="password" />
+            </div>
+            <div class="form-group">
+              <label for="cpassword">Confirm Password</label>
+              <input type="password" name="cpassword" id="cpassword" />
+            </div>
+            <div class="form-group">
+              <label for="aadhaar">Aadhaar</label>
+              <input type="number" name="aadhaar" id="aadhaar" />
+            </div>
+            <div class="form-group-option">
+              <label for="bothGender">Gender</label>
+              <div>
+                <input type="radio" id="Male" name="gender" value="Male" />
+                <label for="Male">Male</label><br />
+              </div>
+              <div>
+                <input type="radio" id="Female" name="gender" value="Female" />
+                <label for="Female">Female</label><br />
+              </div>
+            </div>
+            <button type="submit" class="btn">Sign Up</button>
+            <p class="bottom-text">
+              By clicking the Sign Up button, you agree to our
+              <a href="#">Terms & Conditions</a> and
+              <a href="#">Privacy Policy</a>
+            </p>
+          </form>
+        </div>
+        <div id="form-footer">
+          <p>Already an agent?</p>
+          <a id="navigateToLog" href="#">Login Here</a>
+        </div>
+      </div>
+      <div id="login-container">
+        <div class="form-wrap">
+          <h1>Login</h1>
+          <form id="login" action="/loginVerify" method="POST">
+            <div class="form-group">
+              <label for="lemail">Email</label>
+              <input type="email" name="lemail" id="lemail" />
+            </div>
+            <div class="form-group">
+              <label for="lpassword">Password</label>
+              <input type="password" name="lpassword" id="lpassword" />
+            </div>
+            <button type="submit" class="btn">Sign in</button>
+            <p class="bottom-text">
+              By clicking the Sign in button, you agree to our
+              <a href="#">Terms & Conditions</a> and
+              <a href="#">Privacy Policy</a>
+            </p>
+          </form>
+        </div>
+        <div id="form-footer">
+          <p>New Agent ?</p>
+          <a id="navigateToReg" href="#">Register Here</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("navigateToReg").addEventListener("click", () => {
+        document.getElementById("login-container").style.display = "none";
+        document.getElementById("form-container").style.display = "block";
+      });
+      document.getElementById("navigateToLog").addEventListener("click", () => {
+        document.getElementById("form-container").style.display = "none";
+        document.getElementById("login-container").style.display = "block";
+      });
+    </script>
+    {% if res == "invalid": %}
+    <!--if block html code-->
+    <script>
+      alert("Invalid Username or Password");
+    </script>
+
+    {% elif res == "check_pass" %}
+
+    <script>
+      alert("Entered passwords doesn't match");
+    </script>
+
+    {% endif %}
+  </body>
+</html>

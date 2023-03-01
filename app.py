@@ -170,6 +170,9 @@ def editProfile():
 def login():
     return render_template('login.html')
 
+@app.route("/plogin")
+def plogin():
+    return render_template('plogin.html')
 
 @app.route('/loginVerify', methods=['POST'])
 def loginVerify():
