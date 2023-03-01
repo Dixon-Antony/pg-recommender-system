@@ -72,7 +72,8 @@ ul {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 50px;
 }
 
 /* Search Box */
@@ -400,15 +401,10 @@ table {
   width: 90vw;
 }
 
-.table-content {
-  width: 450px;
-  margin: 50px auto;
-  text-align: center;
+.adminTitle {
+  color: white;
 }
 
-.table-content td {
-  width: 100px;
-}
-
-.table-content button {
+.table {
+  padding: 75px 0;
 }

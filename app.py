@@ -30,17 +30,41 @@ def index():
     cursor.close()
     return render_template('index.html',name=data[0][0])
 
+@app.route("/aindex")
+def aindex():
+    return render_template('aindex.html')
+
 @app.route("/admindashboard")
 def admindashboard():
     return render_template('admindashboard.html')
 
 @app.route("/viewusers")
 def viewusers():
-    return render_template('viewusers.html')
+
+    cursor = mysql.connection.cursor()
+    #Executing SQL Statements
+    cursor.execute(''' SELECT * FROM users ''')
+    data = cursor.fetchall()
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    #Closing the cursor
+    cursor.close()
+
+    return render_template('viewusers.html',data=data, len = len(data))
 
 @app.route("/viewpgowners")
 def viewpgowners():
-    return render_template('viewpgowners.html')
+
+    cursor = mysql.connection.cursor()
+    #Executing SQL Statements
+    cursor.execute(''' SELECT * FROM agents ''')
+    data = cursor.fetchall()
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    #Closing the cursor
+    cursor.close()
+
+    return render_template('viewpgowners.html',data=data, len = len(data))
 
 @app.route("/viewqueries")
 def viewqueries():
@@ -154,6 +178,9 @@ def loginVerify():
     if request.method == 'POST':
         lemail = request.form['lemail']
         lpassword = request.form['lpassword']
+
+    if lemail == 'admin@gmail.com' and lpassword == 'admin123':
+        return redirect('/aindex')
 
     cursor = mysql.connection.cursor()
     
