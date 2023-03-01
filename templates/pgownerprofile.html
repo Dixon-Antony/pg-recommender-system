@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='CSS/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index">Home</a></li>
+        <li><a href="managepg">Manage PG</a></li>
+        <li><a class="current" href="profile">Profile</a></li>
+      </ul>
+    </nav>
+    <div class="container">
+      <div class="space"></div>
+      <!-- CSS Cards -->
+      <div class="profile-card">
+        <div class="profile-card-img">
+          <img src="{{ url_for('static', filename='img/bg5.png') }}" alt="" />
+        </div>
+        <br />
+        <div class="profile-card-content">
+          <h2>Agent Name :{{data[0][1]}}</h2>
+          <h2>Agent ID : {{data[0][0]}}</h2>
+          <h2>Email : {{data[0][3]}}</h2>
+          <h2>Password : {{data[0][2]}}</h2>
+          <h2>Contact No : {{data[0][4]}}</h2>
+          <h2>Aadhaar No : {{data[0][5]}}</h2>
+          <h2>Gender : {{data[0][6]}}</h2>
+          <br />
+        </div>
+      </div>
+      <div class="space"></div>
+    </div>
+  </body>
+
+  <!-- <footer id="main-footer">
+    <div class="footer-content container">
+      <p>Copyright &copy; 2023. All Rights Reserved</p>
+      <div class="social">
+        <i class="fab fa-twitter"></i>
+        <i class="fab fa-linkedin"></i>
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-youtube"></i>
+      </div>
+    </div>
+  </footer> -->
+</html>
