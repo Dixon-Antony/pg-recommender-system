@@ -418,3 +418,78 @@ table {
   align-items: center;
   gap: 2rem;
 }
+
+#managepg-form-container {
+  width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  transition: all 0.5s ease-in-out;
+}
+
+#managepg-form-container input:hover {
+  scale: 1.5;
+}
+
+#managepg-form-container div {
+  padding: 10px 30px;
+}
+
+.same-line {
+  display: grid;
+  grid-gap: 3rem;
+  grid-template-columns: 2fr 3fr;
+}
+
+.select-same-line {
+  display: grid;
+  grid-gap: 1.5rem;
+  grid-template-columns: 1fr 1fr;
+  margin-left: -50px;
+}
+
+.select-same-line select {
+  margin-top: 15px;
+  height: 30px;
+}
+
+.same-line input {
+  margin-top: 10px;
+  height: 20px;
+}
+
+.big-same-line {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#food label {
+  width: 30px;
+}
+
+#other label {
+  width: 50px;
+}
+
+#food .same-line input {
+  margin-top: 3px;
+}
+
+#category-type select {
+  margin-top: 3px;
+}
+
+select {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  padding: 0px 15px;
+  border-radius: 5px;
+  transition: 0.4s ease-in-out;
+}
+
+select:hover {
+  scale: 1.1;
+}
+
+hr {
+  height: 2px;
+}

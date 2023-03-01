@@ -28,80 +28,181 @@
     <br />
     <br />
     <div class="container">
-      <div id="contact-form-container">
+      <div id="managepg-form-container">
         <div class="form-wrap">
           <h1>Manage PG</h1>
           <form>
             <div class="form-group">
-                <label for="pgimage">PG Images Upload</label>
-                <input type="file" name="pgimage" id="pgimage" multiple />
+              <h3>PG Images Upload</h3>
+              <br />
+              <input type="file" name="pgimage" id="pgimage" multiple />
             </div>
-            <div class="form-group">
-                <label for="category">Category</label>
-                <select name="category" id="category">
+            <br />
+            <hr />
+            <div id="category-type" class="big-same-line">
+              <div class="form-group">
+                <div class="select-same-line">
+                  <h3>Category</h3>
+                  <select name="category" id="category">
                     <option value="premium">Premium</option>
                     <option value="standard">Standard</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="type">Type</label>
-                <select name="type" id="type">
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="select-same-line">
+                  <h3>PG for</h3>
+                  <select name="pgtype" id="pgtype">
                     <option value="mens">Mens</option>
                     <option value="womens">Women</option>
                     <option value="coliving">Co-living</option>
-                </select>
+                  </select>
+                </div>
+              </div>
             </div>
-            <div class="form-group">
+            <br />
+            <hr />
+            <div class="big-same-line">
+              <div class="form-group">
                 <h4>Occupancy</h4>
-                <label for="single">Single sharing</label>
-                <input type="checkbox" id="single" name="single" value="single">
-                <label for="double">Double sharing</label>
-                <input type="checkbox" id="double" name="double" value="double">
-                <label for="triple">Triple sharing</label>
-                <input type="checkbox" id="triple" name="triple" value="triple">
-                <label for="four">Four sharing</label>
-                <input type="checkbox" id="four" name="four" value="four">
-                <label for="multi">Multi sharing</label>
-                <input type="checkbox" id="multi" name="multi" value="multi">
+                <div class="same-line">
+                  <label for="single">Single sharing</label>
+                  <input
+                    type="checkbox"
+                    id="single"
+                    name="single"
+                    value="single"
+                  />
+                </div>
+                <div class="same-line">
+                  <label for="double">Double sharing</label>
+                  <input
+                    type="checkbox"
+                    id="double"
+                    name="double"
+                    value="double"
+                  />
+                </div>
+                <div class="same-line">
+                  <label for="triple">Triple sharing</label>
+                  <input
+                    type="checkbox"
+                    id="triple"
+                    name="triple"
+                    value="triple"
+                  />
+                </div>
+                <div class="same-line">
+                  <label for="four">Four sharing</label>
+                  <input type="checkbox" id="four" name="four" value="four" />
+                </div>
+                <div class="same-line">
+                  <label for="multi">Multi sharing</label>
+                  <input
+                    type="checkbox"
+                    id="multi"
+                    name="multi"
+                    value="multi"
+                  />
+                </div>
+              </div>
+              <div class="form-group" id="food">
+                <h3>Food Included</h3>
+                <div class="same-line">
+                  <label for="breakfast">Breakfast</label>
+                  <input
+                    type="checkbox"
+                    id="breakfast"
+                    name="breakfast"
+                    value="breakfast"
+                  />
+                </div>
+                <div class="same-line">
+                  <label for="lunch">Lunch</label>
+                  <input
+                    type="checkbox"
+                    id="lunch"
+                    name="lunch"
+                    value="lunch"
+                  />
+                </div>
+                <div class="same-line">
+                  <label for="dinner">Dinner</label>
+                  <input
+                    type="checkbox"
+                    id="dinner"
+                    name="dinner"
+                    value="dinner"
+                  />
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-                <h4>Food Included</h4>
-                <label for="breakfast">Breakfast</label>
-                <input type="checkbox" id="breakfast" name="breakfast" value="breakfast">
-                <label for="lunch">Lunch</label>
-                <input type="checkbox" id="lunch" name="lunch" value="lunch">
-                <label for="dinner">Dinner</label>
-                <input type="checkbox" id="dinner" name="dinner" value="dinner">
-            </div>
-            <div class="form-group">
-                <label for="isac"> AC/Non AC</label>
-                <select name="isac" id="isac">
+            <hr />
+            <div class="big-same-line">
+              <div class="form-group">
+                <div class="select-same-line">
+                  <h3>AC/Non AC</h3>
+                  <select name="isac" id="isac">
                     <option value="airconditioned">Air conditioned</option>
-                    <option value="non airconditioned">Non airconditioned</option>
+                    <option value="non airconditioned">
+                      Non airconditioned
+                    </option>
                     <option value="both">Both</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="bathtype">Bathroom Type</label>
-                <select name="bathtype" id="bathtype">
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="select-same-line">
+                  <h3>Bathroom Type</h3>
+                  <select name="bathtype" id="bathtype">
                     <option value="attached">Attached</option>
                     <option value="common">Common</option>
-                </select>
+                  </select>
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-                <h4>Other Amenities</h4>
-                <label for="wifi">WiFi</label>
-                <input type="checkbox" id="wifi" name="wifi" value="wifi">
-                <label for="ups">UPS</label>
-                <input type="checkbox" id="ups" name="ups" value="ups">
-                <label for="wacmac">Washing Machine</label>
-                <input type="checkbox" id="wacmac" name="wacmac" value="wacmac">
-                <label for="laundry">Laundry</label>
-                <input type="checkbox" id="laundry" name="laundry" value="laundry">
-                <label for="iron">Ironing</label>
-                <input type="checkbox" id="iron" name="iron" value="iron">
+            <hr />
+            <div id="other" class="form-group">
+              <h3>Other Amenities</h3>
+              <div class="big-same-line">
+                <div class="same-line">
+                  <label for="wifi">WiFi</label>
+                  <input type="checkbox" id="wifi" name="wifi" value="wifi" />
+                </div>
+                <div class="same-line">
+                  <label for="ups">UPS</label>
+                  <input type="checkbox" id="ups" name="ups" value="ups" />
+                </div>
+              </div>
+              <div class="big-same-line">
+                <div class="same-line">
+                  <label for="wacmac">Washing Machine</label>
+                  <input
+                    type="checkbox"
+                    id="wacmac"
+                    name="wacmac"
+                    value="wacmac"
+                  />
+                </div>
+                <div class="same-line">
+                  <label for="laundry">Laundry</label>
+                  <input
+                    type="checkbox"
+                    id="laundry"
+                    name="laundry"
+                    value="laundry"
+                  />
+                </div>
+              </div>
+              <div class="big-same-line">
+                <div class="same-line">
+                  <label for="iron">Ironing</label>
+                  <input type="checkbox" id="iron" name="iron" value="iron" />
+                </div>
+              </div>
             </div>
-            <button type="submit" class="btn">Save Changes</button>
+            <br />
+            <button type="submit" class="btn">Save Changes</button><br />
           </form>
         </div>
       </div>
