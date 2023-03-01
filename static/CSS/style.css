@@ -354,7 +354,8 @@ ul {
   color: white;
 }
 
-#form-footer a {
+#form-footer a,
+.form-switch a {
   /* 
     Footer link color is #49c1a2
   */
@@ -407,4 +408,13 @@ table {
 
 .table {
   padding: 75px 0;
+}
+
+.form-switch {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }
