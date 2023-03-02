@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 from flask import *
 from flask_mysqldb import MySQL
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
 app.secret_key = "abc123"  
@@ -14,6 +16,9 @@ mysql = MySQL(app)
 
 
 #global_variables
+
+UPLOAD_FOLDER = 'static/uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/")
 @app.route("/index")
@@ -85,6 +90,33 @@ def pgownerdashboard():
 @app.route("/managepg")
 def managepg():
     return render_template('managepg.html')
+
+@app.route('/registerPG',methods=['POST'])
+def registerPG():
+
+
+    if request.method == 'POST':
+        cursor = mysql.connection.cursor()
+        files = request.files.getlist('pgimage[]')
+        pgid=1
+        for i in range(len(files)):
+            if files[i]:
+                columnName=str('pgimage'+str(i+1))
+                filename = secure_filename(files[i].filename)
+                files[i].save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+                if i==0:
+                    cursor.execute('''INSERT INTO pgs (pgimage1) VALUES (%s)''',[filename])
+                
+                if i==1:
+                    cursor.execute('''UPDATE pgs SET pgimage2=%s WHERE pgid=%s''',([filename],pgid))
+                
+                if i==2:
+                    cursor.execute('''UPDATE pgs SET pgimage3=%s WHERE pgid=%s''',([filename],pgid))
+
+                mysql.connection.commit()
+        cursor.close()   
+        return 'Registered to admin successfully'
 
 @app.route("/pgownerprofile")
 def pgownerprofile():
