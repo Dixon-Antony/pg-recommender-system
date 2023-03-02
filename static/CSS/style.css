@@ -426,7 +426,7 @@ table {
   transition: all 0.5s ease-in-out;
 }
 
-#managepg-form-container input:hover {
+#managepg-form-container input[type="checkbox"]:hover {
   scale: 1.5;
 }
 
