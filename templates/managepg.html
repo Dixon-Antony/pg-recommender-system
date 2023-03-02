@@ -30,12 +30,16 @@
     <div class="container">
       <div id="managepg-form-container">
         <div class="form-wrap">
-          <h1>Manage PG</h1>
-          <form>
+          <h1>Register your PG</h1>
+          <form
+            method="POST"
+            action="/registerPG"
+            enctype="multipart/form-data"
+          >
             <div class="form-group">
               <h3>PG Images Upload</h3>
               <br />
-              <input type="file" name="pgimage" id="pgimage" multiple />
+              <input type="file" name="pgimage[]" id="pgimage" multiple />
             </div>
             <br />
             <hr />
@@ -44,8 +48,8 @@
                 <div class="select-same-line">
                   <h3>Category</h3>
                   <select name="category" id="category">
-                    <option value="premium">Premium</option>
-                    <option value="standard">Standard</option>
+                    <option value="standard">Standard (5k+)</option>
+                    <option value="premium">Premium (10k+)</option>
                   </select>
                 </div>
               </div>
@@ -176,12 +180,12 @@
               </div>
               <div class="big-same-line">
                 <div class="same-line">
-                  <label for="wacmac">Washing Machine</label>
+                  <label for="wasmac">Washing Machine</label>
                   <input
                     type="checkbox"
-                    id="wacmac"
-                    name="wacmac"
-                    value="wacmac"
+                    id="wasmac"
+                    name="wasmac"
+                    value="wasmac"
                   />
                 </div>
                 <div class="same-line">
