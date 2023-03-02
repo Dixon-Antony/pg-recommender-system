@@ -89,7 +89,16 @@ def pgownerdashboard():
 
 @app.route("/managepg")
 def managepg():
-    return render_template('managepg.html')
+    pgid='1'
+    cursor = mysql.connection.cursor()
+    #Executing SQL Statements
+    cursor.execute(''' SELECT * FROM pgs WHERE pgid=%s''',(pgid))
+    data = cursor.fetchall()
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    #Closing the cursor
+    cursor.close()
+    return render_template('managepg.html',data=data,len=len(data))
 
 @app.route('/registerPG',methods=['POST'])
 def registerPG():
@@ -98,7 +107,7 @@ def registerPG():
     if request.method == 'POST':
         cursor = mysql.connection.cursor()
         files = request.files.getlist('pgimage[]')
-        pgid=1
+        pgid=2
         for i in range(len(files)):
             if files[i]:
                 columnName=str('pgimage'+str(i+1))
@@ -115,8 +124,9 @@ def registerPG():
                     cursor.execute('''UPDATE pgs SET pgimage3=%s WHERE pgid=%s''',([filename],pgid))
 
                 mysql.connection.commit()
-        cursor.close()   
-        return 'Registered to admin successfully'
+        cursor.close()
+   
+        return redirect('/managepg')
 
 @app.route("/pgownerprofile")
 def pgownerprofile():

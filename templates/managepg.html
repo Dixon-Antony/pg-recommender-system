@@ -28,7 +28,11 @@
     <br />
     <br />
     <div class="container">
+      {% if len == 0 %}
+      <h1>No PGs registered yet.</h1>
+      {% else %}
       <div id="managepg-form-container">
+        <!-- <img src="../static/uploads/{{data[0][3]}}" alt="" /> -->
         <div class="form-wrap">
           <h1>Register your PG</h1>
           <form
@@ -36,6 +40,46 @@
             action="/registerPG"
             enctype="multipart/form-data"
           >
+            <div class="form-group">
+              <h3>Property Name</h3>
+              <br />
+              <input type="text" name="pgname" id="pgname" />
+            </div>
+            <div class="form-group">
+              <h3>Property Description</h3>
+              <br />
+              <textarea cols="82" rows="6" name="pgdesc" id="pgdesc"></textarea>
+            </div>
+            <div class="form-group">
+              <h3>Property State</h3>
+              <br />
+              <input type="text" name="pgstate" id="pgstate" />
+            </div>
+            <div class="form-group">
+              <h3>Property Location ( City )</h3>
+              <br />
+              <input type="text" name="pgcity" id="pgcity" />
+            </div>
+            <div class="form-group">
+              <h3>Property Pincode</h3>
+              <br />
+              <input type="text" name="pgpincode" id="pgpincode" />
+            </div>
+            <div class="form-group">
+              <h3>Property Address</h3>
+              <br />
+              <textarea
+                cols="82"
+                rows="6"
+                name="pgaddress"
+                id="pgaddress"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <h3>Owner Name</h3>
+              <br />
+              <input type="text" name="ownername" id="ownername" />
+            </div>
             <div class="form-group">
               <h3>PG Images Upload</h3>
               <br />
@@ -210,6 +254,7 @@
           </form>
         </div>
       </div>
+      {% endif %}
     </div>
   </body>
 

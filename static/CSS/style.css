@@ -490,6 +490,9 @@ select:hover {
   scale: 1.1;
 }
 
-hr {
-  height: 2px;
+textarea {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
 }
