@@ -3,7 +3,6 @@ from flask import *
 from flask_mysqldb import MySQL
 from werkzeug.utils import secure_filename
 import os
-from twilio.rest import Client
 import random
 import smtplib
 
@@ -129,6 +128,10 @@ def managepg():
 @app.route("/addPG")
 def addPG():
     return render_template('addPG.html')
+
+@app.route("/addRooms")
+def addRooms():
+    return render_template('addRooms.html')
 
 @app.route('/registerPG',methods=['POST'])
 def registerPG():
