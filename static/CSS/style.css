@@ -496,3 +496,7 @@ textarea {
   padding: 10px;
   border: none;
 }
+
+.addRoom-container {
+  width: 400px;
+}
