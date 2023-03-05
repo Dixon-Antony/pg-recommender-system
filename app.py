@@ -106,16 +106,37 @@ def registerPG():
 
     if request.method == 'POST':
         cursor = mysql.connection.cursor()
+        pgname = request.form['pgname']
+        pgdesc = request.form['pgdesc']
+        pgtype = request.form['pgtype']
+        pgownername = request.form['ownername']
+        pgaddress = request.form['pgaddress']
+        pgcity = request.form['pgcity']
+        pgpincode = request.form['pgpincode']
         files = request.files.getlist('pgimage[]')
-        pgid=2
+
+        pgid=''
+
+        cursor.execute('''SELECT agentid FROM agents WHERE aname = %s''',([pgownername]))
+        pgownerid = cursor.fetchall()[0][0]
+        mysql.connection.commit()
+
+        cursor.execute('''INSERT INTO pgs (pgname,pgdesc,pgtype,pgownerid,pgaddress,pgcity,pgpincode) VALUES (%s,%s,%s,%s,%s,%s,%s)''',(pgname,pgdesc,pgtype,pgownerid,pgaddress,pgcity,pgpincode))
+        mysql.connection.commit()
+
+        cursor.execute('''SELECT pgid FROM pgs WHERE pgname = %s''',([pgname]))
+        data = cursor.fetchall()
+        mysql.connection.commit()
+        
+        pgid = data[0][0]
+
         for i in range(len(files)):
             if files[i]:
-                columnName=str('pgimage'+str(i+1))
                 filename = secure_filename(files[i].filename)
                 files[i].save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
+            
                 if i==0:
-                    cursor.execute('''INSERT INTO pgs (pgimage1) VALUES (%s)''',[filename])
+                    cursor.execute('''UPDATE pgs SET pgimage1=%s WHERE pgid=%s''',([filename],pgid))
                 
                 if i==1:
                     cursor.execute('''UPDATE pgs SET pgimage2=%s WHERE pgid=%s''',([filename],pgid))
