@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Get OTP</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='CSS/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div id="login-container">
+        <div class="form-wrap">
+          <h1>OTP Verification</h1>
+          <form id="getOTP" action="/getOTP" method="POST">
+            <div class="form-group">
+              <label for="email">Enter Your Email </label><br />
+              <input type="email" name="email" id="email" />
+            </div>
+            <button type="submit" class="btn">Get OTP</button>
+            <p class="bottom-text">
+              By clicking the Get OTP button, you agree to our
+              <a href="#">Terms & Conditions</a> and
+              <a href="#">Privacy Policy</a>
+            </p>
+          </form>
+        </div>
+        <div id="form-footer">
+          <p>Go back ?</p>
+          <a href="/login">Click Here</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

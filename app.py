@@ -3,6 +3,9 @@ from flask import *
 from flask_mysqldb import MySQL
 from werkzeug.utils import secure_filename
 import os
+from twilio.rest import Client
+import random
+import smtplib
 
 app = Flask(__name__)
 app.secret_key = "abc123"  
@@ -177,14 +180,25 @@ def registerPG():
         return redirect('/managepg')
 
 
-@app.route("/listings")
+@app.route("/listings",methods=['POST','GET'])
 def listings():
 
     pgdata = [{'name':'hello','img_src':'bg4','price':'5000','rating':'3'},
-              {'name':'world','img_src':'bg2','price':'4500','rating':'4'},
-              {'name':'Jg','img_src':'bg3','price':'5500','rating':'5'},
-              {'name':'Dinesh','img_src':'bg4','price':'6000','rating':'2'}]
+            {'name':'world','img_src':'bg2','price':'4500','rating':'4'},
+            {'name':'Jg','img_src':'bg3','price':'5500','rating':'5'},
+            {'name':'Dinesh','img_src':'bg4','price':'6000','rating':'2'}]
     
+    # if request.method=='POST':
+    #     search = request.form['search']
+        
+    #     newpgdata = []
+    #     for i in pgdata:
+    #         if search in i.values():
+    #             newpgdata.append(i)
+    #     print(newpgdata)
+    return render_template('listings.html',pgdata=pgdata, len = len(pgdata))
+    
+
 
     return render_template('listings.html',pgdata=pgdata, len = len(pgdata))
 
@@ -360,7 +374,40 @@ def register():
     #Closing the cursor
     cursor.close()
 
-    return redirect('/index')
+    return redirect('/getOTP')
+
+@app.route('/getOTP',methods=['GET','POST'])
+def getOTP():
+    if request.method=='GET':
+        return render_template('getOTP.html')
+    
+    if request.method=='POST':
+        emailid = request.form['email']
+        msg = str(generateOTP())
+        session['otp'] = str(msg)
+        s = smtplib.SMTP('smtp.gmail.com', 587)
+        s.starttls()
+        s.login("pgaccsys123@gmail.com", "vqwddbatjpcatxil")
+        s.sendmail('pgaccsys123@gmail.com',emailid,msg)
+        
+        return render_template('valOTP.html')
+
+def generateOTP():
+    return random.randrange(100000,999999)         
+
+
+@app.route('/valOTP',methods=['GET','POST'])
+def valOTP():
+    if request.method=='GET':
+        return render_template('valOTP.html')
+    
+    if request.method=='POST':
+        otp = request.form['otp']
+
+        if otp == session['otp']:
+            return redirect('/')
+        else:
+            return render_template('valOTP.html',error='invalid')
 
 @app.route('/pregister', methods=['POST'])
 def pregister():
