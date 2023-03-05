@@ -83,22 +83,40 @@ def userbooking():
 def pgownerbooking():
     return render_template('pgownerbooking.html')
 
-@app.route("/pgownerdashboard")
-def pgownerdashboard():
-    return render_template('pgownerdashboard.html')
+@app.route("/pgownerprofile")
+def pgownerprofile():
+    return render_template('pgownerprofile.html')
+
+@app.route("/pindex")
+def pindex():
+    agent_id = session['agent_id']
+    cursor = mysql.connection.cursor()
+    #Executing SQL Statements
+    cursor.execute(''' SELECT aname FROM agents WHERE agentid=%s''',(agent_id))
+    data = cursor.fetchall()
+    print(data)
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    #Closing the cursor
+    cursor.close()
+    return render_template('pindex.html',name=data[0][0])
 
 @app.route("/managepg")
 def managepg():
-    pgid='1'
+    agent_id=session['agent_id']
     cursor = mysql.connection.cursor()
     #Executing SQL Statements
-    cursor.execute(''' SELECT * FROM pgs WHERE pgid=%s''',(pgid))
+    cursor.execute(''' SELECT * FROM pgs WHERE pgownerid=%s''',(agent_id))
     data = cursor.fetchall()
     #Saving the Actions performed on the DB
     mysql.connection.commit()
     #Closing the cursor
     cursor.close()
     return render_template('managepg.html',data=data,len=len(data))
+
+@app.route("/addPG")
+def addPG():
+    return render_template('addPG.html')
 
 @app.route('/registerPG',methods=['POST'])
 def registerPG():
@@ -149,9 +167,6 @@ def registerPG():
    
         return redirect('/managepg')
 
-@app.route("/pgownerprofile")
-def pgownerprofile():
-    return render_template('pgownerprofile.html')
 
 @app.route("/listings")
 def listings():
@@ -265,6 +280,34 @@ def loginVerify():
     else:
         return render_template ('login.html',res="invalid")
     
+@app.route('/ploginVerify', methods=['POST'])
+def ploginVerify():
+    #Creating a connection cursor
+
+    if request.method == 'POST':
+        lemail = request.form['lemail']
+        lpassword = request.form['lpassword']
+
+    if lemail == 'admin@gmail.com' and lpassword == 'admin123':
+        return redirect('/aindex')
+
+    cursor = mysql.connection.cursor()
+    
+    #Executing SQL Statements
+    cursor.execute(''' SELECT * FROM agents WHERE aemail=%s AND apassword=%s''',(lemail,lpassword))
+    data = cursor.fetchall()
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    
+    #Closing the cursor
+    cursor.close()
+
+    if len(data)!=0:
+        session['agent_id'] = str(data[0][0])
+        return redirect('/pindex')    
+    else:
+        return render_template ('plogin.html',res="invalid")
+
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -288,7 +331,6 @@ def register():
 
 
         if password != cpassword:
-            print('hi')
             return render_template('login.html',res='check_pass')
 
     cursor = mysql.connection.cursor()
