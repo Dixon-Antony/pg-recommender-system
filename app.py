@@ -85,7 +85,16 @@ def pgownerbooking():
 
 @app.route("/pgownerprofile")
 def pgownerprofile():
-    return render_template('pgownerprofile.html')
+    agent_id = session['agent_id']
+    cursor = mysql.connection.cursor()
+    #Executing SQL Statements
+    cursor.execute(''' SELECT * FROM agents WHERE agentid=%s''',(agent_id))
+    data = cursor.fetchall()
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    #Closing the cursor
+    cursor.close()
+    return render_template('pgownerprofile.html',data=data)
 
 @app.route("/pindex")
 def pindex():
@@ -342,9 +351,9 @@ def register():
     mysql.connection.commit()
 
     #Executing SQL Statements
-    cursor.execute(''' SELECT userid FROM users WHERE username=%s''',(username))
+    cursor.execute(''' SELECT userid FROM users WHERE username=%s''',([username]))
     data = cursor.fetchall()
-    session['user_id'] = data[0][0]
+    session['user_id'] = str(data[0][0])
     #Saving the Actions performed on the DB
     mysql.connection.commit()
     
@@ -353,6 +362,49 @@ def register():
 
     return redirect('/index')
 
+@app.route('/pregister', methods=['POST'])
+def pregister():
+    #Creating a connection cursor
+
+    if request.method == 'POST':
+        username = request.form['username']
+        # print(username)
+        phone = request.form['phone']
+        # print(phone)
+        email = request.form['email']
+        # print(email)
+        password = request.form['password']
+        # print(password)
+        cpassword = request.form['cpassword']
+        # print(cpassword)
+        aadhaar = request.form['aadhaar']
+        # print(aadhaar)
+        gender = request.form['gender']
+        # print(gender)
+
+
+        if password != cpassword:
+            return render_template('plogin.html',res='check_pass')
+
+    cursor = mysql.connection.cursor()
+    
+    #Executing SQL Statements
+    cursor.execute(''' INSERT into agents (aname,aemail,apassword,aphone,aaadhaar,agender) VALUES(%s,%s,%s,%s,%s,%s)''',(username,email,password,phone,aadhaar,gender))
+
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+
+    #Executing SQL Statements
+    cursor.execute(''' SELECT agentid FROM agents WHERE aname=%s''',([username]))
+    data = cursor.fetchall()
+    session['agent_id'] = str(data[0][0])
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    
+    #Closing the cursor
+    cursor.close()
+
+    return redirect('/pindex')
 
 
 if __name__ == "__main__":

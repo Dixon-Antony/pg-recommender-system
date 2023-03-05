@@ -15,258 +15,92 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
   </head>
-
+  <style>
+    body,
+    h1,
+    h2,
+    h4,
+    p {
+      font-family: Maiandra GD;
+      line-height: 1.6rem;
+    }
+    #main-nav li {
+      padding: 16.4px 24px;
+    }
+    #main-nav a {
+      font-size: 16px;
+      padding: 0 0 8px;
+    }
+  </style>
   <body>
     <nav id="main-nav">
       <ul>
         <li><a href="pindex">Home</a></li>
         <li><a class="current" href="managepg">Manage PG</a></li>
-        <li><a href="pgownwerprofile">Profile</a></li>
+        <li><a href="pgownerprofile">Profile</a></li>
       </ul>
     </nav>
-    <br />
-    <br />
+    <div class="space"></div>
     <div class="container">
       {% if len == 0 %}
       <h1>No PGs registered yet.</h1>
-      <a href="/addPG" class="btn"></a>
+      <a href="/addPG" class="btn">Register Your PG</a>
       {% else %}
-      <div id="managepg-form-container">
-        <div class="form-wrap">
-          <h1>Register your PG</h1>
-          <form
-            method="POST"
-            action="/registerPG"
-            enctype="multipart/form-data"
-          >
-            <div class="form-group">
-              <h3>Property Name</h3>
-              <br />
-              <input type="text" name="pgname" id="pgname" />
-            </div>
-            <div class="form-group">
-              <h3>Property Description</h3>
-              <br />
-              <textarea cols="82" rows="6" name="pgdesc" id="pgdesc"></textarea>
-            </div>
-            <div class="form-group">
-              <h3>Property State</h3>
-              <br />
-              <input type="text" name="pgstate" id="pgstate" />
-            </div>
-            <div class="form-group">
-              <h3>Property Location ( City )</h3>
-              <br />
-              <input type="text" name="pgcity" id="pgcity" />
-            </div>
-            <div class="form-group">
-              <h3>Property Pincode</h3>
-              <br />
-              <input type="text" name="pgpincode" id="pgpincode" />
-            </div>
-            <div class="form-group">
-              <h3>Property Address</h3>
-              <br />
-              <textarea
-                cols="82"
-                rows="6"
-                name="pgaddress"
-                id="pgaddress"
-              ></textarea>
-            </div>
-            <div class="form-group">
-              <h3>Owner Name</h3>
-              <br />
-              <input type="text" name="ownername" id="ownername" />
-            </div>
-            <div class="form-group">
-              <h3>PG Images Upload</h3>
-              <br />
-              <input type="file" name="pgimage[]" id="pgimage" multiple />
-            </div>
-            <br />
-            <hr />
-            <div id="category-type" class="big-same-line">
-              <div class="form-group">
-                <div class="select-same-line">
-                  <h3>Category</h3>
-                  <select name="category" id="category">
-                    <option value="standard">Standard (5k+)</option>
-                    <option value="premium">Premium (10k+)</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="select-same-line">
-                  <h3>PG for</h3>
-                  <select name="pgtype" id="pgtype">
-                    <option value="mens">Mens</option>
-                    <option value="womens">Women</option>
-                    <option value="coliving">Co-living</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <br />
-            <hr />
-            <div class="big-same-line">
-              <div class="form-group">
-                <h4>Occupancy</h4>
-                <div class="same-line">
-                  <label for="single">Single sharing</label>
-                  <input
-                    type="checkbox"
-                    id="single"
-                    name="single"
-                    value="single"
-                  />
-                </div>
-                <div class="same-line">
-                  <label for="double">Double sharing</label>
-                  <input
-                    type="checkbox"
-                    id="double"
-                    name="double"
-                    value="double"
-                  />
-                </div>
-                <div class="same-line">
-                  <label for="triple">Triple sharing</label>
-                  <input
-                    type="checkbox"
-                    id="triple"
-                    name="triple"
-                    value="triple"
-                  />
-                </div>
-                <div class="same-line">
-                  <label for="four">Four sharing</label>
-                  <input type="checkbox" id="four" name="four" value="four" />
-                </div>
-                <div class="same-line">
-                  <label for="multi">Multi sharing</label>
-                  <input
-                    type="checkbox"
-                    id="multi"
-                    name="multi"
-                    value="multi"
-                  />
-                </div>
-              </div>
-              <div class="form-group" id="food">
-                <h3>Food Included</h3>
-                <div class="same-line">
-                  <label for="breakfast">Breakfast</label>
-                  <input
-                    type="checkbox"
-                    id="breakfast"
-                    name="breakfast"
-                    value="breakfast"
-                  />
-                </div>
-                <div class="same-line">
-                  <label for="lunch">Lunch</label>
-                  <input
-                    type="checkbox"
-                    id="lunch"
-                    name="lunch"
-                    value="lunch"
-                  />
-                </div>
-                <div class="same-line">
-                  <label for="dinner">Dinner</label>
-                  <input
-                    type="checkbox"
-                    id="dinner"
-                    name="dinner"
-                    value="dinner"
-                  />
-                </div>
-              </div>
-            </div>
-            <hr />
-            <div class="big-same-line">
-              <div class="form-group">
-                <div class="select-same-line">
-                  <h3>AC/Non AC</h3>
-                  <select name="isac" id="isac">
-                    <option value="airconditioned">Air conditioned</option>
-                    <option value="non airconditioned">
-                      Non airconditioned
-                    </option>
-                    <option value="both">Both</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="select-same-line">
-                  <h3>Bathroom Type</h3>
-                  <select name="bathtype" id="bathtype">
-                    <option value="attached">Attached</option>
-                    <option value="common">Common</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <hr />
-            <div id="other" class="form-group">
-              <h3>Other Amenities</h3>
-              <div class="big-same-line">
-                <div class="same-line">
-                  <label for="wifi">WiFi</label>
-                  <input type="checkbox" id="wifi" name="wifi" value="wifi" />
-                </div>
-                <div class="same-line">
-                  <label for="ups">UPS</label>
-                  <input type="checkbox" id="ups" name="ups" value="ups" />
-                </div>
-              </div>
-              <div class="big-same-line">
-                <div class="same-line">
-                  <label for="wasmac">Washing Machine</label>
-                  <input
-                    type="checkbox"
-                    id="wasmac"
-                    name="wasmac"
-                    value="wasmac"
-                  />
-                </div>
-                <div class="same-line">
-                  <label for="laundry">Laundry</label>
-                  <input
-                    type="checkbox"
-                    id="laundry"
-                    name="laundry"
-                    value="laundry"
-                  />
-                </div>
-              </div>
-              <div class="big-same-line">
-                <div class="same-line">
-                  <label for="iron">Ironing</label>
-                  <input type="checkbox" id="iron" name="iron" value="iron" />
-                </div>
-              </div>
-            </div>
-            <br />
-            <button type="submit" class="btn">Save Changes</button><br />
-          </form>
+
+      <div class="main-content">
+        <div class="main-img w3-content w3-display-container">
+          <img class="myslides" src="../static/uploads/{{data[0][3]}}" alt="" />
+          <img class="mySlides" src="../static/uploads/{{data[0][4]}}" />
+          <img class="mySlides" src="../static/uploads/{{data[0][5]}}" />
+          <button class="w3-button w3-display-left" onclick="plusDivs(-1)">
+            &#10094;
+          </button>
+          <button class="w3-button w3-display-right" onclick="plusDivs(+1)">
+            &#10095;
+          </button>
+        </div>
+        <div class="main-div">
+          <h1>Name : {{data[0][1]}}</h1>
+          <h4>Description : {{data[0][2]}}</h4>
+          <h3>Type : {{data[0][6]}}</h3>
+          <h4>Agent-id : {{data[0][7]}}</h4>
+          <h4>Address : {{data[0][8]}}</h4>
+          <h4>City : {{data[0][9]}}</h4>
+          <h4>Pincode : {{data[0][10]}}</h4>
+          <div class="main-btn">
+            <a class="btn" href="#">Edit</a>
+          </div>
         </div>
       </div>
-      {% endif %}
-    </div>
-  </body>
 
-  <!-- <footer id="main-footer">
-    <div class="footer-content container">
-      <p>Copyright &copy; 2023. All Rights Reserved</p>
-      <div class="social">
-        <i class="fab fa-twitter"></i>
-        <i class="fab fa-linkedin"></i>
-        <i class="fab fa-instagram"></i>
-        <i class="fab fa-youtube"></i>
-      </div>
+      {% endif %}
+      <div class="space"></div>
     </div>
-  </footer> -->
+
+    <script>
+      var slideIndex = 1;
+      showDivs(slideIndex);
+
+      function plusDivs(n) {
+        showDivs((slideIndex += n));
+      }
+
+      function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) {
+          slideIndex = 1;
+        }
+        if (n < 1) {
+          slideIndex = x.length;
+        }
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+        }
+        x[slideIndex - 1].style.display = "block";
+      }
+    </script>
+  </body>
 </html>
