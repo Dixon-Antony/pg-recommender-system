@@ -220,24 +220,23 @@ def registerPG():
 @app.route("/listings",methods=['POST','GET'])
 def listings():
 
-    pgdata = [{'name':'hello','img_src':'bg4','price':'5000','rating':'3'},
-            {'name':'world','img_src':'bg2','price':'4500','rating':'4'},
-            {'name':'Jg','img_src':'bg3','price':'5500','rating':'5'},
-            {'name':'Dinesh','img_src':'bg4','price':'6000','rating':'2'}]
+    # pgdata = [{'name':'hello','img_src':'bg4','price':'5000','rating':'3'},
+    #         {'name':'world','img_src':'bg2','price':'4500','rating':'4'},
+    #         {'name':'Jg','img_src':'bg3','price':'5500','rating':'5'},
+    #         {'name':'Dinesh','img_src':'bg4','price':'6000','rating':'2'}]
     
-    # if request.method=='POST':
-    #     search = request.form['search']
-        
-    #     newpgdata = []
-    #     for i in pgdata:
-    #         if search in i.values():
-    #             newpgdata.append(i)
-    #     print(newpgdata)
-    return render_template('listings.html',pgdata=pgdata, len = len(pgdata))
+    cursor = mysql.connection.cursor()
+    #Executing SQL Statements
+    cursor.execute(''' SELECT * FROM pgs''')
+    data = cursor.fetchall()
+    print(data) 
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    #Closing the cursor
+    cursor.close()
+
+    return render_template('listings.html',pgdata=data, len = len(data))
     
-
-
-    return render_template('listings.html',pgdata=pgdata, len = len(pgdata))
 
 @app.route("/viewListing")
 def viewListing():

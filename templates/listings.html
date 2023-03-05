@@ -38,19 +38,20 @@
           <i class="fas fa-search"></i>
         </a>
       </div>
-      <div class="space"></div>
+      <br>
       <!-- CSS Cards -->
       <div class="card-items">
         {%for i in range(0, len)%}
         <div class="card">
           <div class="card-img">
-            <img src="../static/img/{{pgdata[i]['img_src']}}.jpg" alt="" />
+            <img src="../static/uploads/{{pgdata[i][3]}}" alt="" />
           </div>
           <div class="card-content">
-            <h1>Name : {{pgdata[i]['name']}}</h1>
-            <!-- <p>Desciption : </p> -->
-            <h1>Price : {{pgdata[i]['price']}}</h1>
-            <h1>Rating : {{pgdata[i]['rating']}} / 5</h1>
+            <h1>Name : {{pgdata[i][1]}}</h1>
+            <h1>Id : {{pgdata[i][0]}}</h1>
+            <h1>Type : {{pgdata[i][6]}}</h1>
+            <h1>City : {{pgdata[i][9]}}</h1>
+            <h1>Rating : {{pgdata[i][11]}} / 5</h1>
             <div class="card-btn">
               <a class='btn' href="viewListing">View</a>
             </div>
