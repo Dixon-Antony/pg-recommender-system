@@ -488,7 +488,40 @@ def pregister():
     #Closing the cursor
     cursor.close()
 
-    return redirect('/pindex')
+    return redirect('/pgetOTP')
+
+@app.route('/pgetOTP',methods=['GET','POST'])
+def pgetOTP():
+    if request.method=='GET':
+        return render_template('pgetOTP.html')
+    
+    if request.method=='POST':
+        emailid = request.form['email']
+        msg = str(pgenerateOTP())
+        session['otp'] = str(msg)
+        s = smtplib.SMTP('smtp.gmail.com', 587)
+        s.starttls()
+        s.login("pgaccsys123@gmail.com", "vqwddbatjpcatxil")
+        s.sendmail('pgaccsys123@gmail.com',emailid,msg)
+        
+        return render_template('pvalOTP.html')
+
+def pgenerateOTP():
+    return random.randrange(100000,999999)         
+
+
+@app.route('/pvalOTP',methods=['GET','POST'])
+def pvalOTP():
+    if request.method=='GET':
+        return render_template('pvalOTP.html')
+    
+    if request.method=='POST':
+        otp = request.form['otp']
+
+        if otp == session['otp']:
+            return redirect('/pindex')
+        else:
+            return render_template('pvalOTP.html',error='invalid')
 
 
 if __name__ == "__main__":
