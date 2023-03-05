@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Validate OTP</title>
+    <title>Get OTP</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='CSS/style.css') }}"
@@ -19,14 +19,14 @@
       <div id="login-container">
         <div class="form-wrap">
           <h1>OTP Verification</h1>
-          <form id="valOTP" action="/valOTP" method="POST">
+          <form id="pgetOTP" action="/pgetOTP" method="POST">
             <div class="form-group">
-              <label for="otp">Enter OTP</label><br />
-              <input type="number" name="otp" id="otp" />
+              <label for="email">Enter Your Email </label><br />
+              <input type="email" name="email" id="email" />
             </div>
-            <button type="submit" class="btn">Validate</button>
+            <button type="submit" class="btn">Get OTP</button>
             <p class="bottom-text">
-              By clicking the Validate button, you agree to our
+              By clicking the Get OTP button, you agree to our
               <a href="#">Terms & Conditions</a> and
               <a href="#">Privacy Policy</a>
             </p>
@@ -34,14 +34,9 @@
         </div>
         <div id="form-footer">
           <p>Go back ?</p>
-          <a href="/getOTP">Click Here</a>
+          <a href="/login">Click Here</a>
         </div>
       </div>
     </div>
-    {% if error=='invalid' %}
-    <script>
-      alert("Invalid OTP !");
-    </script>
-    {% endif %}
   </body>
 </html>
