@@ -274,6 +274,7 @@ ul {
   */
   padding: 15px 25px;
   background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(50px);
   border-radius: 10px;
   color: #333;
 }
@@ -500,4 +501,20 @@ textarea {
 
 .addRoom-container {
   width: 400px;
+}
+
+.main-btn {
+  display: flex;
+  width: 250%;
+  justify-content: space-between;
+}
+
+.viewBtn {
+  background-color: transparent;
+  border-radius: 20px;
+  width: 400px;
+}
+
+.adminTables label {
+  color: white;
 }

@@ -122,9 +122,15 @@ def managepg():
     session['pgid'] = str(data[0][0])
     #Saving the Actions performed on the DB
     mysql.connection.commit()
+
+    #Executing SQL Statements
+    cursor.execute(''' SELECT * FROM rooms WHERE pgid=%s''',(session['pgid']))
+    room_data = cursor.fetchall()
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
     #Closing the cursor
     cursor.close()
-    return render_template('managepg.html',data=data,len=len(data))
+    return render_template('managepg.html',data=data,len=len(data),roomData =room_data)
 
 @app.route("/addPG")
 def addPG():
@@ -238,8 +244,20 @@ def listings():
     return render_template('listings.html',pgdata=data, len = len(data))
     
 
-@app.route("/viewListing")
+@app.route("/viewListing",methods=['POST'])
 def viewListing():
+    if request.method=='POST':
+        pgId = request.form['pg-id'];
+        cursor = mysql.connection.cursor()
+        #Executing SQL Statements
+        cursor.execute(''' SELECT * FROM pgs WHERE pgid=%s''',(pgId))
+        data = cursor.fetchall()
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+        #Closing the cursor
+        cursor.close()
+        print(data)
+
     return render_template('viewListing.html')
 
 @app.route("/contact")

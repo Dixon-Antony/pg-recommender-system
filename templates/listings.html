@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Listings</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='CSS/style.css') }}"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     />
 
-    <!-- LoadMore -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script> -->
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   </head>
 
   <body>
-
     <nav id="main-nav">
       <ul>
         <li><a href="index">Home</a></li>
@@ -38,7 +37,7 @@
           <i class="fas fa-search"></i>
         </a>
       </div>
-      <br>
+      <br />
       <!-- CSS Cards -->
       <div class="card-items">
         {%for i in range(0, len)%}
@@ -47,23 +46,32 @@
             <img src="../static/uploads/{{pgdata[i][3]}}" alt="" />
           </div>
           <div class="card-content">
-            <h1>Name : {{pgdata[i][1]}}</h1>
-            <h1>Id : {{pgdata[i][0]}}</h1>
-            <h1>Type : {{pgdata[i][6]}}</h1>
-            <h1>City : {{pgdata[i][9]}}</h1>
-            <h1>Rating : {{pgdata[i][11]}} / 5</h1>
-            <div class="card-btn">
-              <a class='btn' href="viewListing">View</a>
-            </div>
+            <form action="/viewListing" method="POST">
+              <h1>Name : {{pgdata[i][1]}}</h1>
+              <h2>Id : {{pgdata[i][0]}}</h2>
+              <h2>Type : {{pgdata[i][6]}}</h2>
+              <h2>City : {{pgdata[i][9]}}</h2>
+              <h2>Rating : {{pgdata[i][11]}} / 5</h2>
+              <div class="card-btn">
+                <button
+                  type="submit"
+                  name="pg-id"
+                  class="btn viewBtn"
+                  href=""
+                  value="{{pgdata[i][0]}}"
+                >
+                  View
+                </button>
+              </div>
+            </form>
           </div>
         </div>
         {%endfor%}
-        </div>
+      </div>
       <div class="space"></div>
       <a class="btn" href="#" id="loadMore">Load More</a>
       <div class="space"></div>
     </div>
-
 
     <!-- <script>
       $(document).ready(function () {
@@ -77,7 +85,7 @@
         });
       });
     </script> -->
-    
+
     <footer id="main-footer">
       <div class="footer-content">
         <p>Copyright &copy; 2023. All Rights Reserved</p>
@@ -89,7 +97,5 @@
         </div>
       </div>
     </footer>
-
   </body>
-
 </html>
