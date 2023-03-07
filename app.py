@@ -254,11 +254,17 @@ def viewListing():
         data = cursor.fetchall()
         #Saving the Actions performed on the DB
         mysql.connection.commit()
+
+        #Executing SQL Statements
+        cursor.execute(''' SELECT * FROM rooms WHERE pgid=%s''',(pgId))
+        room_data = cursor.fetchall()
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
         #Closing the cursor
         cursor.close()
-        print(data)
+        print(room_data)
 
-    return render_template('viewListing.html')
+    return render_template('viewListing.html',data=data,room_data=room_data)
 
 @app.route("/contact")
 def contact():
