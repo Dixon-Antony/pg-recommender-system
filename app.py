@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 import os
 import random
 import smtplib
+from datetime import date
 
 app = Flask(__name__)
 app.secret_key = "abc123"  
@@ -30,7 +31,6 @@ def index():
     #Executing SQL Statements
     cursor.execute(''' SELECT username FROM users WHERE userid=%s''',(user_id))
     data = cursor.fetchall()
-    print(data)
     #Saving the Actions performed on the DB
     mysql.connection.commit()
     #Closing the cursor
@@ -235,7 +235,6 @@ def listings():
     #Executing SQL Statements
     cursor.execute(''' SELECT * FROM pgs''')
     data = cursor.fetchall()
-    print(data) 
     #Saving the Actions performed on the DB
     mysql.connection.commit()
     #Closing the cursor
@@ -262,9 +261,8 @@ def viewListing():
         mysql.connection.commit()
         #Closing the cursor
         cursor.close()
-        print(room_data)
 
-    return render_template('viewListing.html',data=data,room_data=room_data)
+    return render_template('viewListing.html',data=data,roomData=room_data)
 
 @app.route("/contact")
 def contact():
@@ -276,19 +274,24 @@ def favorites():
 
 @app.route("/profile")
 def profile():
+    
+    booking_status = 'not_boooked'
+    try:
+        booking_status = request.args['response']
 
-    user_id = session['user_id']
+    finally:
+        user_id = session['user_id']
 
-    cursor = mysql.connection.cursor()
-    #Executing SQL Statements
-    cursor.execute(''' SELECT * FROM users WHERE userid=%s''',(user_id))
-    data = cursor.fetchall()
-    #Saving the Actions performed on the DB
-    mysql.connection.commit()
-    #Closing the cursor
-    cursor.close()
+        cursor = mysql.connection.cursor()
+        #Executing SQL Statements
+        cursor.execute(''' SELECT * FROM users WHERE userid=%s''',(user_id))
+        data = cursor.fetchall()
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+        #Closing the cursor
+        cursor.close()
 
-    return render_template('profile.html',data=data)
+        return render_template('profile.html',data=data,status=booking_status)
 
 @app.route("/editProfile",methods=['GET','POST'])
 def editProfile():
@@ -545,6 +548,27 @@ def pvalOTP():
             return redirect('/pindex')
         else:
             return render_template('pvalOTP.html',error='invalid')
+
+
+@app.route('/bookPG',methods=['GET','POST'])
+def bookPG():
+
+    if request.method == 'POST':
+        [roomType,pgId,roomId] = request.form['bookBtn'].split('-')
+        cursor = mysql.connection.cursor()
+        
+        #Executing SQL Statements
+        cursor.execute(''' UPDATE rooms SET available = available - 1 WHERE pgid = %s AND sharingtype=%s;''',(pgId,roomType))
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+
+        #Executing SQL Statements
+        print("user-id : ",session['user_id'])
+        cursor.execute(''' INSERT into bookings (pgid,roomid,userid,bookingdate) VALUES(%s,%s,%s,%s)''',(pgId,roomId,session['user_id'],[date.today()]))
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+
+        return redirect(url_for('profile', response='booked'));
 
 
 if __name__ == "__main__":
