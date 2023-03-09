@@ -13,10 +13,19 @@
     />
     <link
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
   </head>
-
+  <style>
+    .mySlides {
+      display: none;
+    }
+  </style>
   <body>
     <nav id="main-nav">
       <ul>
@@ -28,12 +37,36 @@
       </ul>
     </nav>
     <div class="container">
-      <h1>SMART PG ACCOMODATION SYSTEM</h1>
-      <h3>Welcome {{name}}</h3>
+      <div class="home-grid">
+        <div class="slider w3-content w3-section">
+          <img class="mySlides" src="../static/img/bg.jpg" alt="" />
+          <img class="mySlides" src="../static/img/bg2.jpg" alt="" />
+          <img class="mySlides" src="../static/img/bg3.jpg" alt="" />
+        </div>
+        <div class="welcome"><h1>Welcome {{name}}</h1></div>
+        <div class="home-section-1">
+          <div>
+            <a href="/listings">
+              <h1>Start Exploring</h1>
+            </a>
+          </div>
+          <div>
+            <a href="/listings"
+              ><i class="fa-brands fa-wpexplorer fa-5x"></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="home-section-2">
+          <div>
+            <a href="/profile"><i class="fa-solid fa-user fa-5x"></i></a>
+          </div>
+          <div>
+            <a href="/contact"><i class="fa-solid fa-comment fa-5x"></i></a>
+          </div>
+        </div>
+      </div>
     </div>
-
-
-    <div class="space"></div>
 
     <footer id="main-footer">
       <div class="footer-content">
@@ -47,4 +80,22 @@
       </div>
     </footer>
   </body>
+  <script>
+    var myIndex = 0;
+    carousel();
+
+    function carousel() {
+      var i;
+      var x = document.getElementsByClassName("mySlides");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      myIndex++;
+      if (myIndex > x.length) {
+        myIndex = 1;
+      }
+      x[myIndex - 1].style.display = "block";
+      setTimeout(carousel, 5000); // Change image every 2 seconds
+    }
+  </script>
 </html>

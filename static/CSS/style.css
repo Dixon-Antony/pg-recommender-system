@@ -547,3 +547,77 @@ textarea {
   border-radius: 20px;
   background: transparent;
 }
+
+.home-grid {
+  margin-top: 3.5rem;
+  display: grid;
+  width: 100%;
+  height: 90vh;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 2fr 1fr;
+  justify-content: center;
+  align-items: center;
+  font-family: Maiandra GD;
+  padding: 10px 20px 0px 10px;
+}
+
+.home-grid > div {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-grid .slider {
+  overflow: hidden;
+  padding-bottom: 20px;
+  border-radius: 5px;
+}
+
+.home-grid .slider img {
+  height: 100%;
+  width: 100%;
+  /* object-fit: cover; */
+}
+
+.home-section-1,
+.home-section-2 {
+  justify-content: space-around !important;
+}
+
+.welcome {
+  border: 1px solid #ddd;
+  border-top: 0;
+  border-right: 0;
+  margin-left: 10px;
+}
+
+.welcome h1 {
+  font-family: Maiandra GD;
+}
+
+.home-section-1 {
+  border: 1px solid #ddd;
+  border-left: 0;
+  border-bottom: 0;
+  margin-left: 10px;
+}
+
+.home-section-1 h1 {
+  font-family: Maiandra GD;
+}
+
+.home-grid h1,
+.home-grid i {
+  transition: all 0.4s ease-in-out;
+}
+
+.home-grid a:hover {
+  color: #f92f60;
+}
+
+.home-grid a:hover i,
+.home-grid a:hover h1 {
+  transform: scale(1.2);
+}
