@@ -115,22 +115,26 @@ def pindex():
 @app.route("/managepg")
 def managepg():
     agent_id=session['agent_id']
+    print(agent_id)
     cursor = mysql.connection.cursor()
     #Executing SQL Statements
     cursor.execute(''' SELECT * FROM pgs WHERE pgownerid=%s''',(agent_id))
     data = cursor.fetchall()
-    session['pgid'] = str(data[0][0])
-    #Saving the Actions performed on the DB
-    mysql.connection.commit()
-
-    #Executing SQL Statements
-    cursor.execute(''' SELECT * FROM rooms WHERE pgid=%s''',(session['pgid']))
-    room_data = cursor.fetchall()
-    #Saving the Actions performed on the DB
-    mysql.connection.commit()
-    #Closing the cursor
-    cursor.close()
-    return render_template('managepg.html',data=data,len=len(data),roomData =room_data)
+    print(data)
+    try:
+        session['pgid'] = str(data[0][0])
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+        #Executing SQL Statements
+        cursor.execute(''' SELECT * FROM rooms WHERE pgid=%s''',(session['pgid']))
+        room_data = cursor.fetchall()
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+        #Closing the cursor
+        cursor.close()
+        return render_template('managepg.html',data=data,len=len(data),roomData =room_data)
+    except:
+        return redirect('addPG');
 
 @app.route("/addPG")
 def addPG():
@@ -188,7 +192,6 @@ def registerPG():
         pgpincode = request.form['pgpincode']
         files = request.files.getlist('pgimage[]')
 
-        pgid=''
 
         cursor.execute('''SELECT agentid FROM agents WHERE aname = %s''',([pgownername]))
         pgownerid = cursor.fetchall()[0][0]
@@ -201,7 +204,7 @@ def registerPG():
         data = cursor.fetchall()
         mysql.connection.commit()
         
-        pgid = data[0][0]
+        session['pgid'] = str(data[0][0])
 
         for i in range(len(files)):
             if files[i]:
@@ -209,13 +212,13 @@ def registerPG():
                 files[i].save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             
                 if i==0:
-                    cursor.execute('''UPDATE pgs SET pgimage1=%s WHERE pgid=%s''',([filename],pgid))
+                    cursor.execute('''UPDATE pgs SET pgimage1=%s WHERE pgid=%s''',([filename],session['pgid']))
                 
                 if i==1:
-                    cursor.execute('''UPDATE pgs SET pgimage2=%s WHERE pgid=%s''',([filename],pgid))
+                    cursor.execute('''UPDATE pgs SET pgimage2=%s WHERE pgid=%s''',([filename],session['pgid']))
                 
                 if i==2:
-                    cursor.execute('''UPDATE pgs SET pgimage3=%s WHERE pgid=%s''',([filename],pgid))
+                    cursor.execute('''UPDATE pgs SET pgimage3=%s WHERE pgid=%s''',([filename],session['pgid']))
 
                 mysql.connection.commit()
         cursor.close()
@@ -450,8 +453,8 @@ def getOTP():
         session['otp'] = str(msg)
         s = smtplib.SMTP('smtp.gmail.com', 587)
         s.starttls()
-        s.login("pgaccsys123@gmail.com", "dbjcmiszgvtxsioe")
-        s.sendmail('pgaccsys123@gmail.com',emailid,msg)
+        s.login("pgrecc123@gmail.com", "dzdewdudmjshbbmh")
+        s.sendmail('pgrecc123@gmail.com',emailid,msg)
         
         return render_template('valOTP.html')
 
@@ -527,8 +530,8 @@ def pgetOTP():
         session['otp'] = str(msg)
         s = smtplib.SMTP('smtp.gmail.com', 587)
         s.starttls()
-        s.login("pgaccsys123@gmail.com", "vqwddbatjpcatxil")
-        s.sendmail('pgaccsys123@gmail.com',emailid,msg)
+        s.login("pgrecc123@gmail.com", "dzdewdudmjshbbmh")
+        s.sendmail('pgrecc123@gmail.com',emailid,msg)
         
         return render_template('pvalOTP.html')
 

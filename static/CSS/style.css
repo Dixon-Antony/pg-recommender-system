@@ -578,7 +578,7 @@ textarea {
 .home-grid .slider img {
   height: 100%;
   width: 100%;
-  /* object-fit: cover; */
+  object-fit: cover;
 }
 
 .home-section-1,
