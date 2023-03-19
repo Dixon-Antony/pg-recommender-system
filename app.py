@@ -327,28 +327,44 @@ def contact():
 
 @app.route("/booking")
 def booking():
-    return render_template('booking.html')
+        
+        booking_status = 'not_boooked'
+        try:
+            booking_status = request.args['response']
+            print(booking_status)
+            
+        finally:
+            cursor = mysql.connection.cursor()
+            #Executing SQL Statements
+            cursor.execute(''' SELECT bookingid,pgid,bookingdate,rating FROM bookings WHERE userid=%s''',(session['user_id']))
+            booking_details = cursor.fetchall()
+            pg_id = str(booking_details[0][1])
+            #Saving the Actions performed on the DB
+            mysql.connection.commit()
+
+            #Executing SQL Statements
+            cursor.execute(''' SELECT * FROM pgs WHERE pgid=%s''',(pg_id))
+            pg_data = cursor.fetchall()
+            #Saving the Actions performed on the DB
+            mysql.connection.commit()
+
+            return render_template('booking.html',status=booking_status,booking_details=booking_details,len=len(booking_details),pg_data=pg_data)
 
 @app.route("/profile")
 def profile():
-    
-    booking_status = 'not_boooked'
-    try:
-        booking_status = request.args['response']
 
-    finally:
-        user_id = session['user_id']
+    user_id = session['user_id']
 
-        cursor = mysql.connection.cursor()
-        #Executing SQL Statements
-        cursor.execute(''' SELECT * FROM users WHERE userid=%s''',(user_id))
-        data = cursor.fetchall()
-        #Saving the Actions performed on the DB
-        mysql.connection.commit()
-        #Closing the cursor
-        cursor.close()
+    cursor = mysql.connection.cursor()
+    #Executing SQL Statements
+    cursor.execute(''' SELECT * FROM users WHERE userid=%s''',(user_id))
+    data = cursor.fetchall()
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    #Closing the cursor
+    cursor.close()
 
-        return render_template('profile.html',data=data,status=booking_status)
+    return render_template('profile.html',data=data)
 
 @app.route("/editProfile",methods=['GET','POST'])
 def editProfile():
@@ -627,9 +643,33 @@ def bookPG():
         cursor.execute(''' INSERT into bookings (pgid,roomid,userid,bookingdate) VALUES(%s,%s,%s,%s)''',(pgId,roomId,session['user_id'],[date.today()]))
         #Saving the Actions performed on the DB
         mysql.connection.commit()
+        cursor.close()
 
-        return redirect(url_for('profile', response='booked'));
+        return redirect(url_for('booking', response='booked'));
+
+@app.route('/ratePG',methods=['POST'])
+def ratePG():
+    
+    if request.method=='POST':
+        rating = request.form['rate'];
+        pg_id = request.form['pg-id']
+        user_id = session['user_id']
+        cursor = mysql.connection.cursor()
+        cursor.execute(''' INSERT INTO ratings (user_id,pg_id,rating) VALUES(%s,%s,%s);''',(user_id,pg_id,rating))
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+
+        cursor.execute(''' UPDATE bookings SET rating=%s WHERE userid=%s AND pgid=%s''',(rating,user_id,pg_id))
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+
+        cursor.close()
+
+    return redirect('booking');
+
+
 
 
 if __name__ == "__main__":
   app.run()
+

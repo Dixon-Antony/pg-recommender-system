@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Favorites</title>
+    <title>My Booking</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 
     <link
@@ -32,42 +32,74 @@
     </nav>
     <div class="space"></div>
     <div class="container">
-      <div class="search-box">
-        <input class="search-text" type="text" placeholder="Search Anything" />
-        <a href="#" class="search-btn">
-          <i class="fas fa-search"></i>
-        </a>
-      </div>
-      <div class="space"></div>
+      <br />
       <!-- CSS Cards -->
       <div class="card-items">
-        <div class="card">
+        {%for i in range(0, len)%}
+        <div class="card myBooking">
           <div class="card-img">
-            <img src="{{ url_for('static', filename='img/bg.jpg') }}" alt="" />
+            <img src="../static/uploads/{{pg_data[i][3]}}" alt="" />
           </div>
           <div class="card-content">
-            <h1>Name :</h1>
-            <!-- <p>Desciption : </p> -->
-            <h1>Price :</h1>
-            <h1>Rating : / 5</h1>
-            <div class="card-btn">
-              <a class="btn" href="viewListing">View</a>
+            <br />
+            <h2>Booking Id : {{booking_details[0][0]}}</h2>
+            <h2>Booking Date : {{booking_details[0][2]}}</h2>
+            <br />
+            <hr />
+            <br />
+            <h2>Name : {{pg_data[i][1]}}</h2>
+            <h2>Id : {{pg_data[i][0]}}</h2>
+            <h2>Type : {{pg_data[i][6]}}</h2>
+            <h2>City : {{pg_data[i][9]}}</h2>
+            <h2>Rating : {{pg_data[i][11]}} / 5</h2>
+            <br />
+            <hr />
+            <br />
+            {% if booking_details[0][3] == 0 %}
+            <div id="ratePG">
+              <form action="/ratePG" method="POST">
+                <h2>Rate PG</h2>
+
+                <div class="rate">
+                  <input type="radio" id="star5" name="rate" value="5" />
+                  <label for="star5" title="text">5 stars</label>
+                  <input type="radio" id="star4" name="rate" value="4" />
+                  <label for="star4" title="text">4 stars</label>
+                  <input type="radio" id="star3" name="rate" value="3" />
+                  <label for="star3" title="text">3 stars</label>
+                  <input type="radio" id="star2" name="rate" value="2" />
+                  <label for="star2" title="text">2 stars</label>
+                  <input type="radio" id="star1" name="rate" value="1" />
+                  <label for="star1" title="text">1 star</label>
+                </div>
+                <br />
+
+                <div class="card-btn">
+                  <button
+                    type="submit"
+                    name="pg-id"
+                    class="btn viewBtn"
+                    value="{{pg_data[i][0]}}"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
             </div>
+            {% else %}
+            <div><h2>Your Rating : {{booking_details[0][3]}}</h2></div>
+
+            {% endif %}
           </div>
         </div>
+        {%endfor%}
       </div>
+      <div class="space"></div>
     </div>
+    {% if status=='booked' %}
+    <script>
+      alert("Room Booked Successfully !!!");
+    </script>
+    {% endif %}
   </body>
-
-  <!-- <footer id="main-footer">
-    <div class="footer-content container">
-      <p>Copyright &copy; 2023. All Rights Reserved</p>
-      <div class="social">
-        <i class="fab fa-twitter"></i>
-        <i class="fab fa-linkedin"></i>
-        <i class="fab fa-instagram"></i>
-        <i class="fab fa-youtube"></i>
-      </div>
-    </div>
-  </footer> -->
 </html>
