@@ -7,6 +7,12 @@ import random
 import smtplib
 from datetime import date
 
+import pandas as pd
+import numpy as np
+from scipy.sparse import csr_matrix
+from sklearn.neighbors import NearestNeighbors
+
+
 app = Flask(__name__)
 app.secret_key = "abc123"  
 
@@ -244,9 +250,51 @@ def listings():
     cursor.close()
 
     return render_template('listings.html',pgdata=data, len = len(data))
-    
+
+
+#recommendation
+
+pgs = pd.read_csv("pgs.csv")
+ratings = pd.read_csv("ratings.csv")
+
+final_dataset = ratings.pivot_table(index='pgId',columns='userId',values='rating')
+final_dataset.fillna(0,inplace=True)
+
+no_user_voted = ratings.groupby('pgId')['rating'].agg('count')
+no_pgs_voted = ratings.groupby('userId')['rating'].agg('count')
+
+final_dataset = final_dataset.loc[no_user_voted[no_user_voted > 10].index,:]
+
+final_dataset=final_dataset.loc[:,no_pgs_voted[no_pgs_voted > 50].index]
+
+csr_data = csr_matrix(final_dataset.values)
+final_dataset.reset_index(inplace=True)
+
+knn = NearestNeighbors(metric='cosine', algorithm='brute', n_neighbors=20, n_jobs=-1)
+knn.fit(csr_data)
+
+def get_pg_recommendation(pg_name):
+    n_pgs_to_recommend = 10
+    pg_list = pgs[pgs['title'].str.contains(pg_name)]  
+    if len(pg_list):        
+        pg_idx= pg_list.iloc[0]['pgId']
+        pg_idx = final_dataset[final_dataset['pgId'] == pg_idx].index[0]
+        distances , indices = knn.kneighbors(csr_data[pg_idx],n_neighbors=n_pgs_to_recommend+1)    
+        rec_pg_indices = sorted(list(zip(indices.squeeze().tolist(),distances.squeeze().tolist())),key=lambda x: x[1])[:0:-1]
+        recommend_frame = []
+        for val in rec_pg_indices:
+            pg_idx = final_dataset.iloc[val[0]]['pgId']
+            idx = pgs[pgs['pgId'] == pg_idx].index
+            recommend_frame.append({'Title':pgs.iloc[idx]['title'].values[0],'Distance':val[1]})
+        df = pd.DataFrame(recommend_frame,index=range(1,n_pgs_to_recommend+1))
+        return df.to_records()
+    else:
+        return "No pgs found. Please check your input"
+        
 
 @app.route("/viewListing",methods=['POST'])
+
+
 def viewListing():
     if request.method=='POST':
         pgId = request.form['pg-id'];
@@ -254,6 +302,7 @@ def viewListing():
         #Executing SQL Statements
         cursor.execute(''' SELECT * FROM pgs WHERE pgid=%s''',(pgId))
         data = cursor.fetchall()
+        print(get_pg_recommendation("New Balaji Men's PG"))
         #Saving the Actions performed on the DB
         mysql.connection.commit()
 
@@ -264,6 +313,8 @@ def viewListing():
         mysql.connection.commit()
         #Closing the cursor
         cursor.close()
+
+
 
     return render_template('viewListing.html',data=data,roomData=room_data)
 
