@@ -630,3 +630,7 @@ textarea {
 #logout > li > a:hover {
   color: #f92f60;
 }
+
+.main-btn .btn {
+  border-radius: 20px;
+}

@@ -82,70 +82,12 @@
           <h4>Quad sharing : {{roomData[3][5]}} / {{roomData[3][4]}}</h4>
           <div class="main-btn">
             <a class="btn" href="#">Edit</a>
-            <a class="btn" href="#">Add rooms</a>
           </div>
         </div>
       </div>
 
       {% endif %}
       <div class="space"></div>
-      <div id="login-container addRoom-container">
-        <div class="form-wrap">
-          <h1>Add Rooms</h1>
-          <form id="addRooms" action="/addRooms" method="POST">
-            <div class="form-group">
-              <label for="single">Enter Number of Single Sharing Rooms</label
-              ><br />
-              <input type="number" name="single" id="single" /><br />
-              <label for="singlePrice"
-                >Enter Price of Single Sharing Rooms</label
-              ><br />
-              <input type="number" name="singlePrice" id="singlePrice" />
-            </div>
-            <br />
-            <hr />
-            <br />
-            <div class="form-group">
-              <label for="double">Enter Number of double Sharing Rooms</label
-              ><br />
-              <input type="number" name="double" id="double" /><br />
-              <label for="doublePrice"
-                >Enter Price of Double Sharing Rooms</label
-              ><br />
-              <input type="number" name="doublePrice" id="doublePrice" />
-            </div>
-            <br />
-            <hr />
-            <br />
-            <div class="form-group">
-              <label for="triple">Enter Number of triple Sharing Rooms</label
-              ><br />
-              <input type="number" name="triple" id="triple" /><br />
-              <label for="triplePrice"
-                >Enter Price of Triple Sharing Rooms</label
-              ><br />
-              <input type="number" name="triplePrice" id="triplePrice" />
-            </div>
-            <br />
-            <hr />
-            <br />
-            <div class="form-group">
-              <label for="quad">Enter Number of quad Sharing Rooms</label><br />
-              <input type="number" name="quad" id="quad" /><br />
-              <label for="quadPrice">Enter Price of Quad Sharing Rooms</label
-              ><br />
-              <input type="number" name="quadPrice" id="quadPrice" />
-            </div>
-            <br />
-            <button type="submit" class="btn">Add</button>
-            <p class="bottom-text">
-              By clicking the Add button, you agree to our
-              <a href="#">Terms & Conditions</a> and
-              <a href="#">Privacy Policy</a>
-            </p>
-          </form>
-        </div>
-      </div>
     </div>
     <div class="space"></div>
 

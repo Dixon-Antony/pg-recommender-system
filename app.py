@@ -127,61 +127,25 @@ def managepg():
     cursor.execute(''' SELECT * FROM pgs WHERE pgownerid=%s''',(agent_id))
     data = cursor.fetchall()
     print(data)
-    try:
+    if len(data)==0:
+        session['pgid'] = 'none'
+    else:    
         session['pgid'] = str(data[0][0])
-        #Saving the Actions performed on the DB
-        mysql.connection.commit()
-        #Executing SQL Statements
-        cursor.execute(''' SELECT * FROM rooms WHERE pgid=%s''',(session['pgid']))
-        room_data = cursor.fetchall()
-        #Saving the Actions performed on the DB
-        mysql.connection.commit()
-        #Closing the cursor
-        cursor.close()
-        return render_template('managepg.html',data=data,len=len(data),roomData =room_data)
-    except:
-        return redirect('addPG');
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    #Executing SQL Statements
+    cursor.execute(''' SELECT * FROM rooms WHERE pgid=%s''',[session['pgid']])
+    room_data = cursor.fetchall()
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    #Closing the cursor
+    cursor.close()
+    return render_template('managepg.html',data=data,len=len(data),roomData =room_data)
 
 @app.route("/addPG")
 def addPG():
     return render_template('addPG.html')
-
-@app.route("/addRooms",methods=['POST'])
-def addRooms():
-
-    pgid = session['pgid']
-    roomtype = 'standard'
-
-    if request.method=='POST':
-        s = request.form['single']
-        sp = request.form['singlePrice']
-        d = request.form['double']
-        dp = request.form['doublePrice']
-        t = request.form['triple']
-        tp = request.form['triplePrice']
-        q = request.form['quad']
-        qp = request.form['quadPrice']
-        cursor = mysql.connection.cursor()
-        for i in range(4):
-            if i==0:
-                cursor.execute('''INSERT INTO rooms (pgid,roomtype,sharingtype,room_count,price) VALUES (%s,%s,%s,%s,%s)''',(pgid,roomtype,'single',s,sp))
-                mysql.connection.commit()
-
-            if i==1:
-                cursor.execute('''INSERT INTO rooms (pgid,roomtype,sharingtype,room_count,price) VALUES (%s,%s,%s,%s,%s)''',(pgid,roomtype,'double',d,dp))
-                mysql.connection.commit()
-            
-            if i==2:
-                cursor.execute('''INSERT INTO rooms (pgid,roomtype,sharingtype,room_count,price) VALUES (%s,%s,%s,%s,%s)''',(pgid,roomtype,'triple',t,tp))
-                mysql.connection.commit()
-            
-            if i==3:
-                cursor.execute('''INSERT INTO rooms (pgid,roomtype,sharingtype,room_count,price) VALUES (%s,%s,%s,%s,%s)''',(pgid,roomtype,'quad',q,qp))
-                mysql.connection.commit()
-
-        cursor.close()
-
-    return redirect('/managepg')
+    
 
 @app.route('/registerPG',methods=['POST'])
 def registerPG():
@@ -229,8 +193,47 @@ def registerPG():
                 mysql.connection.commit()
         cursor.close()
    
-        return redirect('/managepg')
+        return redirect('/addRooms')
 
+@app.route("/addRooms",methods=['POST','GET'])
+def addRooms():
+
+    pgid = session['pgid']
+    roomtype = 'standard'
+    
+    if request.method=='GET':
+        return render_template('addRooms.html')
+
+    if request.method=='POST':
+        s = request.form['single']
+        sp = request.form['singlePrice']
+        d = request.form['double']
+        dp = request.form['doublePrice']
+        t = request.form['triple']
+        tp = request.form['triplePrice']
+        q = request.form['quad']
+        qp = request.form['quadPrice']
+        cursor = mysql.connection.cursor()
+        for i in range(4):
+            if i==0:
+                cursor.execute('''INSERT INTO rooms (pgid,roomtype,sharingtype,room_count,price) VALUES (%s,%s,%s,%s,%s)''',(pgid,roomtype,'single',s,sp))
+                mysql.connection.commit()
+
+            if i==1:
+                cursor.execute('''INSERT INTO rooms (pgid,roomtype,sharingtype,room_count,price) VALUES (%s,%s,%s,%s,%s)''',(pgid,roomtype,'double',d,dp))
+                mysql.connection.commit()
+            
+            if i==2:
+                cursor.execute('''INSERT INTO rooms (pgid,roomtype,sharingtype,room_count,price) VALUES (%s,%s,%s,%s,%s)''',(pgid,roomtype,'triple',t,tp))
+                mysql.connection.commit()
+            
+            if i==3:
+                cursor.execute('''INSERT INTO rooms (pgid,roomtype,sharingtype,room_count,price) VALUES (%s,%s,%s,%s,%s)''',(pgid,roomtype,'quad',q,qp))
+                mysql.connection.commit()
+
+        cursor.close()
+
+    return redirect('/managepg')
 
 @app.route("/listings",methods=['POST','GET'])
 def listings():
