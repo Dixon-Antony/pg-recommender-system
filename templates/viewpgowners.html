@@ -28,7 +28,14 @@
     <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
   </head>
-
+  <style>
+    body {
+      font-family: Maiandra GD;
+    }
+    #main-nav > ul {
+      padding-left: 0px !important;
+    }
+  </style>
   <body>
     <nav id="main-nav">
       <ul>
@@ -36,6 +43,9 @@
         <li><a href="viewusers">Users</a></li>
         <li><a class="current" href="viewpgowners">Agents</a></li>
         <li><a href="viewqueries">Queries</a></li>
+        <div id="logout">
+          <li><a href="logout">Logout</a></li>
+        </div>
       </ul>
     </nav>
     <br />

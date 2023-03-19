@@ -271,9 +271,9 @@ def viewListing():
 def contact():
     return render_template('contact.html')
 
-@app.route("/favorites")
-def favorites():
-    return render_template('favorites.html')
+@app.route("/booking")
+def booking():
+    return render_template('booking.html')
 
 @app.route("/profile")
 def profile():
@@ -330,7 +330,10 @@ def editProfile():
 
 
     
-
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/login")
 
 
 @app.route("/login")

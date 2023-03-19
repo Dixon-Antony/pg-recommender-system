@@ -45,6 +45,7 @@ ul {
 }
 #main-nav ul {
   display: flex;
+  justify-content: space-between;
 }
 #main-nav li {
   padding: 1rem 1.5rem;
@@ -620,4 +621,12 @@ textarea {
 .home-grid a:hover i,
 .home-grid a:hover h1 {
   transform: scale(1.2);
+}
+
+#logout {
+  padding-left: 600px !important;
+}
+
+#logout > li > a:hover {
+  color: #f92f60;
 }
