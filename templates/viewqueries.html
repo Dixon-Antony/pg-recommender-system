@@ -34,13 +34,13 @@
       <div class="queries-container">
         {% for i in range(len)%}
         <div class="query">
-          <h1>{{data[i][2]}}</h1>
-          <h3>{{data[i][3]}}</h3>
+          <h1><i class="fa-solid fa-user"></i> &nbsp;{{data[i][2]}}</h1>
+          <h2><i class="fa-solid fa-envelope"></i> &nbsp;{{data[i][3]}}</h2>
           <h3>Query : {{data[i][4]}}</h3>
           <form action="/reply" method="POST">
             <input type="text" name="reply" id="reply" />
             <button type="submit" name="queryId" value="{{data[i][0]}}">
-              Reply
+              <i class="fa-solid fa-paper-plane fa-1.5x"></i>
             </button>
           </form>
         </div>

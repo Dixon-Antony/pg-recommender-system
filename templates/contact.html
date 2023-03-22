@@ -62,8 +62,8 @@
         <h1>My Queries</h1>
         {% for i in range(len)%}
         <div class="query">
-          <h1>{{data[i][2]}}</h1>
-          <h3>{{data[i][3]}}</h3>
+          <h1><i class="fa-solid fa-user"></i> &nbsp;{{data[i][2]}}</h1>
+          <h2><i class="fa-solid fa-envelope"></i> &nbsp;{{data[i][3]}}</h2>
           <h3>Query : {{data[i][4]}}</h3>
           {% if data[i][6] == 'positive' %}
           <h3>Reply : {{data[i][5]}}</h3>
