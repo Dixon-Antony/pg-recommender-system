@@ -37,11 +37,11 @@
         <div class="form-wrap">
           <h1>Contact Us</h1>
           <p>Developers for this Site</p>
-          <marquee>Dixon JG Dinesh</marquee>
-          <form>
+          <marquee>Dixon --- JG (Master) --- Dinesh</marquee>
+          <form action="/postQuery" method="POST">
             <div class="form-group">
               <label for="name">Name</label>
-              <input type="text" name="Name" id="name" />
+              <input type="text" name="name" id="name" />
             </div>
             <div class="form-group">
               <label for="email">Email</label>
@@ -49,12 +49,36 @@
             </div>
             <div class="form-group">
               <label for="queries">Queries</label>
-              <input type="text" name="Queries" id="queries" />
+              <input type="text" name="queries" id="queries" />
             </div>
-            <button type="submit" class="btn">Submit</button>
+            <button type="submit" name="queryId" class="btn">Submit</button>
           </form>
         </div>
       </div>
+
+      {% if len>0 %}
+
+      <div class="queries-container">
+        <h1>My Queries</h1>
+        {% for i in range(len)%}
+        <div class="query">
+          <h1>{{data[i][2]}}</h1>
+          <h3>{{data[i][3]}}</h3>
+          <h3>Query : {{data[i][4]}}</h3>
+          {% if data[i][6] == 'positive' %}
+          <h3>Reply : {{data[i][5]}}</h3>
+          {% else %}
+          <h3>Reply : Not yet replied. (check again in a while)</h3>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      <div class="space"></div>
+      {% else %}
+      <div class="queries-container">
+        <h1>No Queries</h1>
+      </div>
+      {% endif %}
     </div>
   </body>
 

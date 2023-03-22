@@ -12,7 +12,6 @@ import numpy as np
 from scipy.sparse import csr_matrix
 from sklearn.neighbors import NearestNeighbors
 
-
 app = Flask(__name__)
 app.secret_key = "abc123"  
 
@@ -81,7 +80,18 @@ def viewpgowners():
 
 @app.route("/viewqueries")
 def viewqueries():
-    return render_template('viewqueries.html')
+
+    cursor = mysql.connection.cursor()
+    #Executing SQL Statements
+    cursor.execute(''' SELECT * FROM queries WHERE status='negative' ''')
+    data = cursor.fetchall()
+    print(data)
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    #Closing the cursor
+    cursor.close()
+
+    return render_template('viewqueries.html',data=data, len = len(data))
 
 @app.route("/userbooking")
 def userbooking():
@@ -323,7 +333,18 @@ def viewListing():
 
 @app.route("/contact")
 def contact():
-    return render_template('contact.html')
+    user_id = session['user_id']
+
+    cursor = mysql.connection.cursor()
+    #Executing SQL Statements
+    cursor.execute(''' SELECT * FROM queries WHERE user_id=%s''',(user_id))
+    data = cursor.fetchall()
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    #Closing the cursor
+    cursor.close()
+
+    return render_template('contact.html',data=data,len=len(data))
 
 @app.route("/booking")
 def booking():
@@ -651,7 +672,7 @@ def bookPG():
 def ratePG():
     
     if request.method=='POST':
-        rating = request.form['rate'];
+        rating = request.form['rate']
         pg_id = request.form['pg-id']
         user_id = session['user_id']
         cursor = mysql.connection.cursor()
@@ -667,7 +688,33 @@ def ratePG():
 
     return redirect('booking');
 
+@app.route('/postQuery',methods=['POST'])
+def postQuery():
+    if request.method == 'POST':
+        name = request.form['name']
+        email= request.form['email']
+        queries = request.form['queries']
+        user_id = session['user_id']
 
+        cursor = mysql.connection.cursor()
+        cursor.execute(''' INSERT INTO queries (name,email,queries,user_id) VALUES(%s,%s,%s,%s);''',(name,email,queries,user_id))
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+        cursor.close()
+
+    return redirect('/contact');
+
+@app.route('/reply',methods=['POST'])
+def reply():
+    if request.method=='POST':
+        reply = request.form['reply']
+        qrid = request.form['queryId']
+        cursor = mysql.connection.cursor()
+        cursor.execute(''' UPDATE queries SET replies=%s,status='positive' WHERE qrid=%s''',(reply,qrid))
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+        cursor.close()
+    return redirect('viewqueries')
 
 
 if __name__ == "__main__":
