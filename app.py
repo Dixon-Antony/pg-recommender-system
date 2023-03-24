@@ -265,28 +265,86 @@ def listings():
     return render_template('listings.html',pgdata=data, len = len(data))
 
 
-#recommendation
 
-pgs = pd.read_csv("pgs.csv")
-ratings = pd.read_csv("ratings.csv")
 
-final_dataset = ratings.pivot_table(index='pgId',columns='userId',values='rating')
-final_dataset.fillna(0,inplace=True)
 
-no_user_voted = ratings.groupby('pgId')['rating'].agg('count')
-no_pgs_voted = ratings.groupby('userId')['rating'].agg('count')
+        
 
-final_dataset = final_dataset.loc[no_user_voted[no_user_voted > 10].index,:]
+@app.route("/viewListing",methods=['POST'])
 
-final_dataset=final_dataset.loc[:,no_pgs_voted[no_pgs_voted > 50].index]
 
-csr_data = csr_matrix(final_dataset.values)
-final_dataset.reset_index(inplace=True)
 
-knn = NearestNeighbors(metric='cosine', algorithm='brute', n_neighbors=20, n_jobs=-1)
-knn.fit(csr_data)
+
+
+def viewListing():
+    if request.method=='POST':
+        pgId = request.form['pg-id'];
+        cursor = mysql.connection.cursor()
+        #Executing SQL Statements
+        cursor.execute(''' SELECT * FROM pgs WHERE pgid=%s''',(pgId))
+        data = cursor.fetchall()
+        pg_name = data[0][1]
+        print(get_pg_recommendation(pg_name))
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+
+        #Executing SQL Statements
+        cursor.execute(''' SELECT * FROM rooms WHERE pgid=%s''',(pgId))
+        room_data = cursor.fetchall()
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+        #Closing the cursor
+        cursor.close()
+
+        return render_template('viewListing.html',data=data,roomData=room_data)
 
 def get_pg_recommendation(pg_name):
+        #recommendation
+
+    cursor = mysql.connection.cursor()
+    #Executing SQL Statements
+    cursor.execute(''' SELECT pgid,pgname FROM pgs''')
+    pgdata = list(cursor.fetchall())
+
+    df = pd.DataFrame(pgdata,columns=['pgId','title'])
+    # print(df)
+    # print(type(df))
+
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+
+    #Executing SQL Statements
+    cursor.execute(''' SELECT user_id,pg_id,rating FROM ratings''')
+    ratingdata = list(cursor.fetchall())
+
+    rdf = pd.DataFrame(ratingdata,columns=['userId','pgId','rating'])
+    # print(rdf.head())
+
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    #Closing the cursor
+    cursor.close()
+
+    pgs = df
+    ratings = rdf
+
+
+    final_dataset = ratings.pivot_table(index='pgId',columns='userId',values='rating')
+    final_dataset.fillna(0,inplace=True)
+
+    no_user_voted = ratings.groupby('pgId')['rating'].agg('count')
+    no_pgs_voted = ratings.groupby('userId')['rating'].agg('count')
+
+    final_dataset = final_dataset.loc[no_user_voted[no_user_voted > 10].index,:]
+
+    final_dataset=final_dataset.loc[:,no_pgs_voted[no_pgs_voted > 50].index]
+
+    csr_data = csr_matrix(final_dataset.values)
+    final_dataset.reset_index(inplace=True)
+
+    knn = NearestNeighbors(metric='cosine', algorithm='brute', n_neighbors=20, n_jobs=-1)
+    knn.fit(csr_data)
+
     n_pgs_to_recommend = 10
     pg_list = pgs[pgs['title'].str.contains(pg_name)]  
     if len(pg_list):        
@@ -303,33 +361,10 @@ def get_pg_recommendation(pg_name):
         return df.to_records()
     else:
         return "No pgs found. Please check your input"
-        
-
-@app.route("/viewListing",methods=['POST'])
-
-
-def viewListing():
-    if request.method=='POST':
-        pgId = request.form['pg-id'];
-        cursor = mysql.connection.cursor()
-        #Executing SQL Statements
-        cursor.execute(''' SELECT * FROM pgs WHERE pgid=%s''',(pgId))
-        data = cursor.fetchall()
-        print(get_pg_recommendation("New Balaji Men's PG"))
-        #Saving the Actions performed on the DB
-        mysql.connection.commit()
-
-        #Executing SQL Statements
-        cursor.execute(''' SELECT * FROM rooms WHERE pgid=%s''',(pgId))
-        room_data = cursor.fetchall()
-        #Saving the Actions performed on the DB
-        mysql.connection.commit()
-        #Closing the cursor
-        cursor.close()
 
 
 
-    return render_template('viewListing.html',data=data,roomData=room_data)
+    
 
 @app.route("/contact")
 def contact():
