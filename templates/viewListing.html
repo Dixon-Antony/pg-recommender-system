@@ -74,7 +74,7 @@
           <h4>Description : {{data[0][2]}}</h4>
           <h4>Type : {{data[0][6]}}</h4>
           <h4>Agent-id : {{data[0][7]}}</h4>
-          <h4>Address : {{data[0][8]}}</h4>
+          <h4 class="overflow">Address : {{data[0][8]}}</h4>
           <h4>City : {{data[0][9]}}</h4>
           <h4>Pincode : {{data[0][10]}}</h4>
           <br />
@@ -166,9 +166,40 @@
           </div>
         </div>
       </div>
+      <br /><br />
 
-      <div class="space"></div>
+      <h1>You might also like</h1>
+      <br />
       <!-- CSS Cards -->
+      <!-- CSS Cards -->
+      <div class="card-items">
+        {%for i in range(0, rlen)%}
+        <div class="card">
+          <div class="card-img">
+            <img src="../static/uploads/{{recommendation_data[i][4]}}" alt="" />
+          </div>
+          <div class="card-content">
+            <form action="/viewListing" method="POST">
+              <h2 class="overflow">{{recommendation_data[i][1]}}</h2>
+              <h3>Id : {{recommendation_data[i][0]}}</h3>
+              <h3>Type : {{recommendation_data[i][6]}}</h3>
+              <h3>City : {{recommendation_data[i][9]}}</h3>
+              <h3>Rating : {{recommendation_data[i][11]}} / 5</h3>
+              <div class="card-btn">
+                <button
+                  type="submit"
+                  name="pg-id"
+                  class="btn viewBtn"
+                  value="{{recommendation_data[i][0]}}"
+                >
+                  View
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
 
       <div class="space"></div>
     </div>

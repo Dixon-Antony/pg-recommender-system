@@ -265,38 +265,46 @@ def listings():
     return render_template('listings.html',pgdata=data, len = len(data))
 
 
-
-
-
-        
+      
 
 @app.route("/viewListing",methods=['POST'])
-
-
-
-
 
 def viewListing():
     if request.method=='POST':
         pgId = request.form['pg-id'];
         cursor = mysql.connection.cursor()
         #Executing SQL Statements
-        cursor.execute(''' SELECT * FROM pgs WHERE pgid=%s''',(pgId))
+        cursor.execute(''' SELECT * FROM pgs WHERE pgid=%s''',([pgId]))
         data = cursor.fetchall()
         pg_name = data[0][1]
-        print(get_pg_recommendation(pg_name))
+        recommendations = get_pg_recommendation(pg_name)
         #Saving the Actions performed on the DB
         mysql.connection.commit()
 
+
         #Executing SQL Statements
-        cursor.execute(''' SELECT * FROM rooms WHERE pgid=%s''',(pgId))
+        cursor.execute(''' SELECT * FROM rooms WHERE pgid=%s''',([pgId]))
         room_data = cursor.fetchall()
         #Saving the Actions performed on the DB
         mysql.connection.commit()
+        
+        recommended_data=[]
+        for i in range(len(recommendations)):
+            #Executing SQL Statements
+            cursor.execute(''' SELECT * FROM pgs WHERE pgname=%s ''',([recommendations[i][1]]))
+            rec_data = cursor.fetchall()
+            recommended_data.append(rec_data[0])
+            #Saving the Actions performed on the DB
+            mysql.connection.commit()
+
+        # print(recommended_data)
+
         #Closing the cursor
         cursor.close()
+            
 
-        return render_template('viewListing.html',data=data,roomData=room_data)
+
+        return render_template('viewListing.html',data=data,roomData=room_data, recommendation_data=recommended_data, rlen = len(recommended_data))
 
 def get_pg_recommendation(pg_name):
         #recommendation
@@ -394,15 +402,19 @@ def booking():
             #Executing SQL Statements
             cursor.execute(''' SELECT bookingid,pgid,bookingdate,rating FROM bookings WHERE userid=%s''',(session['user_id']))
             booking_details = cursor.fetchall()
-            pg_id = str(booking_details[0][1])
             #Saving the Actions performed on the DB
             mysql.connection.commit()
 
-            #Executing SQL Statements
-            cursor.execute(''' SELECT * FROM pgs WHERE pgid=%s''',(pg_id))
-            pg_data = cursor.fetchall()
-            #Saving the Actions performed on the DB
-            mysql.connection.commit()
+            pg_data = []
+            for i in range(len(booking_details)):
+                pg_id = str(booking_details[i][1])
+                #Executing SQL Statements
+                cursor.execute(''' SELECT * FROM pgs WHERE pgid=%s''',(pg_id))
+                data = cursor.fetchall()
+                pg_data.append(data[0])
+                #Saving the Actions performed on the DB
+                mysql.connection.commit()
+            cursor.close()
 
             return render_template('booking.html',status=booking_status,booking_details=booking_details,len=len(booking_details),pg_data=pg_data)
 

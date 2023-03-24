@@ -144,6 +144,7 @@ ul {
   align-items: center;
   background: rgba(255, 255, 255, 0.1);
   padding-bottom: 30px;
+  margin: 0 1rem;
   /* display: none ;     */
   transition: all 0.4s ease-in-out;
 }
@@ -169,6 +170,7 @@ ul {
 .card-items .card .card-content {
   margin-left: 2rem;
   align-self: flex-start;
+  width: 85%;
 }
 
 .card-items .card a {
@@ -203,6 +205,7 @@ ul {
   background: rgba(0, 0, 0, 0.5);
   padding: 2rem;
   border-radius: 20px;
+  max-width: 1040px;
 }
 
 .main-content .main-img {
@@ -222,6 +225,7 @@ ul {
 .main-content .main-div {
   margin-top: 1rem;
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-self: flex-start;
   align-items: flex-start;
@@ -726,4 +730,11 @@ textarea {
 
 .query button i:hover {
   color: #f92f60;
+}
+
+.overflow {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
