@@ -270,6 +270,18 @@ def listings():
         #Saving the Actions performed on the DB
         mysql.connection.commit()
 
+    #Executing SQL Statements
+    cursor.execute(''' SELECT pg_id,AVG(rating) FROM ratings GROUP BY pg_id''')
+    rating_data = cursor.fetchall()
+    # print(rating_data)
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+
+    for i in range(len(rating_data)):
+        #Executing SQL Statements
+        cursor.execute(''' UPDATE pgs SET pgrating=%s WHERE pgid=%s''',(round(rating_data[i][1],1),[rating_data[i][0]]))
+        # Saving the Actions performed on the DB
+        mysql.connection.commit()
 
     #Closing the cursor
     cursor.close()
