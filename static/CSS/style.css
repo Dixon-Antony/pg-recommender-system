@@ -150,8 +150,10 @@ ul {
 }
 
 .card-items .recc-card {
-  height: 50vh;
-  width: 20vw;
+  height: 40vh;
+  width: 15vw;
+  border-radius: 15px;
+  padding-bottom: 10px;
 }
 
 .card-items .card:hover {
@@ -167,8 +169,9 @@ ul {
 }
 
 .card-items .recc-card .recc-card-img {
-  height: 30vh;
-  width: 20vw;
+  height: 25vh;
+  width: 15vw;
+  border-radius: 5px;
 }
 
 .card-items .card .card-img img {
@@ -540,7 +543,17 @@ textarea {
 }
 
 .recc-viewBtn {
-  width: 270px;
+  padding-top: -20px;
+  height: 35px;
+  width: 200px;
+  border-radius: 20%;
+  font-size: 15px;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+.recc-card-btn {
+  display: flex;
+  justify-content: center;
 }
 
 .adminTables label {
@@ -755,6 +768,7 @@ textarea {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  text-align: left;
 }
 
 .input-group {

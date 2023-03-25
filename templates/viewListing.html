@@ -69,7 +69,7 @@
           </button>
         </div>
         <div class="main-div">
-          <h1>Name : {{data[0][1]}}</h1>
+          <h1 class="overflow">Name : {{data[0][1]}}</h1>
           <h4>Property-id : {{data[0][0]}}</h4>
           <h4>Description : {{data[0][2]}}</h4>
           <h4>Type : {{data[0][6]}}</h4>
@@ -180,9 +180,9 @@
           </div>
           <div class="card-content recc-card-content">
             <form action="/viewListing" method="POST">
-              <h3 class="overflow">{{recommendation_data[i][1]}}</h3>
-              <h4>Type : {{recommendation_data[i][6]}}</h4>
-              <h4>Rating : {{recommendation_data[i][11]}} / 5</h4>
+              <h4 class="overflow">{{recommendation_data[i][1]}}</h4>
+              <h5>Type : {{recommendation_data[i][6]}}</h5>
+              <h5>Rating : {{recommendation_data[i][11]}} / 5</h5>
               <div class="card-btn recc-card-btn">
                 <button
                   type="submit"
