@@ -42,8 +42,8 @@
           </div>
           <div class="card-content">
             <br />
-            <h2>Booking Id : {{booking_details[0][0]}}</h2>
-            <h2>Booking Date : {{booking_details[0][2]}}</h2>
+            <h2>Booking Id : {{booking_details[i][0]}}</h2>
+            <h2>Booking Date : {{booking_details[i][2]}}</h2>
             <br />
             <hr />
             <br />
@@ -55,7 +55,7 @@
             <br />
             <hr />
             <br />
-            {% if booking_details[0][3] == 0 %}
+            {% if booking_details[i][3] == 0 %}
             <div id="ratePG">
               <form action="/ratePG" method="POST">
                 <h2>Rate PG</h2>
@@ -87,7 +87,7 @@
               </form>
             </div>
             {% else %}
-            <div><h2>Your Rating : {{booking_details[0][3]}}</h2></div>
+            <div><h2>Your Rating : {{booking_details[i][3]}}</h2></div>
 
             {% endif %}
           </div>

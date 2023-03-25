@@ -259,11 +259,22 @@ def listings():
     data = cursor.fetchall()
     #Saving the Actions performed on the DB
     mysql.connection.commit()
+    
+
+    if request.method=='POST':
+        search = cari = "%" + request.form['search'] +"%"
+
+        cursor.execute(''' SELECT * FROM pgs WHERE pgname LIKE %s OR pgaddress LIKE %s  OR pgtype LIKE %s OR pgpincode LIKE %s  ''',([search],[search],[search],[search]))
+        data = cursor.fetchall()
+        # print(data)
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+
+
     #Closing the cursor
     cursor.close()
 
     return render_template('listings.html',pgdata=data, len = len(data))
-
 
       
 

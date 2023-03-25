@@ -174,22 +174,20 @@
       <!-- CSS Cards -->
       <div class="card-items">
         {%for i in range(0, rlen)%}
-        <div class="card">
-          <div class="card-img">
+        <div class="card recc-card">
+          <div class="card-img recc-card-img">
             <img src="../static/uploads/{{recommendation_data[i][4]}}" alt="" />
           </div>
-          <div class="card-content">
+          <div class="card-content recc-card-content">
             <form action="/viewListing" method="POST">
-              <h2 class="overflow">{{recommendation_data[i][1]}}</h2>
-              <h3>Id : {{recommendation_data[i][0]}}</h3>
-              <h3>Type : {{recommendation_data[i][6]}}</h3>
-              <h3>City : {{recommendation_data[i][9]}}</h3>
-              <h3>Rating : {{recommendation_data[i][11]}} / 5</h3>
-              <div class="card-btn">
+              <h3 class="overflow">{{recommendation_data[i][1]}}</h3>
+              <h4>Type : {{recommendation_data[i][6]}}</h4>
+              <h4>Rating : {{recommendation_data[i][11]}} / 5</h4>
+              <div class="card-btn recc-card-btn">
                 <button
                   type="submit"
                   name="pg-id"
-                  class="btn viewBtn"
+                  class="btn viewBtn recc-viewBtn"
                   value="{{recommendation_data[i][0]}}"
                 >
                   View

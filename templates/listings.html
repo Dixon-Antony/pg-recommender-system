@@ -34,11 +34,32 @@
     </nav>
     <div class="space"></div>
     <div class="container">
-      <div class="search-box">
-        <input class="search-text" type="text" placeholder="Search Anything" />
-        <a href="#" class="search-btn">
-          <i class="fas fa-search"></i>
-        </a>
+      <!-- <div class="search-box">
+        <form action="/listings" method="POST">
+          <input
+            class="search-text"
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Search Anything"
+          />
+          <button type="submit" class="search-btn">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
+      </div> -->
+      <div class="input-group">
+        <form action="/listings" method="POST">
+          <input
+            type="text"
+            class="input"
+            id="search"
+            name="search"
+            placeholder="type anything ..."
+            autocomplete="off"
+          />
+          <input class="button--submit" value="Search" type="submit" />
+        </form>
       </div>
       <br />
       <!-- CSS Cards -->
@@ -71,7 +92,9 @@
         {%endfor%}
       </div>
       <div class="space"></div>
-      <a class="btn" href="#" id="loadMore">Load More</a>
+      <a class="btn" href="#" id="loadMore"
+        >Load More &nbsp;<i class="fas fa-spinner fa-spin"></i
+      ></a>
       <div class="space"></div>
     </div>
 
