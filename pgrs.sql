@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2023 at 05:49 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.9
+-- Generation Time: Mar 24, 2023 at 08:11 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,7 +35,7 @@ CREATE TABLE `agents` (
   `aaadhaar` varchar(12) NOT NULL,
   `aphone` varchar(10) NOT NULL,
   `agender` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `agents`
@@ -61,7 +61,7 @@ CREATE TABLE `bookings` (
   `userid` int(10) NOT NULL,
   `bookingdate` date NOT NULL,
   `rating` int(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `bookings`
@@ -90,7 +90,7 @@ CREATE TABLE `pgs` (
   `pgcity` varchar(20) NOT NULL,
   `pgpincode` int(6) NOT NULL,
   `pgrating` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pgs`
@@ -146,7 +146,57 @@ INSERT INTO `pgs` (`pgid`, `pgname`, `pgdesc`, `pgimage1`, `pgimage2`, `pgimage3
 (47, 'Ramya Men\'s PG', 'Sea View PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 47, 'panchyat, Ramappa Nagar Main Rd, Main Rd, Perungudi, Chennai, Tamil Nadu 600096', 'Chennai', 600096, 0),
 (48, 'Sri Chaitanya Ladies & Gents Hostel', 'Swimming Pool PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'both', 48, 'Thiruvalluvar St., Thiruvengadam Nagar, Kandhanchavadi, Chennai, Tamil Nadu 600096', 'Chennai', 600096, 0),
 (49, 'SS Men\'s PG', 'Star PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 49, 'panchayat office, Kannayan street, near to Perungudi, Perungudi, Chennai, Tamil Nadu 600096', 'Chennai', 600096, 0),
-(50, 'Tirumala Gents PG', 'Lucky PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 50, 'Plat No.6, 2nd Cross St, kodhanda Raman nagar, Kandhanchavadi, Chennai, Tamil Nadu 600096', 'Chennai', 600096, 0);
+(50, 'Tirumala Gents PG', 'Lucky PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 50, 'Plat No.6, 2nd Cross St, kodhanda Raman nagar, Kandhanchavadi, Chennai, Tamil Nadu 600096', 'Chennai', 600096, 0),
+(51, 'Nizhal Guest House', 'Good PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 51, 'Guindy, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(52, 'MD Mens PG\r\n', 'Feels like home', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 52, '3rd St, Old Narasingapuram, Maduvinkarai, Guindy, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(53, 'Senthamizh Best care homely hostel and pg', 'Best care PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 53, 'Poomagal 2nd street Ekkathuthangal, Guindy, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(54, 'Sky MEN`S HOSTEL', 'Cheap PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 54, '9/12, 1st St, Narasinga Colony, Maduvinkarai, Guindy, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(55, 'National Men\'s Hostel - Branch 2', 'Clean PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 55, 'No. 17, 5, Dhanakotti Raja St, South Phase, Ekkatuthangal, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(56, 'Sri Guru Datta Men’s Hostel', 'Hygiene Food', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 56, '15b, Ganapathy Colony, Poomagal Second St, Ekkatuthangal, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(57, 'Zolo Habitat', 'Feels like premium', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 57, 'No. 53, Third St, Ravi Colony, Nazarethpuram, Gandhi Nagar, St.Thomas Mount, Tamil Nadu 600016', 'Chennai', 600016, 0),
+(58, '\r\n\r\nCmk Hostel', 'Best PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 58, '2657+V2F, Manickam Ln, Guindy Institutional Area, SIDCO Industrial Estate, Guindy, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(59, 'PG Saidapet Metro', 'Comfort PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 59, 'Gandhi St, Abith Colony, Industrial Area, Saidapet, Chennai, Tamil Nadu 600015', 'Chennai', 600015, 0),
+(60, 'G.R.K. Gents Hostel', 'Love to Stay', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 60, 'State Highway 2, 17/6, Kabilar St, Ambal Nagar, Ekkatuthangal, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(61, 'Karthikeya Mens Hostel', 'Feels like Heaven', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 61, 'Hno 4A Poomagal, 3rd St, behind volampiya tech park, Ekkatuthangal, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(62, 'SR Mansion', 'Good facility', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 62, '1st Cross Street Balaji Nagar, Ekkatuthangal, Guindy, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(63, 'Zolo Rozzby PG\r\n', 'Comfort stay', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'both', 63, '12, Ramapuram Ramasamy Street, Sadullakhan Nagar, Saidapet, Chennai, Tamil Nadu 600015', 'Chennai', 600015, 0),
+(64, 'Hari Krishna Mens Pg ', 'Wonderful PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 64, 'No: 598, MKN Rd, near CSI Church, Mela Ilandaikulam, Alandur, Chennai, Tamil Nadu 600016', 'Chennai', 600016, 0),
+(65, 'DEN Mens Hostel PG ', 'Feels like premium', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 65, 'hyatt, 42, Sardar Patel Rd, opp. to park, Sriram Nagar, Guindy, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(66, 'Modern Guest House', 'Premium stay', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'both', 66, 'Ekkatuthangal, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(67, 'Narayana Mens Hostel', 'Good food', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 67, '12, Sundar Nagar 1st Ave, South Phase, Sathya Nagar, Ekkatuthangal, Chennai, Tamil Nadu 600030', 'Chennai', 600030, 0),
+(68, 'National Men’s Hostel', 'Hygiene Food ', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 68, '11, 4th Cross St, Balaji Nagar, Ekkatuthangal, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(69, 'Sri Gowri Ladies Hostel', 'Feels like home', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'women', 69, '2683+97W, Poomagal Main Rd, Poomagal Nagar, Gandhi Nagar, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(70, 'Sri Guru Datta Mansion\r\n', 'Nice PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 70, '4A, 3rd Main Rd, Poomagal Nagar, Ekkatuthangal, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(71, 'Skylark Paying Guest House-Women\'s pg-ladies pg', 'Feels like home', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 71, '336, MJM, M.M.Garden Rd, Alandur, Chennai, Tamil Nadu 600016', 'Chennai', 600016, 0),
+(72, 'Divyam Women\'s Hostel', 'Feels like Home', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'women', 72, '40, Pillaiyar Koil 1st St, Ambal Nagar, Ekkatuthangal, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(73, 'Praveen Mansion', 'Clean food ', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 73, '12, Kabilar St, Ambal Nagar, Ekkatuthangal, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(74, 'Sky Hostels\r\n', 'Feels like Home', 'default1.jpg', 'default22.jpg', 'default3.jpg', 'mens', 74, '39 B, Chakrapani colony, North Parade Road,, St. Thomas mount, Guindy (near Jothi Theatre), Chennai, Tamil Nadu 600016', 'Chennai', 600016, 0),
+(75, 'Shri Sai Shelters Men\'s Hostel', 'Feels like Heaven', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 75, 'No 27, Sathya Nagar 2nd St, South Phase, Sathya Nagar, Ekkatuthangal, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(76, 'Annai Ladies Hostel', 'Best for Women', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'women', 76, 'G-Flr, 12/5, Kabilar St, opp. Hyundai Showroom, near guindy, Ambal Nagar, Ekkatuthangal, Chennai, Tamil Nadu 600032', 'Chennai', 76, 0),
+(77, 'Venkateswara Boy\'s Hostel', 'Clean and Good PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 77, '2682+JJ7, Sardhar Colony, Sathya Nagar, Gandhi Nagar, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(78, 'Harini Homes', 'Feels secured', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'women', 78, 'Pallavan Street, Near Ekkatuthangal Metro station Guindy, 600032, 600083', 'Chennai', 600083, 0),
+(79, 'SELVI GIRLS PG\r\n', 'Comfort stay', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'women', 79, '27/5, Gandhiyar St, Nehru Nagar, Velachery, Chennai, Tamil Nadu 600042', 'Chennai', 600042, 0),
+(80, 'Stanza Living Borisov House', 'Feels like premium', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'women', 80, 'Old No: 10&11, Guindy, New No: 23, Ambal Nagar Main Rd, Poomagal Nagar, Ekkatuthangal, Chennai, Tamil Nadu 600032', 'Chennai', 600032, 0),
+(81, 'Flora Men\'s Hostel & PG', 'Feels like heaven', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 81, 'No. 22/30, Amarar Jeeva Street, Kamaraj Nagar, Tambaram Sanatorium, Chennai, Tamil Nadu 600047', 'Chennai', 600047, 0),
+(82, 'Jayam Paying Guest, Mens Hostel with steam sanitized', 'Good food and Clean PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 82, '13, Saloman St, East Tambaram, Tambaram, Chennai, Tamil Nadu 600059', 'Chennai', 600059, 0),
+(83, 'Paying Guest Hostel', 'Feels like home', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 83, 'W4FJ+WR7, Saloman St, Near Abhirami Mahal, Annai Theresa Nagar, East Tambaram, Tambaram, Chennai, Tamil Nadu 600059', 'Chennai', 600059, 0),
+(84, 'Shree Sai vishnu pg for men', 'Secured PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 84, 'New, 27/6, Valmiki St, next to priyam clinic, East Tambaram, Tambaram, Chennai, Tamil Nadu 600059', 'Chennai', 600059, 0),
+(85, 'Dolphin Men\'s PG', 'Nice PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 85, 'NO.47 Jiva st,Kamaraj Nager,Tambaram Sanatorium land mark, near GK HOTEL & KONAAR HOTEL, Chennai, Tamil Nadu 600047', 'Chennai', 600047, 0),
+(86, 'Alex Paying Guest Hostel', 'Good to stay', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 86, 'W49J+M7R, Anandapuram, East Tambaram, Tambaram, Chennai, Tamil Nadu 600059', 'Chennai', 600059, 0),
+(87, 'Yrn ladies pg east tambaram', 'Feels like home', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'women', 87, 'W4FM+7XH, Aarthi Nagar, Tambaram, Chennai, Tamil Nadu 600059', 'Chennai', 600059, 0),
+(88, 'Rejoice Mens PG', 'Clean and Nice PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 88, 'W3GX+FWW, Lakshmipuram Extension, Tambaram, Chennai, Tamil Nadu 600045', 'Chennai', 600045, 0),
+(89, 'YRN MENS PG', 'Feels like heaven', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 89, '7, Kennady Street, Brindavan Colony, Vidya Theatre Backside, Tambaram West, Chennai, Tamil Nadu 600045', 'Chennai', 600045, 0),
+(90, 'Anugrahha Mens and Womens hostel', 'Feels like home', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'both', 90, 'MES Cross road, Kadaperi, Tambaram Sanatoruim, Chennai, Tamil Nadu 600045', 'Chennai', 600045, 0),
+(91, 'Sky Men’s Hostel/PG', 'Good to stay', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 91, 'Guduvancheri, Tamil Nadu 603202', 'Chennai', 603202, 0),
+(92, 'Ooviya Ladies PG\r\n', 'Secured PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'women', 92, 'R3Q4+25X, 2nd St, Guduvancheri, Tamil Nadu 603202', 'Chennai', 603202, 0),
+(93, 'KAG MEN\'S HOSTEL/PG', 'Clean and tasty food', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 93, 'Sree Subha Flat, Plot No.:-8, Ganapathy Nagar, Vallalar Nagar, Guduvancheri, Tamil Nadu 603202', 'Chennai', 603202, 0),
+(94, 'Evergreen Hostel', 'Pleasant PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 94, '2nd Main Rd, KK Nagar, Guduvancheri, Tamil Nadu 603202', 'Chennai', 603202, 0),
+(95, 'R.K.S Ladies Hostel', 'Feels like home', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'women', 95, 'No.6 Ratha Nagar Nandhivaram Guduvanchery, Chengalpattu, Chennai, Tamil Nadu 603202', 'Chennai', 603202, 0),
+(96, 'Chennai Sleeps Men\'s Hostel\r\n', 'Clean PG', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 96, '2nd Street, Jayalakshmi Nagar, Udhayasuriyan Nagar, Guduvancheri, Tamil Nadu 603212', 'Chennai', 603212, 0),
+(97, 'Just4Adams - PG Hostel, Men\'s Hostel & Mansion', 'Premium stay', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'mens', 97, '104, Vallalar 2nd Street, Vaigai Nagar, Urapakkam, Tamil Nadu 603210', 'Chennai', 603210, 0),
+(98, 'Priya Aachi Ladies Hostel', 'Feels like home', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'women', 98, 'Guduvancheri, Tamil Nadu 603202', 'Chennai', 603202, 0),
+(99, 'RKS Ladies Hostel', 'Feels like heaven', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'women', 99, 'No.6, Radha Nagar 1st St, Nandhivaram, Guduvancheri, Tamil Nadu 603202', 'Chennai', 603202, 0),
+(100, 'Aarthi Womens Hostel\r\n', 'Comfort stay', 'default1.jpg', 'default2.jpg', 'default3.jpg', 'women', 100, 'Street No. 29, Third Street, Vallanchery Main Road Near Royal Womens Hostel K K Nagar, Ganapathipuram, Guduvancheri, Tamil Nadu 603202', 'Chennai', 603202, 0);
 
 -- --------------------------------------------------------
 
@@ -162,7 +212,7 @@ CREATE TABLE `queries` (
   `queries` varchar(150) NOT NULL,
   `replies` varchar(150) NOT NULL,
   `status` varchar(25) NOT NULL DEFAULT 'negative'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `queries`
@@ -185,7 +235,7 @@ CREATE TABLE `ratings` (
   `user_id` int(100) NOT NULL,
   `pg_id` int(100) NOT NULL,
   `rating` int(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `ratings`
@@ -2427,7 +2477,7 @@ CREATE TABLE `rooms` (
   `room_count` int(25) NOT NULL,
   `available` int(25) NOT NULL,
   `price` int(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `rooms`
@@ -2461,7 +2511,7 @@ CREATE TABLE `users` (
   `phone` varchar(10) NOT NULL,
   `aadhaar` varchar(12) NOT NULL,
   `gender` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -2542,7 +2592,7 @@ ALTER TABLE `bookings`
 -- AUTO_INCREMENT for table `pgs`
 --
 ALTER TABLE `pgs`
-  MODIFY `pgid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `pgid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `queries`

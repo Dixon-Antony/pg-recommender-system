@@ -106,7 +106,7 @@ def pgownerprofile():
     agent_id = session['agent_id']
     cursor = mysql.connection.cursor()
     #Executing SQL Statements
-    cursor.execute(''' SELECT * FROM agents WHERE agentid=%s''',(agent_id))
+    cursor.execute(''' SELECT * FROM agents WHERE agentid=%s''',([agent_id]))
     data = cursor.fetchall()
     #Saving the Actions performed on the DB
     mysql.connection.commit()
@@ -119,7 +119,7 @@ def pindex():
     agent_id = session['agent_id']
     cursor = mysql.connection.cursor()
     #Executing SQL Statements
-    cursor.execute(''' SELECT aname FROM agents WHERE agentid=%s''',(agent_id))
+    cursor.execute(''' SELECT aname FROM agents WHERE agentid=%s''',([agent_id]))
     data = cursor.fetchall()
     print(data)
     #Saving the Actions performed on the DB
@@ -134,7 +134,7 @@ def managepg():
     print(agent_id)
     cursor = mysql.connection.cursor()
     #Executing SQL Statements
-    cursor.execute(''' SELECT * FROM pgs WHERE pgownerid=%s''',(agent_id))
+    cursor.execute(''' SELECT * FROM pgs WHERE pgownerid=%s''',([agent_id]))
     data = cursor.fetchall()
     print(data)
     if len(data)==0:
