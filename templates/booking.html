@@ -32,8 +32,9 @@
     </nav>
     <div class="space"></div>
     <div class="container">
-      <br />
       <!-- CSS Cards -->
+      {% if len>0 %}
+      <br />
       <div class="card-items">
         {%for i in range(0, len)%}
         <div class="card myBooking">
@@ -94,6 +95,9 @@
         </div>
         {%endfor%}
       </div>
+      {% else %}
+      <h1>No bookings yet.</h1>
+      {% endif %}
       <div class="space"></div>
     </div>
     {% if status=='booked' %}

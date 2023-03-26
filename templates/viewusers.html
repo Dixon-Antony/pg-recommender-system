@@ -27,6 +27,16 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- TabletoExcel   -->
+    <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <script type="text/javascript">
+      function exportTo() {
+        $("#example").table2excel({
+          filename: "UserData.xls",
+        });
+      }
+    </script>
   </head>
   <style>
     body {
@@ -50,6 +60,9 @@
     </nav>
     <div class="space"></div>
     <div class="container adminTables">
+      <button class="download" type="submit" onclick="exportTo()">
+        <i class="fas fa-download fa-2x"></i>
+      </button>
       <h1 class="adminTitle">Users</h1>
       <table id="example" class="table table-striped" style="width: 100%">
         <thead>
@@ -75,6 +88,7 @@
           {% endfor %}
         </tbody>
       </table>
+      <br />
     </div>
 
     <div class="space"></div>

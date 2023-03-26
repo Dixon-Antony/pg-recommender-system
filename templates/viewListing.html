@@ -69,10 +69,22 @@
           </button>
         </div>
         <div class="main-div">
-          <h1>Name : {{data[0][1]}}</h1>
+          <h1 style="color: aquamarine">{{data[0][1]}}</h1>
           <h4>Property-id : {{data[0][0]}}</h4>
           <h4>Description : {{data[0][2]}}</h4>
+          {% if data[0][6] == 'mens' %}
+          <h4>
+            Type : Men's
+            <i style="color: rgb(46, 147, 235)" class="fas fa-mars"></i>
+          </h4>
+          {% elif data[0][6] == 'women' %}
+          <h4>
+            Type : Women's
+            <i style="color: rgb(216, 36, 180)" class="fas fa-venus"></i>
+          </h4>
+          {% else %}
           <h4>Type : {{data[0][6]}}</h4>
+          {% endif %}
           <h4>Agent-id : {{data[0][7]}}</h4>
           <h4 class="overflow">Address : {{data[0][8]}}</h4>
           <h4>City : {{data[0][9]}}</h4>
@@ -180,8 +192,22 @@
           </div>
           <div class="card-content recc-card-content">
             <form action="/viewListing" method="POST">
-              <h4 class="overflow">{{recommendation_data[i][1]}}</h4>
-              <h5>Type : {{recommendation_data[i][6]}}</h5>
+              <h4 class="overflow" style="color: aquamarine">
+                {{recommendation_data[i][1]}}
+              </h4>
+              {% if recommendation_data[i][6] == 'mens' %}
+              <h4>
+                Type : Men's
+                <i style="color: rgb(46, 147, 235)" class="fas fa-mars"></i>
+              </h4>
+              {% elif recommendation_data[i][6] == 'women' %}
+              <h4>
+                Type : Women's
+                <i style="color: rgb(216, 36, 180)" class="fas fa-venus"></i>
+              </h4>
+              {% else %}
+              <h4>Type : {{recommendation_data[i][6]}}</h4>
+              {% endif %}
               <h5>Rating : {{recommendation_data[i][11]}} / 5</h5>
               <div class="card-btn recc-card-btn">
                 <button

@@ -18,7 +18,7 @@ app.secret_key = "abc123"
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'pgpg'
+app.config['MYSQL_DB'] = 'pgrs'
  
 mysql = MySQL(app)
 
@@ -432,7 +432,7 @@ def booking():
             for i in range(len(booking_details)):
                 pg_id = str(booking_details[i][1])
                 #Executing SQL Statements
-                cursor.execute(''' SELECT * FROM pgs WHERE pgid=%s''',(pg_id))
+                cursor.execute(''' SELECT * FROM pgs WHERE pgid=%s''',([pg_id]))
                 data = cursor.fetchall()
                 pg_data.append(data[0])
                 #Saving the Actions performed on the DB

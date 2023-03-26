@@ -544,9 +544,10 @@ textarea {
 
 .recc-viewBtn {
   padding-top: -20px;
+  margin-bottom: 5px;
   height: 35px;
-  width: 200px;
-  border-radius: 20%;
+  width: 150px;
+  border-radius: 20px;
   font-size: 15px;
   margin-top: 0.5rem;
   text-align: center;
@@ -808,4 +809,42 @@ textarea {
 .input:focus-visible {
   border-color: #f92f60;
   outline: none;
+}
+
+/* ScrollBar */
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px black;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #f92f60;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: red;
+}
+
+.download {
+  display: inline-block;
+  position: absolute;
+  padding: 10px;
+  color: #f92f60;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  align-self: flex-end;
+  top: 31%;
+  right: 25%;
+}
+
+.agentDownload {
+  right: 22%;
 }
