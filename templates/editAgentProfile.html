@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Profile</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='CSS/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index">Home</a></li>
+        <li><a href="listings">Listings</a></li>
+        <li><a href="booking">Booking</a></li>
+        <li><a class="current" href="profile">Profile</a></li>
+        <li><a href="contact">Contact</a></li>
+        <div id="logout">
+          <li><a href="logout">Logout</a></li>
+        </div>
+      </ul>
+    </nav>
+    <br />
+    <br />
+    <div class="container">
+      <div id="contact-form-container">
+        <div class="form-wrap">
+          <h1>Edit Profile</h1>
+          <form action="/editAgentProfile" method="POST">
+            <div class="form-group">
+              <label for="username">Agent Name</label>
+              <input
+                type="text"
+                name="username"
+                id="username"
+                value="{{data[0][1]}}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                value="{{data[0][2]}}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="phone">Contact No.</label>
+              <input
+                type="tel"
+                name="phone"
+                id="phone"
+                value="{{data[0][5]}}"
+              />
+            </div>
+            <button type="submit" class="btn">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <!-- <footer id="main-footer">
+    <div class="footer-content container">
+      <p>Copyright &copy; 2023. All Rights Reserved</p>
+      <div class="social">
+        <i class="fab fa-twitter"></i>
+        <i class="fab fa-linkedin"></i>
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-youtube"></i>
+      </div>
+    </div>
+  </footer> -->
+</html>

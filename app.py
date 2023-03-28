@@ -114,6 +114,8 @@ def pgownerprofile():
     cursor.close()
     return render_template('pgownerprofile.html',data=data)
 
+
+
 @app.route("/pindex")
 def pindex():
     agent_id = session['agent_id']
@@ -488,6 +490,38 @@ def editProfile():
         cursor.close()
 
         return redirect('/profile')
+    
+@app.route("/editAgentProfile",methods=['GET','POST'])
+def editAgentProfile():
+
+    agent_id = session['agent_id']
+
+    if request.method=='GET':
+        cursor = mysql.connection.cursor()
+        #Executing SQL Statements
+        cursor.execute(''' SELECT * FROM agents WHERE agentid=%s''',([agent_id]))
+        data = cursor.fetchall()
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+        #Closing the cursor
+        cursor.close()
+
+        return render_template('editAgentProfile.html',data=data)
+
+    if request.method=='POST':
+        username = request.form['username']
+        password = request.form['password']
+        phone = request.form['phone']
+
+        cursor = mysql.connection.cursor()
+        #Executing SQL Statements
+        cursor.execute(''' UPDATE agents SET aname=%s,apassword=%s,aphone=%s WHERE agentid=%s''',(username,password,phone,agent_id))
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+        #Closing the cursor
+        cursor.close()
+
+        return redirect('/pgownerprofile')
 
 
     
