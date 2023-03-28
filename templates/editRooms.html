@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Room Details</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='CSS/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="pindex">Home</a></li>
+        <li><a class="current" href="managepg">Manage PG</a></li>
+        <li><a href="pgownerprofile">Profile</a></li>
+        <div id="logout">
+          <li><a href="logout">Logout</a></li>
+        </div>
+      </ul>
+    </nav>
+    <br />
+    <br />
+    <div class="container">
+      <div id="login-container addRoom-container">
+        <div class="form-wrap">
+          <h1>Edit Rooms</h1>
+          <form id="editRooms" action="/editRooms" method="POST">
+            <div class="form-group">
+              <h1>Single</h1>
+              <label for="sroomcount">Single Sharing Rooms Count</label><br />
+              <input
+                type="number"
+                name="sroomcount"
+                id="sroomcount"
+                value="{{data[0][4]}}"
+              /><br />
+              <label for="savailable">Single Sharing Rooms Available</label
+              ><br />
+              <input
+                type="number"
+                name="savailable"
+                id="savailable"
+                value="{{data[0][5]}}"
+              /><br />
+              <label for="sprice">Enter Price of Single Sharing Rooms</label
+              ><br />
+              <input
+                type="number"
+                name="sprice"
+                id="sprice"
+                value="{{data[0][6]}}"
+              />
+            </div>
+            <br />
+            <hr />
+            <br />
+            <div class="form-group">
+              <h1>Double</h1>
+              <label for="droomcount">Double Sharing Rooms Count</label><br />
+              <input
+                type="number"
+                name="droomcount"
+                id="droomcount"
+                value="{{data[1][4]}}"
+              /><br />
+              <label for="davailable">Double Sharing Rooms Available</label
+              ><br />
+              <input
+                type="number"
+                name="davailable"
+                id="davailable"
+                value="{{data[1][5]}}"
+              /><br />
+              <label for="dprice">Enter Price of Double Sharing Rooms</label
+              ><br />
+              <input
+                type="number"
+                name="dprice"
+                id="dprice"
+                value="{{data[1][6]}}"
+              />
+            </div>
+            <br />
+            <hr />
+            <br />
+            <div class="form-group">
+              <h1>Triple</h1>
+              <label for="troomcount">Triple Sharing Rooms Count</label><br />
+              <input
+                type="number"
+                name="troomcount"
+                id="troomcount"
+                value="{{data[2][4]}}"
+              /><br />
+              <label for="tavailable">Triple Sharing Rooms Available</label
+              ><br />
+              <input
+                type="number"
+                name="tavailable"
+                id="tavailable"
+                value="{{data[2][5]}}"
+              /><br />
+              <label for="tprice">Enter Price of Triple Sharing Rooms</label
+              ><br />
+              <input
+                type="number"
+                name="tprice"
+                id="tprice"
+                value="{{data[2][6]}}"
+              />
+            </div>
+            <br />
+            <hr />
+            <br />
+            <div class="form-group">
+              <h1>Quad</h1>
+              <label for="qroomcount">Quad Sharing Rooms Count</label>
+              <br />
+              <input
+                type="number"
+                name="qroomcount"
+                id="qroomcount"
+                value="{{data[3][4]}}"
+              /><br />
+              <label for="qavailable">Quad Sharing Rooms Available</label>
+              <br />
+              <input
+                type="number"
+                name="qavailable"
+                id="qavailable"
+                value="{{data[3][5]}}"
+              /><br />
+              <label for="qprice">Enter Price of Quad Sharing Rooms</label
+              ><br />
+              <input
+                type="number"
+                name="qprice"
+                id="qprice"
+                value="{{data[3][6]}}"
+              />
+            </div>
+            <br />
+            <button type="submit" class="btn">Save Changes</button>
+            <p class="bottom-text">
+              By clicking the Add button, you agree to our
+              <a href="#">Terms & Conditions</a> and
+              <a href="#">Privacy Policy</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <!-- <footer id="main-footer">
+    <div class="footer-content container">
+      <p>Copyright &copy; 2023. All Rights Reserved</p>
+      <div class="social">
+        <i class="fab fa-twitter"></i>
+        <i class="fab fa-linkedin"></i>
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-youtube"></i>
+      </div>
+    </div>
+  </footer> -->
+</html>

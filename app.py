@@ -527,12 +527,13 @@ def editAgentProfile():
 def editRooms():
 
     pg_id = session['pgid']
-
+    print("PG ID",pg_id)
     if request.method=='GET':
         cursor = mysql.connection.cursor()
         #Executing SQL Statements
-        cursor.execute(''' SELECT * FROM rooms WHERE pg_id=%s''',([pg_id]))
+        cursor.execute(''' SELECT * FROM rooms WHERE pgid=%s''',([pg_id]))
         data = cursor.fetchall()
+        print(data)
         #Saving the Actions performed on the DB
         mysql.connection.commit()
         #Closing the cursor
@@ -542,17 +543,29 @@ def editRooms():
 
     if request.method=='POST':
         savailable = request.form['savailable']
+
         sroomcount = request.form['sroomcount']
+
         sprice = request.form['sprice']
+
         davailable = request.form['davailable']
+ 
         droomcount = request.form['droomcount']
+
         dprice = request.form['dprice']
+
         tavailable = request.form['tavailable']
+
         troomcount = request.form['troomcount']
+
         tprice = request.form['tprice']
+
         qavailable = request.form['qavailable']
+
         qroomcount = request.form['qroomcount']
+
         qprice = request.form['qprice']
+
 
         cursor = mysql.connection.cursor()
         #Executing SQL Statements
