@@ -852,3 +852,11 @@ textarea {
 .editPGButton {
   width: 100px;
 }
+
+#popularDiv {
+  display: flex;
+  position: absolute;
+  right: 100px;
+  margin-top: -20px;
+  justify-content: flex-end;
+}

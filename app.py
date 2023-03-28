@@ -885,6 +885,20 @@ def reply():
     return redirect('viewqueries')
 
 
+@app.route("/popularPgs")
+def popularPgs():
+    cursor = mysql.connection.cursor()
+    cursor.execute('''SELECT * FROM pgs ORDER BY pgrating DESC LIMIT 10''')
+    data = cursor.fetchall()
+    print(data)
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    cursor.close()
+
+    return render_template('popularPgs.html',pgdata=data, len = len(data))
+
+
 if __name__ == "__main__":
   app.run()
+
 
