@@ -848,3 +848,7 @@ textarea {
 .agentDownload {
   right: 22%;
 }
+
+.editPGButton {
+  width: 100px;
+}

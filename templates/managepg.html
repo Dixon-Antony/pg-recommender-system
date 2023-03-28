@@ -80,9 +80,16 @@
           <h4>Double sharing : {{roomData[1][5]}} / {{roomData[1][4]}}</h4>
           <h4>Triple sharing : {{roomData[2][5]}} / {{roomData[2][4]}}</h4>
           <h4>Quad sharing : {{roomData[3][5]}} / {{roomData[3][4]}}</h4>
-          <div class="main-btn">
-            <a class="btn" href="#">Edit</a>
-          </div>
+          <form action="/editRooms" , method="POST">
+            <button
+              type="submit"
+              name="pg-id"
+              class="btn viewBtn editPGButton"
+              value="{{data[0][0]}}"
+            >
+              Edit
+            </button>
+          </form>
         </div>
       </div>
 

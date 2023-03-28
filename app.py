@@ -523,7 +523,58 @@ def editAgentProfile():
 
         return redirect('/pgownerprofile')
 
+@app.route("/editRooms",methods=['GET','POST'])
+def editRooms():
 
+    pg_id = session['pgid']
+
+    if request.method=='GET':
+        cursor = mysql.connection.cursor()
+        #Executing SQL Statements
+        cursor.execute(''' SELECT * FROM rooms WHERE pg_id=%s''',([pg_id]))
+        data = cursor.fetchall()
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+        #Closing the cursor
+        cursor.close()
+
+        return render_template('editRooms.html',data=data)
+
+    if request.method=='POST':
+        savailable = request.form['savailable']
+        sroomcount = request.form['sroomcount']
+        sprice = request.form['sprice']
+        davailable = request.form['davailable']
+        droomcount = request.form['droomcount']
+        dprice = request.form['dprice']
+        tavailable = request.form['tavailable']
+        troomcount = request.form['troomcount']
+        tprice = request.form['tprice']
+        qavailable = request.form['qavailable']
+        qroomcount = request.form['qroomcount']
+        qprice = request.form['qprice']
+
+        cursor = mysql.connection.cursor()
+        #Executing SQL Statements
+        cursor.execute(''' UPDATE rooms SET available=%s,room_count=%s,price=%s WHERE pgid=%s AND sharingtype=%s''',(savailable,sroomcount,sprice,[pg_id],'single'))
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+        #Executing SQL Statements
+        cursor.execute(''' UPDATE rooms SET available=%s,room_count=%s,price=%s WHERE pgid=%s AND sharingtype=%s''',(davailable,droomcount,dprice,[pg_id],'double'))
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+        #Executing SQL Statements
+        cursor.execute(''' UPDATE rooms SET available=%s,room_count=%s,price=%s WHERE pgid=%s AND sharingtype=%s''',(tavailable,troomcount,tprice,[pg_id],'triple'))
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+        #Executing SQL Statements
+        cursor.execute(''' UPDATE rooms SET available=%s,room_count=%s,price=%s WHERE pgid=%s AND sharingtype=%s''',(qavailable,qroomcount,qprice,[pg_id],'quad'))
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+        #Closing the cursor
+        cursor.close()
+
+        return redirect('/managepg')
     
 @app.route("/logout")
 def logout():
