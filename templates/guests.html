@@ -33,7 +33,7 @@
     <script type="text/javascript">
       function exportTo() {
         $("#example").table2excel({
-          filename: "UserData.xls",
+          filename: "{{pgName}}" + "-" + "BookingData.xls",
         });
       }
     </script>
@@ -67,7 +67,7 @@
       >
         <i class="fas fa-download fa-2x"></i>
       </button>
-      <h1 class="adminTitle">Guests</h1>
+      <h1 class="adminTitle">Guests of {{pgName}}</h1>
       <table id="example" class="table table-striped" style="width: 100%">
         <thead>
           <tr>

@@ -194,7 +194,13 @@ ul {
   color: white;
 }
 
-.btn {
+.contact-btn {
+  display: flex;
+  gap: 10rem;
+}
+
+.btn,
+.subscribe-btn {
   display: inline-block;
   color: white;
   font-size: 20px;
@@ -206,7 +212,14 @@ ul {
   cursor: pointer;
 }
 
-.btn:hover {
+.subscribe-btn {
+  font-family: Maiandra GD;
+  height: 50px;
+  background-color: transparent;
+}
+
+.btn:hover,
+.subscribe-btn:hover {
   color: white;
   background: #f92f60;
 }

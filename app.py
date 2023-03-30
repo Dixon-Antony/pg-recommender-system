@@ -715,7 +715,7 @@ def getOTP():
         session['otp'] = str(msg)
         s = smtplib.SMTP('smtp.gmail.com', 587)
         s.starttls()
-        s.login("pgrecc123@gmail.com", "dzdewdudmjshbbmh")
+        s.login("pgrecc123@gmail.com", "fdchwvnbkrvszkcu")
         s.sendmail('pgrecc123@gmail.com',emailid,msg)
         
         return render_template('valOTP.html')
@@ -792,7 +792,7 @@ def pgetOTP():
         session['otp'] = str(msg)
         s = smtplib.SMTP('smtp.gmail.com', 587)
         s.starttls()
-        s.login("pgrecc123@gmail.com", "dzdewdudmjshbbmh")
+        s.login("pgrecc123@gmail.com", "fdchwvnbkrvszkcu")
         s.sendmail('pgrecc123@gmail.com',emailid,msg)
         
         return render_template('pvalOTP.html')
@@ -905,11 +905,26 @@ def guests():
     data = cursor.fetchall()
     mysql.connection.commit()
     print(data)
+    cursor.execute('''SELECT pgname from pgs WHERE pgid=%s''',([pg_id]))
+    pg_name = cursor.fetchall()[0][0]
+    mysql.connection.commit()
     #Saving the Actions performed on the DB
     
     cursor.close()
 
-    return render_template('guests.html',data=data, len = len(data))
+    return render_template('guests.html',data=data, len = len(data),pgName = pg_name)
+
+@app.route('/subscribe',methods=['POST'])
+def subscribe():
+    if request.method=='POST':
+        subscription_data = request.form['subscribe'].split('-')
+        cursor = mysql.connection.cursor()
+        cursor.execute(''' UPDATE users SET subscription=%s WHERE userid=%s ''',([subscription_data[1]],[subscription_data[0]]))
+        mysql.connection.commit()
+        cursor.close()
+
+        return redirect('/profile')
+    
 
 if __name__ == "__main__":
   app.run()

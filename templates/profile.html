@@ -48,8 +48,32 @@
           <h2>Gender : {{data[0][6]}}</h2>
           <br />
           <div class="contact-btn">
-            <a class="btn" href="editProfile">Edit Profile</a>
+            <a class="btn" href="editProfile"
+              ><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;Edit
+              Profile</a
+            >
+            <form action="/subscribe" method="POST">
+              {% if data[0][7] == 'unsubscribed' %}
+              <button
+                value="{{data[0][0]}}-subscribed"
+                name="subscribe"
+                class="subscribe-btn"
+              >
+                Subscribe
+              </button>
+              {% else %}
+              <button
+                value="{{data[0][0]}}-unsubscribed"
+                name="subscribe"
+                class="subscribe-btn"
+              >
+                Unsubscribe
+              </button>
+              {% endif %}
+            </form>
           </div>
+
+          <div class="contact-btn"></div>
         </div>
       </div>
       <div class="space"></div>
