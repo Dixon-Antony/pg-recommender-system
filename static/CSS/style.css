@@ -560,6 +560,17 @@ textarea {
 .adminTables label {
   color: white;
 }
+.adminTables tr {
+  border: 4px solid rgba(55, 160, 142, 0.4);
+}
+
+.adminTables thead th {
+  background-color: rgba(55, 160, 142, 0.4);
+}
+
+.adminTables th {
+  min-width: 120px;
+}
 
 .price-cards {
   display: flex;
@@ -842,11 +853,11 @@ textarea {
   border-radius: 50%;
   align-self: flex-end;
   top: 31%;
-  right: 25%;
+  right: 15%;
 }
 
 .agentDownload {
-  right: 22%;
+  right: 15%;
 }
 
 .editPGButton {
@@ -859,4 +870,33 @@ textarea {
   right: 100px;
   margin-top: -20px;
   justify-content: flex-end;
+}
+
+.form-control,
+.form-select {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  /* outline-color: #f92f60 !important; */
+  border: 2px solid #f92f60 !important;
+  transition: all 0.3s ease-in-out;
+}
+
+.form-select option {
+  color: black;
+}
+
+.paginate_button a {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 2px solid #f92f60 !important;
+  color: white !important;
+}
+
+.paginate_button a:hover {
+  background-color: #f92f60 !important;
+  color: white !important;
+}
+
+.guestsDownload {
+  top: 51%;
+  right: 20%;
 }

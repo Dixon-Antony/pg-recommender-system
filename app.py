@@ -890,13 +890,26 @@ def popularPgs():
     cursor = mysql.connection.cursor()
     cursor.execute('''SELECT * FROM pgs ORDER BY pgrating DESC LIMIT 10''')
     data = cursor.fetchall()
-    print(data)
+    # print(data)
     #Saving the Actions performed on the DB
     mysql.connection.commit()
     cursor.close()
 
     return render_template('popularPgs.html',pgdata=data, len = len(data))
 
+@app.route("/guests")
+def guests():
+    pg_id = session['pgid']
+    cursor = mysql.connection.cursor()
+    cursor.execute('''SELECT bookings.bookingid,bookings.roomid,bookings.bookingdate,users.username,users.phone FROM bookings INNER JOIN users ON bookings.userid = users.userid WHERE pgid=%s''',([pg_id]))
+    data = cursor.fetchall()
+    mysql.connection.commit()
+    print(data)
+    #Saving the Actions performed on the DB
+    
+    cursor.close()
+
+    return render_template('guests.html',data=data, len = len(data))
 
 if __name__ == "__main__":
   app.run()

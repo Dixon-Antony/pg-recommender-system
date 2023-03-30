@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guests</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='CSS/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <!-- tables -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- TabletoExcel   -->
+    <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <script type="text/javascript">
+      function exportTo() {
+        $("#example").table2excel({
+          filename: "UserData.xls",
+        });
+      }
+    </script>
+  </head>
+  <style>
+    body {
+      font-family: Maiandra GD;
+    }
+    #main-nav > ul {
+      padding-left: 0px !important;
+    }
+  </style>
+  <body>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="pindex">Home</a></li>
+        <li><a href="managepg">Manage PG</a></li>
+        <li><a class="current" href="guests">Guests</a></li>
+        <li><a href="pgownerprofile">Profile</a></li>
+        <div id="logout">
+          <li><a href="logout">Logout</a></li>
+        </div>
+      </ul>
+    </nav>
+    <div class="space"></div>
+    <div class="container adminTables">
+      <button
+        class="download guestsDownload"
+        type="submit"
+        onclick="exportTo()"
+      >
+        <i class="fas fa-download fa-2x"></i>
+      </button>
+      <h1 class="adminTitle">Guests</h1>
+      <table id="example" class="table table-striped" style="width: 100%">
+        <thead>
+          <tr>
+            <th>Booking-id</th>
+            <th>Room-id</th>
+            <th>Username</th>
+            <th>Phone Number</th>
+            <th>Booking Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%for i in range(0, len)%}
+          <tr>
+            <td>{{data[i][0]}}</td>
+            <td>{{data[i][1]}}</td>
+            <td>{{data[i][3]}}</td>
+            <td>{{data[i][4]}}</td>
+            <td>{{data[i][2]}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <script>
+      $(document).ready(function () {
+        $("#example").DataTable();
+      });
+    </script>
+  </body>
+
+  <!-- <footer id="main-footer">
+    <div class="footer-content container">
+      <p>Copyright &copy; 2023. All Rights Reserved</p>
+      <div class="social">
+        <i class="fab fa-twitter"></i>
+        <i class="fab fa-linkedin"></i>
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-youtube"></i>
+      </div>
+    </div>
+  </footer> -->
+</html>
