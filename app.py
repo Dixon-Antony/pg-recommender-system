@@ -12,6 +12,8 @@ import numpy as np
 from scipy.sparse import csr_matrix
 from sklearn.neighbors import NearestNeighbors
 
+
+
 app = Flask(__name__)
 app.secret_key = "abc123"  
 
@@ -242,6 +244,38 @@ def addRooms():
             if i==3:
                 cursor.execute('''INSERT INTO rooms (pgid,roomtype,sharingtype,room_count,available,price) VALUES (%s,%s,%s,%s,%s,%s)''',(pgid,roomtype,'quad',q,q,qp))
                 mysql.connection.commit()
+
+        
+
+        cursor.execute(''' SELECT * FROM  pgs WHERE pgid=%s''',([pgid]))
+        emailPgData = cursor.fetchall()
+        print(emailPgData)
+        mysql.connection.commit()
+
+        cursor.execute(''' SELECT email FROM  users WHERE subscription="subscribed" ''')
+        receiverData = cursor.fetchall()
+        receivers = []
+        for i in range(len(receiverData)):
+            receivers.append(receiverData[i][0])
+        print(receivers)
+        mysql.connection.commit()
+        
+        # msg = MIMEMultipart()
+        # msg['From'] = "me@gmail.com"
+        # msg['To'] = "you@gmail.com"
+        # msg['Subject'] = "Email using Python"
+
+        welcome="A New Paying Guest property has arrived !!! Check it out at the website\n\n"
+        pgName = "Name : "+emailPgData[0][1]
+        pgType = "Type : "+emailPgData[0][6]
+        pgAddress = "Address : "+emailPgData[0][8]
+        note = "This email has been sent to you because you're subscribed to the messaging service."
+        msg = "From : PGReccMessageEngine\n"+"Subject : New PG Added !\n \n"+welcome+"\n"+pgName + "\n"+pgType+"\n"+pgAddress+"\n\n\n"+note
+         
+        s = smtplib.SMTP('smtp.gmail.com', 587)
+        s.starttls()
+        s.login("PGReccMessageEngine", "pliuttlzepratzho")
+        s.sendmail('PGReccMessageEngine',receivers,msg)
 
         cursor.close()
 
@@ -723,10 +757,13 @@ def getOTP():
         msg = str(generateOTP())
         session['otp'] = str(msg)
         s = smtplib.SMTP('smtp.gmail.com', 587)
+        s.ehlo()
         s.starttls()
-        s.login("ReccPg700@gmail.com", "ujtegczryhhxeybw")
-        s.sendmail('ReccPg700@gmail.com',emailid,msg)
-        
+        s.ehlo()
+        s.login("PGReccMessageEngine", "pliuttlzepratzho")
+        s.sendmail('PGReccMessageEngine',emailid,msg)
+        s.quit()
+
         return render_template('valOTP.html')
 
 def generateOTP():
@@ -742,6 +779,7 @@ def valOTP():
         otp = request.form['otp']
 
         if otp == session['otp']:
+        # if otp == '123456':
             return redirect('/')
         else:
             return render_template('valOTP.html',error='invalid')
@@ -800,10 +838,13 @@ def pgetOTP():
         msg = str(pgenerateOTP())
         session['otp'] = str(msg)
         s = smtplib.SMTP('smtp.gmail.com', 587)
+        s.ehlo()
         s.starttls()
-        s.login("ReccPg700@gmail.com", "ujtegczryhhxeybw")
-        s.sendmail('ReccPg700@gmail.com',emailid,msg)
-        
+        s.ehlo()
+        s.login("PGReccMessageEngine", "pliuttlzepratzho")
+        s.sendmail('PGReccMessageEngine',emailid,msg)
+        s.quit()
+
         return render_template('pvalOTP.html')
 
 def pgenerateOTP():
@@ -819,6 +860,7 @@ def pvalOTP():
         otp = request.form['otp']
 
         if otp == session['otp']:
+        # if otp == '123456':
             return redirect('/pindex')
         else:
             return render_template('pvalOTP.html',error='invalid')
