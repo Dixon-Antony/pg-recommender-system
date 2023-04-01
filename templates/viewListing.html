@@ -184,8 +184,8 @@
           <a class="btn" href="/askQueries"> Ask a Query </a>
         </div>
       </div>
+      {% if rlen %}
       <br /><br />
-
       <h1>You might also like</h1>
       <br />
       <!-- CSS Cards -->
@@ -230,7 +230,7 @@
         </div>
         {%endfor%}
       </div>
-
+      {% endif %}
       <div class="space"></div>
     </div>
     <footer id="main-footer">

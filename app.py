@@ -34,7 +34,7 @@ def index():
     user_id = session['user_id']
     cursor = mysql.connection.cursor()
     #Executing SQL Statements
-    cursor.execute(''' SELECT username FROM users WHERE userid=%s''',(user_id))
+    cursor.execute(''' SELECT username FROM users WHERE userid=%s''',([user_id]))
     data = cursor.fetchall()
     #Saving the Actions performed on the DB
     mysql.connection.commit()
@@ -228,19 +228,19 @@ def addRooms():
         cursor = mysql.connection.cursor()
         for i in range(4):
             if i==0:
-                cursor.execute('''INSERT INTO rooms (pgid,roomtype,sharingtype,room_count,price) VALUES (%s,%s,%s,%s,%s)''',(pgid,roomtype,'single',s,sp))
+                cursor.execute('''INSERT INTO rooms (pgid,roomtype,sharingtype,room_count,available,price) VALUES (%s,%s,%s,%s,%s,%s)''',(pgid,roomtype,'single',s,s,sp))
                 mysql.connection.commit()
 
             if i==1:
-                cursor.execute('''INSERT INTO rooms (pgid,roomtype,sharingtype,room_count,price) VALUES (%s,%s,%s,%s,%s)''',(pgid,roomtype,'double',d,dp))
+                cursor.execute('''INSERT INTO rooms (pgid,roomtype,sharingtype,room_count,available,price) VALUES (%s,%s,%s,%s,%s,%s)''',(pgid,roomtype,'double',d,d,dp))
                 mysql.connection.commit()
             
             if i==2:
-                cursor.execute('''INSERT INTO rooms (pgid,roomtype,sharingtype,room_count,price) VALUES (%s,%s,%s,%s,%s)''',(pgid,roomtype,'triple',t,tp))
+                cursor.execute('''INSERT INTO rooms (pgid,roomtype,sharingtype,room_count,available,price) VALUES (%s,%s,%s,%s,%s,%s)''',(pgid,roomtype,'triple',t,t,tp))
                 mysql.connection.commit()
             
             if i==3:
-                cursor.execute('''INSERT INTO rooms (pgid,roomtype,sharingtype,room_count,price) VALUES (%s,%s,%s,%s,%s)''',(pgid,roomtype,'quad',q,qp))
+                cursor.execute('''INSERT INTO rooms (pgid,roomtype,sharingtype,room_count,available,price) VALUES (%s,%s,%s,%s,%s,%s)''',(pgid,roomtype,'quad',q,q,qp))
                 mysql.connection.commit()
 
         cursor.close()
@@ -344,6 +344,13 @@ def get_pg_recommendation(pg_name):
     # print(df)
     # print(type(df))
 
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+
+    cursor.execute(''' SELECT * FROM ratings WHERE pg_id=%s''',([session['pgid']]))
+    newPgdata = cursor.fetchall()
+    if len(newPgdata)==0:
+        return []
     #Saving the Actions performed on the DB
     mysql.connection.commit()
 
@@ -717,8 +724,8 @@ def getOTP():
         session['otp'] = str(msg)
         s = smtplib.SMTP('smtp.gmail.com', 587)
         s.starttls()
-        s.login("pgrecc123@gmail.com", "fdchwvnbkrvszkcu")
-        s.sendmail('pgrecc123@gmail.com',emailid,msg)
+        s.login("ReccPg700@gmail.com", "ujtegczryhhxeybw")
+        s.sendmail('ReccPg700@gmail.com',emailid,msg)
         
         return render_template('valOTP.html')
 
@@ -794,8 +801,8 @@ def pgetOTP():
         session['otp'] = str(msg)
         s = smtplib.SMTP('smtp.gmail.com', 587)
         s.starttls()
-        s.login("pgrecc123@gmail.com", "fdchwvnbkrvszkcu")
-        s.sendmail('pgrecc123@gmail.com',emailid,msg)
+        s.login("ReccPg700@gmail.com", "ujtegczryhhxeybw")
+        s.sendmail('ReccPg700@gmail.com',emailid,msg)
         
         return render_template('pvalOTP.html')
 

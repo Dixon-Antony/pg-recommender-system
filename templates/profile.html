@@ -47,6 +47,11 @@
           <h2>Contact No : {{data[0][4]}}</h2>
           <h2>Aadhaar No : {{data[0][5]}}</h2>
           <h2>Gender : {{data[0][6]}}</h2>
+          {% if data[0][7]=='unsubscribed' %}
+          <h2 style="color: #f92f60">Subscription : {{data[0][7]}}</h2>
+          {% else %}
+          <h2 style="color: aquamarine">Subscription : {{data[0][7]}}</h2>
+          {% endif %}
           <br />
           <div class="contact-btn">
             <a class="btn" href="editProfile"
