@@ -273,10 +273,12 @@ def addRooms():
         msg = "From : PGReccMessageEngine\n"+"Subject : New PG Added !\n \n"+welcome+"\n"+pgName + "\n"+pgType+"\n"+pgAddress+"\n\n\n"+note
          
         s = smtplib.SMTP('smtp.gmail.com', 587)
+        s.ehlo()
         s.starttls()
+        s.ehlo()
         s.login("PGReccMessageEngine", "pliuttlzepratzho")
         s.sendmail('PGReccMessageEngine',receivers,msg)
-
+        s.quit()
         cursor.close()
 
     return redirect('/managepg')
