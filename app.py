@@ -83,7 +83,7 @@ def viewqueries():
 
     cursor = mysql.connection.cursor()
     #Executing SQL Statements
-    cursor.execute(''' SELECT * FROM queries WHERE status='negative' ''')
+    cursor.execute(''' SELECT * FROM queries WHERE status='negative' AND pg_id=%s''',([session['pgid']]))
     data = cursor.fetchall()
     print(data)
     #Saving the Actions performed on the DB
@@ -297,6 +297,7 @@ def listings():
 def viewListing():
     if request.method=='POST':
         pgId = request.form['pg-id'];
+        session['pgid'] = pgId
         cursor = mysql.connection.cursor()
         #Executing SQL Statements
         cursor.execute(''' SELECT * FROM pgs WHERE pgid=%s''',([pgId]))
@@ -402,10 +403,10 @@ def get_pg_recommendation(pg_name):
 @app.route("/contact")
 def contact():
     user_id = session['user_id']
-
+    session['pgid']=str(0)
     cursor = mysql.connection.cursor()
     #Executing SQL Statements
-    cursor.execute(''' SELECT * FROM queries WHERE user_id=%s''',(user_id))
+    cursor.execute(''' SELECT * FROM queries WHERE user_id=%s AND pg_id=%s''',(user_id,[session['pgid']]))
     data = cursor.fetchall()
     #Saving the Actions performed on the DB
     mysql.connection.commit()
@@ -612,6 +613,7 @@ def loginVerify():
         lpassword = request.form['lpassword']
 
     if lemail == 'admin@gmail.com' and lpassword == 'admin123':
+        session['pgid']=str(0)
         return redirect('/aindex')
 
     cursor = mysql.connection.cursor()
@@ -856,6 +858,21 @@ def ratePG():
 
     return redirect('booking');
 
+@app.route('/userqueries')
+def userqueries():
+    user_id = session['user_id']
+
+    cursor = mysql.connection.cursor()
+    #Executing SQL Statements
+    cursor.execute(''' SELECT queries.qrid,queries.user_id,pgs.pgname,queries.name,queries.email,queries.queries,queries.replies,queries.status FROM queries INNER JOIN pgs on queries.pg_id=pgs.pgid WHERE user_id=%s''',([user_id]))
+    data = cursor.fetchall()
+    print(data)
+    #Saving the Actions performed on the DB
+    mysql.connection.commit()
+    #Closing the cursor
+    cursor.close()
+    return render_template("userqueries.html",data=data,len=len(data))
+
 @app.route('/postQuery',methods=['POST'])
 def postQuery():
     if request.method == 'POST':
@@ -863,14 +880,18 @@ def postQuery():
         email= request.form['email']
         queries = request.form['queries']
         user_id = session['user_id']
+        pg_id = session['pgid']
 
         cursor = mysql.connection.cursor()
-        cursor.execute(''' INSERT INTO queries (name,email,queries,user_id) VALUES(%s,%s,%s,%s);''',(name,email,queries,user_id))
+        cursor.execute(''' INSERT INTO queries (name,email,queries,user_id,pg_id) VALUES(%s,%s,%s,%s,%s);''',(name,email,queries,user_id,[pg_id]))
         #Saving the Actions performed on the DB
         mysql.connection.commit()
         cursor.close()
 
-    return redirect('/contact');
+        if session['pgid'] == str(0):
+            return redirect('/contact')
+
+    return redirect('/userqueries')
 
 @app.route('/reply',methods=['POST'])
 def reply():
@@ -882,7 +903,11 @@ def reply():
         #Saving the Actions performed on the DB
         mysql.connection.commit()
         cursor.close()
-    return redirect('viewqueries')
+
+        if session['pgid'] == str(0):
+            return redirect('/viewqueries')
+
+    return redirect('/guests')
 
 
 @app.route("/popularPgs")
@@ -909,10 +934,12 @@ def guests():
     pg_name = cursor.fetchall()[0][0]
     mysql.connection.commit()
     #Saving the Actions performed on the DB
-    
-    cursor.close()
 
-    return render_template('guests.html',data=data, len = len(data),pgName = pg_name)
+    cursor.execute(''' SELECT * FROM queries WHERE pg_id=%s AND status=%s ''',([pg_id],'negative'))
+    qdata = cursor.fetchall()
+    cursor.close()
+    mysql.connection.commit()
+    return render_template('guests.html',data=data, len = len(data),qdata=qdata,qlen=len(qdata),pgName = pg_name)
 
 @app.route('/subscribe',methods=['POST'])
 def subscribe():
@@ -925,6 +952,16 @@ def subscribe():
 
         return redirect('/profile')
     
+@app.route('/askQueries')
+def askQueries():
+    pg_id = session['pgid']
+    cursor = mysql.connection.cursor()
+    cursor.execute(''' SELECT pgname FROM pgs WHERE pgid=%s ''',([pg_id]))
+    pgName = cursor.fetchall()[0][0]
+    mysql.connection.commit()
+    cursor.close()
+    return render_template('/askQueries.html',pgName=pgName)
+
 
 if __name__ == "__main__":
   app.run()

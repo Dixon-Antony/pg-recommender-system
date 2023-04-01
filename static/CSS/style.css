@@ -754,7 +754,7 @@ textarea {
 }
 
 .query * {
-  margin: 1rem 0;
+  margin: 0.4rem 0;
 }
 
 .query input[type="text"] {
@@ -912,4 +912,17 @@ textarea {
 .guestsDownload {
   top: 51%;
   right: 20%;
+}
+
+.ask {
+  width: 100%;
+  display: flex;
+}
+
+.ask button {
+  background: transparent;
+}
+
+.agentQuery {
+  color: white;
 }

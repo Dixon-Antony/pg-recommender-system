@@ -91,6 +91,27 @@
         </tbody>
       </table>
     </div>
+    {% if qlen %}
+    <div class="container agentQuery">
+      <h1>Queries</h1>
+      <div class="queries-container">
+        {% for i in range(qlen)%}
+        <div class="query">
+          <h2><i class="fa-solid fa-user"></i> &nbsp;{{qdata[i][3]}}</h2>
+          <h2><i class="fa-solid fa-envelope"></i> &nbsp;{{qdata[i][4]}}</h2>
+          <h4>Query : {{qdata[i][5]}}</h4>
+          <form action="/reply" method="POST">
+            <input type="text" name="reply" id="reply" />
+            <button type="submit" name="queryId" value="{{qdata[i][0]}}">
+              <i class="fa-solid fa-paper-plane fa-1.5x"></i>
+            </button>
+          </form>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
     <script>
       $(document).ready(function () {
         $("#example").DataTable();
