@@ -97,10 +97,13 @@
           {% else %}
           <h4>Type : {{data[0][6]}}</h4>
           {% endif %}
-          <h4>Agent-id : {{data[0][7]}}</h4>
+          <h4>Owner : {{agentName}} ({{data[0][7]}})</h4>
           <h4 class="overflow">Address : {{data[0][8]}}</h4>
           <h4>City : {{data[0][9]}}</h4>
           <h4>Pincode : {{data[0][10]}}</h4>
+          <h3 style="color: rgb(255, 220, 103); font-family: Maiandra GD">
+            Overall Rating : {{data[0][11]}} / 5
+          </h3>
           <br />
           <h1>Room Availability</h1>
           <br />

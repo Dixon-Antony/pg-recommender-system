@@ -343,6 +343,9 @@ def viewListing():
         #Saving the Actions performed on the DB
         mysql.connection.commit()
 
+        cursor.execute(''' SELECT aname FROM agents WHERE agentid=%s''',([data[0][7]]))
+        agentName = cursor.fetchall()[0][0]
+        mysql.connection.commit()
 
         #Executing SQL Statements
         cursor.execute(''' SELECT * FROM rooms WHERE pgid=%s''',([pgId]))
@@ -366,7 +369,7 @@ def viewListing():
             
 
 
-        return render_template('viewListing.html',data=data,roomData=room_data, recommendation_data=recommended_data, rlen = len(recommended_data))
+        return render_template('viewListing.html',data=data,roomData=room_data, recommendation_data=recommended_data, rlen = len(recommended_data),agentName = agentName)
 
 def get_pg_recommendation(pg_name):
         #recommendation
