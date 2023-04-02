@@ -11,7 +11,7 @@
     />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
   </head>
   <body>
@@ -75,7 +75,7 @@
             <div id="category-type" class="big-same-line">
               <div class="form-group">
                 <div class="select-same-line">
-                  <h3>Category</h3>
+                  <h3><i class="fas fa-building fa-2x"></i></h3>
                   <select name="category" id="category">
                     <option value="standard">Standard (5k+)</option>
                     <option value="premium">Premium (10k+)</option>
@@ -84,7 +84,7 @@
               </div>
               <div class="form-group">
                 <div class="select-same-line">
-                  <h3>PG for</h3>
+                  <h3><i class="fas fa-restroom fa-2x"></i></h3>
                   <select name="pgtype" id="pgtype">
                     <option value="mens">Mens</option>
                     <option value="womens">Womens</option>
@@ -99,7 +99,7 @@
               <div class="form-group">
                 <h4>Occupancy</h4>
                 <div class="same-line">
-                  <label for="single">Single sharing</label>
+                  <label for="single"><i class="fas fa-bed"></i></label>
                   <input
                     type="checkbox"
                     id="single"
@@ -108,7 +108,9 @@
                   />
                 </div>
                 <div class="same-line">
-                  <label for="double">Double sharing</label>
+                  <label for="double"
+                    ><i class="fas fa-bed"></i> <i class="fas fa-bed"></i
+                  ></label>
                   <input
                     type="checkbox"
                     id="double"
@@ -117,7 +119,10 @@
                   />
                 </div>
                 <div class="same-line">
-                  <label for="triple">Triple sharing</label>
+                  <label for="triple"
+                    ><i class="fas fa-bed"></i> <i class="fas fa-bed"></i>
+                    <i class="fas fa-bed"></i
+                  ></label>
                   <input
                     type="checkbox"
                     id="triple"
@@ -126,23 +131,19 @@
                   />
                 </div>
                 <div class="same-line">
-                  <label for="four">Four sharing</label>
+                  <label for="four"
+                    ><i class="fas fa-bed"></i> <i class="fas fa-bed"></i>
+                    <i class="fas fa-bed"></i> <i class="fas fa-bed"></i
+                  ></label>
                   <input type="checkbox" id="four" name="four" value="four" />
-                </div>
-                <div class="same-line">
-                  <label for="multi">Multi sharing</label>
-                  <input
-                    type="checkbox"
-                    id="multi"
-                    name="multi"
-                    value="multi"
-                  />
                 </div>
               </div>
               <div class="form-group" id="food">
                 <h3>Food Included</h3>
                 <div class="same-line">
-                  <label for="breakfast">Breakfast</label>
+                  <label for="breakfast"
+                    ><i class="fas fa-concierge-bell"></i> Breakfast</label
+                  >
                   <input
                     type="checkbox"
                     id="breakfast"
@@ -151,7 +152,9 @@
                   />
                 </div>
                 <div class="same-line">
-                  <label for="lunch">Lunch</label>
+                  <label for="lunch"
+                    ><i class="fa-solid fa-concierge-bell"></i> Lunch</label
+                  >
                   <input
                     type="checkbox"
                     id="lunch"
@@ -160,7 +163,9 @@
                   />
                 </div>
                 <div class="same-line">
-                  <label for="dinner">Dinner</label>
+                  <label for="dinner"
+                    ><i class="fas fa-concierge-bell"></i> Dinner</label
+                  >
                   <input
                     type="checkbox"
                     id="dinner"
@@ -174,7 +179,7 @@
             <div class="big-same-line">
               <div class="form-group">
                 <div class="select-same-line">
-                  <h3>AC/Non AC</h3>
+                  <h3><i class="fas fa-wind fa-2x"></i></h3>
                   <select name="isac" id="isac">
                     <option value="airconditioned">Air conditioned</option>
                     <option value="non airconditioned">
@@ -186,7 +191,7 @@
               </div>
               <div class="form-group">
                 <div class="select-same-line">
-                  <h3>Bathroom Type</h3>
+                  <h3><i class="fas fa-bath fa-2x"></i></h3>
                   <select name="bathtype" id="bathtype">
                     <option value="attached">Attached</option>
                     <option value="common">Common</option>
@@ -199,26 +204,29 @@
               <h3>Other Amenities</h3>
               <div class="big-same-line">
                 <div class="same-line">
-                  <label for="wifi">WiFi</label>
+                  <label for="wifi"
+                    ><i class="fa-solid fa-wifi"></i> WiFi</label
+                  >
                   <input type="checkbox" id="wifi" name="wifi" value="wifi" />
                 </div>
                 <div class="same-line">
-                  <label for="ups">UPS</label>
+                  <label for="ups"
+                    ><i class="fa-solid fa-plug-circle-bolt"></i> UPS</label
+                  >
                   <input type="checkbox" id="ups" name="ups" value="ups" />
                 </div>
               </div>
               <div class="big-same-line">
                 <div class="same-line">
-                  <label for="wasmac">Washing Machine</label>
-                  <input
-                    type="checkbox"
-                    id="wasmac"
-                    name="wasmac"
-                    value="wasmac"
-                  />
+                  <label for="pool"
+                    ><i class="fa-solid fa-swimmer"></i> Pool</label
+                  >
+                  <input type="checkbox" id="pool" name="pool" value="pool" />
                 </div>
                 <div class="same-line">
-                  <label for="laundry">Laundry</label>
+                  <label for="laundry"
+                    ><i class="fas fa-hot-tub"></i> Laundry</label
+                  >
                   <input
                     type="checkbox"
                     id="laundry"
@@ -229,8 +237,41 @@
               </div>
               <div class="big-same-line">
                 <div class="same-line">
-                  <label for="iron">Ironing</label>
+                  <label for="iron"
+                    ><i class="fa-solid fa-shirt"></i> Ironing</label
+                  >
                   <input type="checkbox" id="iron" name="iron" value="iron" />
+                </div>
+                <div class="same-line">
+                  <label for="gym"
+                    ><i class="fa-solid fa-dumbbell"></i><br />
+                    Gym</label
+                  >
+                  <input type="checkbox" id="gym" name="gym" value="gym" />
+                </div>
+              </div>
+              <div class="big-same-line">
+                <div class="same-line">
+                  <label for="party"
+                    ><i class="fas fa-holly-berry"></i> Party</label
+                  >
+                  <input
+                    type="checkbox"
+                    id="party"
+                    name="party"
+                    value="party"
+                  />
+                </div>
+                <div class="same-line">
+                  <label for="music"
+                    ><i class="fas fa-music"></i> Loud music</label
+                  >
+                  <input
+                    type="checkbox"
+                    id="music"
+                    name="music"
+                    value="music"
+                  />
                 </div>
               </div>
             </div>

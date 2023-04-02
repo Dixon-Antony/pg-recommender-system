@@ -478,11 +478,13 @@ table {
 
 .same-line {
   display: grid;
+  text-align: center;
   grid-gap: 3rem;
   grid-template-columns: 2fr 3fr;
 }
 
 .select-same-line {
+  text-align: right;
   display: grid;
   grid-gap: 1.5rem;
   grid-template-columns: 1fr 1fr;
@@ -490,7 +492,7 @@ table {
 }
 
 .select-same-line select {
-  margin-top: 15px;
+  margin-top: 5px;
   height: 30px;
 }
 
@@ -505,7 +507,8 @@ table {
 }
 
 #food label {
-  width: 30px;
+  width: 100px;
+  text-align: left;
 }
 
 #other label {
@@ -874,7 +877,7 @@ textarea {
 }
 
 .editPGButton {
-  width: 100px;
+  width: 120px;
 }
 
 #popularDiv {

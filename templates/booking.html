@@ -44,16 +44,22 @@
           </div>
           <div class="card-content">
             <br />
-            <h2>Booking Id : {{booking_details[i][0]}}</h2>
-            <h2>Booking Date : {{booking_details[i][2]}}</h2>
+            <h2>
+              <i class="fas fa-address-book"></i>&nbsp;
+              {{booking_details[i][0]}}
+            </h2>
+            <h2>
+              <i class="far fa-calendar-alt"></i>&nbsp;
+              {{booking_details[i][2]}}
+            </h2>
             <br />
             <hr />
             <br />
-            <h2>Name : {{pg_data[i][1]}}</h2>
-            <h2>Id : {{pg_data[i][0]}}</h2>
-            <h2>Type : {{pg_data[i][6]}}</h2>
-            <h2>City : {{pg_data[i][9]}}</h2>
-            <h2>Overall rating : {{pg_data[i][11]}} / 5</h2>
+            <h2><i class="fas fa-building"></i>&nbsp; {{pg_data[i][1]}}</h2>
+            <!-- <h2><i class=""></i>&nbsp;  {{pg_data[i][0]}}</h2> -->
+            <h2><i class="fas fa-restroom"></i>&nbsp; {{pg_data[i][6]}}</h2>
+            <h2><i class="fas fa-globe-asia"></i>&nbsp; {{pg_data[i][9]}}</h2>
+            <h2><i class="fas fa-smile"></i>&nbsp; {{pg_data[i][11]}} / 5</h2>
             <br />
             <hr />
             <br />
@@ -89,7 +95,11 @@
               </form>
             </div>
             {% else %}
-            <div><h2>Your Rating : {{booking_details[i][3]}}</h2></div>
+            <div>
+              <h2>
+                <i class="fas fa-star"></i>&nbsp; {{booking_details[i][3]}}
+              </h2>
+            </div>
 
             {% endif %}
           </div>

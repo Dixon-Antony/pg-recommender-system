@@ -66,42 +66,59 @@
           </button>
         </div>
         <div class="main-div">
-          <h1 style="color: aquamarine">{{data[0][1]}}</h1>
-          <h4>Property-id : {{data[0][0]}}</h4>
-          <h4>Description : {{data[0][2]}}</h4>
-          <h4>Type : {{data[0][6]}}</h4>
-          <h4>Agent-id : {{data[0][7]}}</h4>
-          <h4>Address : {{data[0][8]}}</h4>
-          <h4>City : {{data[0][9]}}</h4>
-          <h4>Pincode : {{data[0][10]}}</h4>
+          <h1 style="color: aquamarine">
+            <i class="fas fa-building"></i> {{data[0][1]}}
+          </h1>
+          <h4><i class="fas fa-address-book"></i>&nbsp; {{data[0][0]}}</h4>
+          <h4><i class="fas fa-comment-dots"></i>&nbsp; {{data[0][2]}}</h4>
+          <h4><i class="fas fa-restroom"></i>&nbsp; {{data[0][6]}}</h4>
+          <h4><i class="fas fa-user-secret"></i>&nbsp; {{data[0][7]}}</h4>
+          <h4 class="overflow">
+            <i class="fas fa-map-marker-alt"></i>&nbsp; {{data[0][8]}}
+          </h4>
+          <h4><i class="fas fa-globe-asia"></i>&nbsp; {{data[0][9]}}</h4>
+          <h4><i class="fas fa-envelope"></i>&nbsp; {{data[0][10]}}</h4>
+          <h3 style="color: rgb(255, 220, 103); font-family: Maiandra GD">
+            <i class="fas fa-smile"></i>&nbsp; {{data[0][11]}} / 5
+          </h3>
           <br />
           <hr />
           <br />
           <h1>Room Availability</h1>
           <br />
           <h4>
-            Single sharing : {{roomData[0][5]}} (available) / {{roomData[0][4]}}
-            (total)
+            <i class="fas fa-bed"></i>&nbsp; : {{roomData[0][5]}} (available) /
+            {{roomData[0][4]}} (total)
           </h4>
-          <h4 style="color: aquamarine">Price : ₹ {{roomData[0][6]}}</h4>
+          <h4 style="color: aquamarine">
+            <i class="fas fa-inr"></i> {{roomData[0][6]}}
+          </h4>
           <br />
           <h4>
-            Double sharing : {{roomData[1][5]}} (available) / {{roomData[1][4]}}
-            (total)
+            <i class="fas fa-bed"></i> <i class="fas fa-bed"></i>&nbsp; :
+            {{roomData[1][5]}} (available) / {{roomData[1][4]}} (total)
           </h4>
-          <h4 style="color: aquamarine">Price : ₹ {{roomData[1][6]}}</h4>
+          <h4 style="color: aquamarine">
+            <i class="fas fa-inr"></i> {{roomData[1][6]}}
+          </h4>
           <br />
           <h4>
-            Triple sharing : {{roomData[2][5]}} (available) / {{roomData[2][4]}}
-            (total)
+            <i class="fas fa-bed"></i> <i class="fas fa-bed"></i>
+            <i class="fas fa-bed"></i>&nbsp; : {{roomData[2][5]}} (available) /
+            {{roomData[2][4]}} (total)
           </h4>
-          <h4 style="color: aquamarine">Price : ₹ {{roomData[2][6]}}</h4>
+          <h4 style="color: aquamarine">
+            <i class="fas fa-inr"></i> {{roomData[2][6]}}
+          </h4>
           <br />
           <h4>
-            Quad sharing : {{roomData[3][5]}} (available) / {{roomData[3][4]}}
-            (total)
+            <i class="fas fa-bed"></i> <i class="fas fa-bed"> </i>
+            <i class="fas fa-bed"></i> <i class="fas fa-bed"></i>&nbsp; :
+            {{roomData[3][5]}} (available) / {{roomData[3][4]}} (total)
           </h4>
-          <h4 style="color: aquamarine">Price : ₹ {{roomData[3][6]}}</h4>
+          <h4 style="color: aquamarine">
+            <i class="fas fa-inr"></i> {{roomData[3][6]}}
+          </h4>
           <br />
           <form action="/editRooms" , method="GET">
             <button
@@ -110,7 +127,7 @@
               class="btn viewBtn editPGButton"
               value="{{data[0][0]}}"
             >
-              Edit
+              <i class="fas fa-pencil"></i>&nbsp; Edit
             </button>
           </form>
         </div>

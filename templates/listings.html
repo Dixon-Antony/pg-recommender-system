@@ -78,23 +78,23 @@
           <div class="card-content">
             <form action="/viewListing" method="POST">
               <h2 style="color: aquamarine" class="overflow">
-                {{pgdata[i][1]}}
+                <i class="fas fa-building"></i>&nbsp; {{pgdata[i][1]}}
               </h2>
               {% if pgdata[i][6] == 'mens' %}
               <h2>
-                Type : Men's
+                <i class="fas fa-restroom"></i>&nbsp; Men's
                 <i style="color: rgb(46, 147, 235)" class="fas fa-mars"></i>
               </h2>
               {% elif pgdata[i][6] == 'women' %}
               <h2>
-                Type : Women's
+                <i class="fas fa-restroom"></i>&nbsp; Women's
                 <i style="color: rgb(216, 36, 180)" class="fas fa-venus"></i>
               </h2>
               {% else %}
-              <h2>Type : {{pgdata[i][6]}}</h2>
+              <h2><i class="fas fa-restroom"></i>&nbsp; {{pgdata[i][6]}}</h2>
               {% endif %}
-              <h2>City : {{pgdata[i][9]}}</h2>
-              <h2>Rating : {{pgdata[i][11]}} / 5</h2>
+              <h2><i class="fas fa-globe-asia"></i>&nbsp; {{pgdata[i][9]}}</h2>
+              <h2><i class="fas fa-smile"></i>&nbsp; {{pgdata[i][11]}} / 5</h2>
               <div class="card-btn">
                 <button
                   type="submit"

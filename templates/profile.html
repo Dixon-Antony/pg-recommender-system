@@ -40,17 +40,21 @@
         </div>
         <br />
         <div class="profile-card-content">
-          <h2>User Name : {{data[0][1]}}</h2>
-          <h2>User ID : {{data[0][0]}}</h2>
-          <h2>Email : {{data[0][3]}}</h2>
-          <h2>Password : {{data[0][2]}}</h2>
-          <h2>Contact No : {{data[0][4]}}</h2>
-          <h2>Aadhaar No : {{data[0][5]}}</h2>
-          <h2>Gender : {{data[0][6]}}</h2>
+          <h2><i class="fas fa-user-alt"></i>&nbsp; {{data[0][1]}}</h2>
+          <h2><i class="fas fa-address-book"></i>&nbsp; {{data[0][0]}}</h2>
+          <h2><i class="fas fa-envelope"></i>&nbsp; {{data[0][3]}}</h2>
+          <h2><i class="fas fa-key"></i>&nbsp; {{data[0][2]}}</h2>
+          <h2><i class="fas fa-phone"></i>&nbsp; {{data[0][4]}}</h2>
+          <h2><i class="fas fa-address-card"></i>&nbsp; {{data[0][5]}}</h2>
+          <h2><i class="fas fa-restroom"></i>&nbsp; {{data[0][6]}}</h2>
           {% if data[0][7]=='unsubscribed' %}
-          <h2 style="color: #f92f60">Subscription : {{data[0][7]}}</h2>
+          <h2 style="color: #f92f60">
+            <i class="fas fa-bell"></i>&nbsp; {{data[0][7]}}
+          </h2>
           {% else %}
-          <h2 style="color: aquamarine">Subscription : {{data[0][7]}}</h2>
+          <h2 style="color: aquamarine">
+            <i class="fas fa-bell"></i>&nbsp; {{data[0][7]}}
+          </h2>
           {% endif %}
           <br />
           <div class="contact-btn">
@@ -65,7 +69,7 @@
                 name="subscribe"
                 class="subscribe-btn"
               >
-                Subscribe
+                <i class="fas fa-bell"></i>&nbsp; Subscribe
               </button>
               {% else %}
               <button
@@ -73,7 +77,7 @@
                 name="subscribe"
                 class="subscribe-btn"
               >
-                Unsubscribe
+                <i class="fas fa-bell-slash"></i>&nbsp; Unsubscribe
               </button>
               {% endif %}
             </form>
