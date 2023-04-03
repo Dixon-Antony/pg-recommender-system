@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>Admin Home</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 
     <link
@@ -13,10 +13,29 @@
     />
     <link
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
   </head>
-
+  <style>
+    body {
+      font-family: Maiandra GD;
+      line-height: 1.6;
+    }
+    #main-nav > ul > li {
+      padding: 16px 24px;
+    }
+    #main-nav > ul > li > a {
+      font-size: 16px;
+    }
+    .mySlides {
+      display: none;
+    }
+  </style>
   <body>
     <nav id="main-nav">
       <ul>
@@ -30,10 +49,46 @@
       </ul>
     </nav>
     <div class="container">
-      <h1>Hi admin</h1>
-    </div>
+      <div class="home-grid">
+        <div class="slider w3-content w3-section">
+          <img class="mySlides" src="../static/uploads/default2.jpg" alt="" />
+          <img
+            class="mySlides"
+            src="../static/uploads/andrea-davis-7450hH--84M-unsplash.jpg"
+            alt=""
+          />
+          <img
+            class="mySlides"
+            src="../static/uploads/daniel-mensah-boafo-lb78I0tkDVQ-unsplash.jpg"
+            alt=""
+          />
+        </div>
+        <div class="welcome"><h1>Welcome {{name}}</h1></div>
+        <div class="home-section-1">
+          <div>
+            <a href="/viewqueries">
+              <h1>Read Comments</h1>
+            </a>
+          </div>
+          <div>
+            <a href="/viewqueries"
+              ><i class="fa-solid fa-comments fa-5x"></i
+            ></a>
+          </div>
+        </div>
 
-    <div class="space"></div>
+        <div class="home-section-2">
+          <div>
+            <a href="/viewusers"><i class="fa-solid fa-users fa-5x"></i></a>
+          </div>
+          <div>
+            <a href="/viewpgowners"
+              ><i class="fa-solid fa-building-user fa-5x"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <footer id="main-footer">
       <div class="footer-content">
@@ -47,4 +102,22 @@
       </div>
     </footer>
   </body>
+  <script>
+    var myIndex = 0;
+    carousel();
+
+    function carousel() {
+      var i;
+      var x = document.getElementsByClassName("mySlides");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      myIndex++;
+      if (myIndex > x.length) {
+        myIndex = 1;
+      }
+      x[myIndex - 1].style.display = "block";
+      setTimeout(carousel, 5000); // Change image every 2 seconds
+    }
+  </script>
 </html>
