@@ -884,13 +884,18 @@ def bookPG():
         mysql.connection.commit()
 
         #Executing SQL Statements
-        print("user-id : ",session['user_id'])
         cursor.execute(''' INSERT into bookings (pgid,roomid,userid,bookingdate) VALUES(%s,%s,%s,%s)''',(pgId,roomId,session['user_id'],[date.today()]))
         #Saving the Actions performed on the DB
         mysql.connection.commit()
+
+        cursor.execute('''SELECT bookingid FROM bookings ORDER BY bookingid DESC LIMIT 1''',)
+        booking_id = cursor.fetchall()[0][0]
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+        
         cursor.close()
 
-        return redirect(url_for('booking', response='booked'));
+        return render_template('payment.html',booking_id=booking_id)
 
 @app.route('/ratePG',methods=['POST'])
 def ratePG():
@@ -1015,6 +1020,21 @@ def askQueries():
     mysql.connection.commit()
     cursor.close()
     return render_template('/askQueries.html',pgName=pgName)
+
+@app.route("/payment",methods=['POST'])
+def payment():
+
+    if request.method == 'POST':
+        booking_id = request.form['payment-btn']
+        print(booking_id)
+        cursor = mysql.connection.cursor()
+        cursor.execute('''UPDATE bookings SET payment='paid' WHERE bookingid=%s''',([booking_id]))
+        mysql.connection.commit()
+        cursor.close()
+        return redirect(url_for('booking', response='booked'))
+    
+
+
 
 
 if __name__ == "__main__":
