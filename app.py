@@ -330,19 +330,10 @@ def listings():
 def filter():
     if request.method == 'POST':
 
-        cursor = mysql.connection.cursor()
-        #Executing SQL Statements
-        cursor.execute(''' SELECT * FROM pgs''')
-        data = cursor.fetchall()
-        #Saving the Actions performed on the DB
-        mysql.connection.commit()
-         
         pgtype = request.form['fpgtype']
         sharingtype = request.form['fsharingtype']
         priceRange = request.form['frange']
         location = "%" + request.form['flocation'] + "%"
-
-        print(priceRange)
 
         if priceRange == '10300':
             lRange = 0
@@ -360,7 +351,7 @@ def filter():
             lRange = 0
             hRange = 5500
 
-
+        cursor = mysql.connection.cursor()
         cursor.execute(''' SELECT pgs.* FROM pgs INNER JOIN  ROOMS on pgs.pgid = rooms.pgid WHERE pgs.pgtype = %s AND rooms.sharingtype=%s AND pgs.pgaddress LIKE %s AND rooms.price BETWEEN %s and %s''',([pgtype],[sharingtype],[location],lRange,hRange))
         data = cursor.fetchall()
         # print(data)

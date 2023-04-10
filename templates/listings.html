@@ -168,6 +168,14 @@
       <br />
       <button class="openbtn" onclick="openNav()">&#9776; Open filters</button>
 
+      {% if len == 0 %}
+      <h1>No Data available for the selected filters.</h1>
+      <div class="space"></div>
+      <a class="btn" href="/listings" id="loadMore"
+        >Load More &nbsp;<i class="fas fa-spinner fa-spin"></i
+      ></a>
+      {% else %}
+
       <!-- CSS Cards -->
       <div class="card-items">
         {%for i in range(0, len)%}
@@ -210,10 +218,7 @@
         </div>
         {%endfor%}
       </div>
-      <div class="space"></div>
-      <a class="btn" href="#" id="loadMore"
-        >Load More &nbsp;<i class="fas fa-spinner fa-spin"></i
-      ></a>
+      {% endif %}
       <div class="space"></div>
     </div>
 
