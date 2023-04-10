@@ -162,3 +162,33 @@ cross_validate(algo, data, measures=['RMSE'],cv=3,verbose=True)
 
 
 
+from surprise import Dataset, Reader, SVD, KNNBasic
+from surprise.model_selection import train_test_split
+from surprise.accuracy import rmse, mae
+
+
+# Split the data into training and testing sets
+trainset, testset = train_test_split(data, test_size=0.2)
+
+# Define the SVD and k-NN algorithms
+svd = SVD()
+knn = KNNBasic()
+
+# Fit each algorithm on the training set
+svd.fit(trainset)
+knn.fit(trainset)
+
+# Use each algorithm to predict the ratings for the test set
+svd_predictions = svd.test(testset)
+knn_predictions = knn.test(testset)
+
+# Evaluate the performance of each algorithm
+svd_rmse = rmse(svd_predictions)
+knn_rmse = rmse(knn_predictions)
+
+svd_mae = mae(svd_predictions)
+knn_mae = mae(knn_predictions)
+
+# Print the results
+print('SVD RMSE:', svd_rmse, 'MAE:', svd_mae)
+print('k-NN RMSE:', knn_rmse, 'MAE:', knn_mae)

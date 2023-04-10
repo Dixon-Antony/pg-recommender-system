@@ -326,7 +326,64 @@ def listings():
 
     return render_template('listings.html',pgdata=data, len = len(data))
 
-      
+@app.route('/filter',methods=['POST'])
+def filter():
+    if request.method == 'POST':
+
+        cursor = mysql.connection.cursor()
+        #Executing SQL Statements
+        cursor.execute(''' SELECT * FROM pgs''')
+        data = cursor.fetchall()
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+         
+        pgtype = request.form['fpgtype']
+        sharingtype = request.form['fsharingtype']
+        priceRange = request.form['frange']
+        location = "%" + request.form['flocation'] + "%"
+
+        print(priceRange)
+
+        if priceRange == '10300':
+            lRange = 0
+            hRange = 10300
+        
+        elif priceRange == '8500':
+            lRange = 8500
+            hRange = 9000
+
+        elif priceRange == '6500':
+            lRange = 6500
+            hRange = 7500
+        
+        elif priceRange == '5500':
+            lRange = 0
+            hRange = 5500
+
+
+        cursor.execute(''' SELECT pgs.* FROM pgs INNER JOIN  ROOMS on pgs.pgid = rooms.pgid WHERE pgs.pgtype = %s AND rooms.sharingtype=%s AND pgs.pgaddress LIKE %s AND rooms.price BETWEEN %s and %s''',([pgtype],[sharingtype],[location],lRange,hRange))
+        data = cursor.fetchall()
+        # print(data)
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+
+        #Executing SQL Statements
+        cursor.execute(''' SELECT pg_id,AVG(rating) FROM ratings GROUP BY pg_id''')
+        rating_data = cursor.fetchall()
+        # print(rating_data)
+        #Saving the Actions performed on the DB
+        mysql.connection.commit()
+
+        for i in range(len(rating_data)):
+            #Executing SQL Statements
+            cursor.execute(''' UPDATE pgs SET pgrating=%s WHERE pgid=%s''',(round(rating_data[i][1],1),[rating_data[i][0]]))
+            # Saving the Actions performed on the DB
+            mysql.connection.commit()
+
+        #Closing the cursor
+        cursor.close()
+
+        return render_template('listings.html', pgdata=data, len = len(data))
 
 @app.route("/viewListing",methods=['POST'])
 
@@ -985,7 +1042,7 @@ def popularPgs():
 def guests():
     pg_id = session['pgid']
     cursor = mysql.connection.cursor()
-    cursor.execute('''SELECT bookings.bookingid,bookings.roomid,bookings.bookingdate,users.username,users.phone FROM bookings INNER JOIN users ON bookings.userid = users.userid WHERE pgid=%s''',([pg_id]))
+    cursor.execute('''SELECT bookings.bookingid,bookings.roomid,bookings.bookingdate,users.username,users.phone, bookings.payment FROM bookings INNER JOIN users ON bookings.userid = users.userid WHERE pgid=%s''',([pg_id]))
     data = cursor.fetchall()
     mysql.connection.commit()
     print(data)

@@ -33,8 +33,106 @@
         </div>
       </ul>
     </nav>
+    <div id="mySidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+      <form action="/filter" class="filterForm" method="POST">
+        <div class="form-group">
+          <h2>Choose type</h2>
+          <div class="same-line">
+            <label for="mens">Men's</label>
+            <input type="radio" name="fpgtype" value="mens" checked="checked" />
+          </div>
+          <div class="same-line">
+            <label for="womens">Women's</label>
+            <input type="radio" name="fpgtype" value="women" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <h2>Choose sharing type</h2>
+          <div class="same-line">
+            <label for="single">Single</label>
+            <input
+              type="radio"
+              name="fsharingtype"
+              value="single"
+              checked="checked"
+            />
+          </div>
+          <div class="same-line">
+            <label for="double">Double</label>
+            <input type="radio" name="fsharingtype" value="double" />
+          </div>
+          <div class="same-line">
+            <label for="triple">Triple</label>
+            <input type="radio" name="fsharingtype" value="triple" />
+          </div>
+          <div class="same-line">
+            <label for="quad">Quad</label>
+            <input type="radio" name="fsharingtype" value="quad" />
+          </div>
+        </div>
+        <div class="form-group">
+          <h2>Choose price range</h2>
+          <div class="same-line">
+            <label for="srange">Less than 10,300</label>
+            <input type="radio" name="frange" value="10300" checked="checked" />
+          </div>
+          <div class="same-line">
+            <label for="drange">8,500 - 9,000</label>
+            <input type="radio" name="frange" value="8500" />
+          </div>
+          <div class="same-line">
+            <label for="trange">6,500 - 7,500</label>
+            <input type="radio" name="frange" value="6500" />
+          </div>
+          <div class="same-line">
+            <label for="qrange">Less than 5500</label>
+            <input type="radio" name="frange" value="5500" />
+          </div>
+        </div>
+        <div class="form-group">
+          <h2>Choose location</h2>
+          <div class="same-line">
+            <label for="tharamani">Tharamani</label>
+            <input
+              type="radio"
+              name="flocation"
+              value="tharamani"
+              checked="checked"
+            />
+          </div>
+          <div class="same-line">
+            <label for="guindy">Guindy</label>
+            <input type="radio" name="flocation" value="guindy" />
+          </div>
+          <div class="same-line">
+            <label for="velachery">Velachery</label>
+            <input type="radio" name="flocation" value="velachery" />
+          </div>
+          <div class="same-line">
+            <label for="perungudi">Perungudi</label>
+            <input type="radio" name="flocation" value="perungudi" />
+          </div>
+          <div class="same-line">
+            <label for="thiruvanmiyur">Thiruvanmiyur</label>
+            <input type="radio" name="flocation" value="thiruvanmiyur" />
+          </div>
+          <div class="same-line">
+            <label for="tambaram">Tambaram</label>
+            <input type="radio" name="flocation" value="tambaram" />
+          </div>
+          <div class="same-line">
+            <label for="guduvancheri">Guduvancheri</label>
+            <input type="radio" name="flocation" value="guduvancheri" />
+          </div>
+        </div>
+        <button class="btn filterBtn" type="submit">Search Now</button>
+        <br /><br />
+      </form>
+    </div>
     <div class="space"></div>
-    <div class="container">
+    <div class="container" id="container">
       <!-- <div class="search-box">
         <form action="/listings" method="POST">
           <input
@@ -68,6 +166,8 @@
         </div>
       </div>
       <br />
+      <button class="openbtn" onclick="openNav()">&#9776; Open filters</button>
+
       <!-- CSS Cards -->
       <div class="card-items">
         {%for i in range(0, len)%}
@@ -117,18 +217,17 @@
       <div class="space"></div>
     </div>
 
-    <!-- <script>
-      $(document).ready(function () {
-        $(".card").slice(0, 6).show();
-        $("#loadMore").on("click", function (e) {
-          e.preventDefault();
-          $(".card:hidden").slice(0, 6).slideDown();
-          if ($(".card:hidden").length == 0) {
-            $("#loadMore").hide();
-          }
-        });
-      });
-    </script> -->
+    <script>
+      function openNav() {
+        document.getElementById("mySidebar").style.width = "350px";
+        document.getElementById("container").style.marginLeft = "350px";
+      }
+
+      function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("container").style.marginLeft = "0";
+      }
+    </script>
 
     <footer id="main-footer">
       <div class="footer-content">
